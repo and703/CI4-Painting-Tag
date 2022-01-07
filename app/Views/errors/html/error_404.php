@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="refresh" content="3;url=/" />
 	<title>404 Page Not Found</title>
 
 	<style>

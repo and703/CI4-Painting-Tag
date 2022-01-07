@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="robots" content="noindex">
-
+	<meta http-equiv="refresh" content="3;url=/" />
 	<title>Whoops!</title>
 
 	<style type="text/css">
