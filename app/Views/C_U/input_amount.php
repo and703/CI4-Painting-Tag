@@ -34,7 +34,7 @@
                 <div class="row">
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT AMOUNT</h4>
                     <div class="col-12">
-						<form action="/worker/get_troly" method="post">
+						<form action="/worker/save" method="post">
 							<input type="hidden" name="mch" value="<?= $mch;?>">
 							<input type="hidden" name="WM_NAME_WM_SURNAME" value="<?= $worker->WM_NAME;?> <?= $worker->WM_SURNAME;?>">
 							<input type="hidden" name="WM_CODE" value="<?= $worker->WM_CODE;?>">

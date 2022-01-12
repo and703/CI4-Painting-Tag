@@ -3,6 +3,8 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\Worker_model;
+use App\Models\KomikModel;
+use App\Models\ParkModel;
 
 class Worker extends Controller
 {
@@ -49,26 +51,16 @@ class Worker extends Controller
         echo view('C_U/input_amount', $data);
     }
 
-    public function get_troly()
-    {
-        $model = new Worker_model();
-        $id1 = $this->request->getPost('WM_CODE');
-        $id2 = $this->request->getPost('MAT_IP_CODE');
-        $data['mch'] = $this->request->getPost('mch');
-        $data['Amount'] = $this->request->getPost('Amount');
-        $data['Troly'] = $this->request->getPost('Troly');
-        $data['worker'] = $model->getWorker($id1)->getRow();
-        $data['gt_ip'] = $model->getGtip($id2)->getRow();
-        $data['title'] = "Input Amount GT";
-        echo view('C_U/troly', $data);
-    }
-
     public function save()
     {
-        $model = new Worker_model();
+        
+        $md2 = new ParkModel();
+        $dt['park']     = $md2->where('id_paint', '0')->first();
+        $slot = $dt['park']['slot'];
         $startTime = date('d/m/Y H.i');
         $cenvertedTime = date("d/m/Y H.i", strtotime('+3 hours'));
 
+        $model = new Worker_model();
         $data = array(
             'WM_CODE'               => $this->request->getPost('WM_CODE'),
             'MCH'                   => $this->request->getPost('mch'),
@@ -79,7 +71,7 @@ class Worker extends Controller
             'On_Insert'             => $startTime,
             'CURE_TIME'             => $cenvertedTime,
             'Count_Printed'         => $this->request->getPost('Count_Printed'),
-            'Troly'                 => $this->request->getPost('Troly'),
+            'Park'                  => $slot,
         );
         $model->savePrint($data);
         return redirect()->to('/worker/print');
@@ -87,9 +79,19 @@ class Worker extends Controller
     
     public function print()
     {
-        $model = new Worker_model();
-		$data['painting'] = $model->viewPrint()->getRow();
+        $md1 = new KomikModel();
+        $md2 = new ParkModel();
+		$data['painting'] = $md1->orderBy('id', 'DESC')->first();
+        $id = $data['painting']['id'];
+        $slot = $data['painting']['Park'];
+		$data['park'] = $md2->where('slot', $slot)->first();
+        $dtid = $data['park']['id'];
+        $dt = [
+            'id_paint'  => $id,
+        ];
+        $md2->update($dtid, $dt);
 		$data['title'] = "Print Tag";
+        //print_r($dtid);
 		echo view('C_U/print', $data);
     }
 	

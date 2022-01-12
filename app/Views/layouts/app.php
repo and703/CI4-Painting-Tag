@@ -37,6 +37,9 @@
     function reprint() {
         document.getElementById("0").click();
     }
+    function Func() {
+        document.getElementById("mchForm").submit();
+    }
 
     let keysDown = {};
     window.onkeydown = function(e) {
@@ -45,6 +48,17 @@
         if (keysDown["+"]) {
             reprint();
             console.log("+");
+        }
+        else if (keysDown["1"]) {
+            document.getElementById("mch").value = "A1"; //set value on myInputID
+            //do what you want when control and a is pressed for example
+            Func();
+            console.log("1");
+        }
+        else if(keysDown["2"] ){
+            document.getElementById("mch").value = "M1"; //set value on myInputID
+            Func();
+            console.log("2");
         }
     }
 
@@ -58,7 +72,6 @@
     <div id="app">
         <!-- Main -->
         <div id="main" style="padding-top: 0px;padding-bottom: 0px;">
-        
         <a href="/komik" id="0" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For RePrint Tag</a>
             <footer>
                 <div class="footer clearfix mb-0 text-muted">

@@ -10,7 +10,7 @@ class KomikModel extends Model
     protected $table         = 'painting';
     protected $primaryKey    = 'id';
     protected $useTimestamps = false;
-    protected $allowedFields = ['WM_CODE', 'MCH', 'WM_NAME_WM_SURNAME', 'MAT_DESC', 'MAT_IP_CODE', 'Amount', 'On_Insert', 'CURE_TIME', 'Count_Printed','Troley'];
+    protected $allowedFields = ['id', 'WM_CODE', 'MCH', 'WM_NAME_WM_SURNAME', 'MAT_DESC', 'MAT_IP_CODE', 'Amount', 'On_Insert', 'CURE_TIME', 'Count_Printed','Troley'];
 
 
     public function getKomik($slug = false)
