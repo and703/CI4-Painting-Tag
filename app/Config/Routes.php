@@ -41,6 +41,7 @@ $routes->get('/komik/update/(:any)', 'Komik::update/$1');
 
 $routes->get('/', 'Worker::index');
 $routes->get('worker', 'Worker::index');
+$routes->get('parking', 'Worker::Park');
 
 
 /*

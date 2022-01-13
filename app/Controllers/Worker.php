@@ -19,6 +19,14 @@ class Worker extends Controller
         $data['title'] = "Input Nik";
         echo view('worker_view', $data);
     }
+    
+    public function Park()
+    {
+        $md2 = new ParkModel();
+		$data['park'] = $md2->orderBy('id', 'ASC')->findAll();
+        $data['title'] = "Painting Park";
+        echo view('C_U/Park', $data);
+    }
 
     public function get_nik()
     {
