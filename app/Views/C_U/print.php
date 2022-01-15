@@ -24,7 +24,7 @@
                 <br>
                 <div id="qrcode"></div>
                 <?php
-                    $Qr = $painting['MAT_IP_CODE'].', '.$painting['Amount'].', '.$painting['On_Insert'].', '.$painting['WM_CODE'];
+                    $Qr = $painting['MAT_IP_CODE'].','.$painting['Amount'].','.$painting['On_Insert'].','.$painting['WM_CODE'].','.$painting['id'];
                 ?>
                 <script type="text/javascript">
                 var qrcode = new QRCode(document.getElementById("qrcode"), {

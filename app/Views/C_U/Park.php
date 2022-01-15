@@ -1,63 +1,47 @@
-<?= $this->extend('layouts/app') ?>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "pcs";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+    header("Refresh:600");
 ?>
+<?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
+<br>
 <div class="page-heading">
     <!-- validations start -->
     <section id="input-validation" align="center">
         <div class="container">
-            <div class="row row-cols-5 row-cols-lg-10 g-1 g-lg-2">
-            <?php if($park): ?>
-            <?php foreach($park as $p): ?>
-                <div class="col">
-                    <div class="card mb-4 rounded-3 shadow-sm">
-                        <div class="card-header py-3">
-                            <h4 class="my-0 fw-normal"><?= $p['slot'];?></h4>
-                        </div>
-                        <div class="card-body" style="
-                            padding-right: 0px;
-                            padding-bottom: 0px;
-                            padding-left: 0px;">
-                            <?php
-                                if(!$p['id_paint'] == 0){
-                                    $sql = "SELECT *  FROM painting WHERE id = ".$p['id_paint']." ORDER BY id ASC ";
-                                    $result = $conn->query($sql);
-                                    while($row = $result->fetch_assoc()) {
-                            ?>
-                                        <h1 class="card-title pricing-card-title"><?= $row['MAT_IP_CODE'];?></h1>
-                                        <ul class="list-unstyled mt-3 mb-4">
-                                            <li><?= $row['Amount'];?></li>
-                                        </ul>
-                            <?php
-                                    }
-                                }else{
-                            ?>
-                                        <h1 class="card-title pricing-card-title"></h1>
-                                        <ul class="list-unstyled mt-3 mb-4">
-                                            <li></li>
-                                        </ul>
-                            <?php
-                                }
-                            ?>
-                        </div>
-                    </div>
+            <div class="col-4">
+                <div class="row">
+                    <h5 class="card-title" style="font-size: 50%; color: #FFF;"><?= $session->get('WM_CODE');?></h5>
+                    <h5 class="card-title" style="font-size: 50%; color: #FFF;"><?= $session->get('WM_NAME')." ".$session->get('WM_SURNAME');?></h5>
+                    <h5 class="card-title" style="font-size: 50%; color: #FFF;"><br></h5>
                 </div>
-            <?php endforeach; ?>
-            <?php endif; ?>
+            </div>
+            <div id="h" class="row row-cols-12 row-cols-lg-10 g-1 g-lg-1">
+            </div>
+			<div class="row" align="center">
+				<div class="col-12">
+					<div class="row">
+						<div class="row" align="left">
+						</div>
+						<h5 class="card-title" style="font-size: 200%; color: #FFF017;">SCAN TAG QRCODE</h4>
+						<div class="col-12">
+							<form action="/worker/get_tag" method="post">
+								<input style="text-align:center; font-weight:bold; width:70%" type="text" class="form-control" name="listTag" placeholder="listTag" required autofocus>
+								<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
         </div>
     </section>
     <!-- validations end -->
 
 </div>
+<script>
+$(document).ready(function(){  
+    setInterval(function(){   
+        $("#h").load("./co.php");
+    }, 500);
+});
+</script>
 <?= $this->endSection() ?>

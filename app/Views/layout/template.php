@@ -35,18 +35,19 @@
 </head>
 
 <body onload=display_ct();>
+<a href="/parking" id=".">.</a>
+<a href="/" id="-"></a>
     <div id="app">
         <!-- Main -->
+		<footer>
+			<div class="footer clearfix mb-0 text-muted">
+				<div class="float-end" style="padding-right: 10px;">
+					<span id='ct'></span>
+				</div>
+			</div>
+		</footer>
         <div id="main" style="padding-top: 0px;padding-bottom: 0px;">
-        
-        <a href="/worker" id="0" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For Painting Tag</a>
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-end" style="padding-right: 10px;">
-                        <span id='ct'></span>
-                    </div>
-                </div>
-            </footer>
+
             <!-- Content -->
             <?= $this->renderSection('content') ?>
             <!-- End Content -->

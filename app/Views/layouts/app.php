@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/css/app.css">
     <?= $this->renderSection('styles') ?>
     <link rel="shortcut icon" href="/assets/images/Pirelli_PZero.png" type="image/x-icon">
+    <script src="/assets/vendors/jquery/jquery.min.js"></script>
     
     <script type="text/javascript"> 
         function display_c(){
@@ -36,10 +37,16 @@
 
 <script type="text/javascript"> 
     function reprint() {
-        document.getElementById("0").click();
+        document.getElementById("+").click();
     }
-    function Func() {
+    function Func1() {
         document.getElementById("mchForm").submit();
+    }
+    function Func2() {
+        document.getElementById(".").click();
+    }
+    function Func3() {
+        document.getElementById("-").click();
     }
 
     let keysDown = {};
@@ -53,13 +60,21 @@
         else if (keysDown["1"]) {
             document.getElementById("mch").value = "A1"; //set value on myInputID
             //do what you want when control and a is pressed for example
-            Func();
+            Func1();
             console.log("1");
         }
         else if(keysDown["2"] ){
             document.getElementById("mch").value = "M1"; //set value on myInputID
-            Func();
+            Func1();
             console.log("2");
+        }
+        else if(keysDown["."] ){
+            Func2();
+            console.log(".");
+        }
+        else if(keysDown["-"] ){
+            Func3();
+            console.log("-");
         }
     }
 
@@ -70,10 +85,10 @@
 </head>
 
 <body onload=display_ct();>
+<a href="/parking" id="."></a>
+<a href="/" id="-"></a>
     <div id="app">
         <!-- Main -->
-        <div id="main" style="padding-top: 0px;padding-bottom: 0px;">
-        <a href="/komik" id="0" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For RePrint Tag</a>
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-end" style="padding-right: 10px;">
@@ -81,6 +96,7 @@
                     </div>
                 </div>
             </footer>
+        <div id="main" style="padding-top: 0px;padding-bottom: 0px;">
             <!-- Content -->
             <?= $this->renderSection('content') ?>
             <!-- End Content -->

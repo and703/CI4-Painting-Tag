@@ -36,7 +36,7 @@
                     <p style="font-size: 200%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $komik['On_Insert'];?></p>
                     <p style="font-size: 200%; color: #000;margin-bottom: 0px;"><?= $komik['WM_NAME_WM_SURNAME'];?></p>
                     <p style="font-size: 200%; color: #000;margin-bottom: 0px;"><?= $komik['WM_CODE'];?></p>
-                    <p style="font-size: 300%; color: #000;margin-bottom: 0px;"><?= $komik['Troly'];?></p>
+                    <p style="font-size: 300%; color: #000;margin-bottom: 0px;"><?= $komik['Park'];?></p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -44,7 +44,7 @@
                     <br>
                     <div id="qrcode"></div>
                     <?php
-                        $Qr = $komik['MAT_IP_CODE'].', '.$komik['Amount'].', '.$komik['On_Insert'].', '.$komik['WM_CODE'];
+                        $Qr = $komik['MAT_IP_CODE'].','.$komik['Amount'].','.$komik['On_Insert'].','.$komik['WM_CODE'].','.$komik['id'];
                     ?>
                     <script type="text/javascript">
                     var qrcode = new QRCode(document.getElementById("qrcode"), {

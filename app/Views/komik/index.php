@@ -1,17 +1,18 @@
 <?= $this->extend('layout/template'); ?>
 
 <?= $this->section('content'); ?>
-
+        
+<a href="/worker" id="0" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For Painting Tag</a>
 <div class="container">
     <div class="row">
         <div class="col" align="center">
         <br><br><br>
             <h1 class="mt-2" style="color: #FFF017;">Press number pad according to the serial number that will be reprinted</h1>
-            <?php if (session()->getFlashdata('pesan')) : ?>
+<!--             <?php if (session()->getFlashdata('pesan')) : ?>
               <div class="alert alert-success" role="alert">
                 <?= session()->getFlashdata('pesan'); ?>
               </div>
-            <?php endif;  ?>
+            <?php endif;  ?> -->
           <table class="table" style="color: #FFF017;">
             <tbody>
                 <?php $i = 1; ?>
@@ -41,7 +42,10 @@
 </div>
 <script type="text/javascript"> 
         function reprint() {
-            document.getElementById("0").click();
+            document.getElementById("+").click();
+        }
+        function park() {
+            document.getElementById("-").click();
         }
         function print1() {
             document.getElementById("1").click();
@@ -86,6 +90,10 @@
           else if(keysDown["5"] ){
               print5();
               console.log("5");
+          }
+          else if(keysDown["-"] ){
+              park();
+              console.log("-");
           }
         }
 
