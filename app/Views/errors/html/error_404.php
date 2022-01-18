@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<meta http-equiv="refresh" content="3;url=/" />
 	<title>404 Page Not Found</title>
 
 	<style>
@@ -77,9 +76,18 @@
 			<?php if (! empty($message) && $message !== '(null)') : ?>
 				<?= nl2br(esc($message)) ?>
 			<?php else : ?>
-				Sorry! Cannot seem to find the page you were looking for.
+				<div class="container text-center">
+
+					<h1 class="headline">Whoops!</h1>
+
+					<p class="lead" style="font-size: 250%; color: danger; font-weight:bold;" >ID Sudah Cekout Park / Tidak Valid .</p>
+
+				</div>
 			<?php endif ?>
 		</p>
 	</div>
 </body>
 </html>
+<script language="JavaScript" type="text/javascript">
+        setTimeout("window.history.go(-2)",2000);
+</script>

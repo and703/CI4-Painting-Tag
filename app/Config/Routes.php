@@ -41,7 +41,9 @@ $routes->get('/reprint/update/(:any)', 'Komik::update/$1');
 
 $routes->get('/', 'Worker::index');
 $routes->get('worker', 'Worker::index');
-$routes->get('parking', 'Worker::Park');
+$routes->get('parking', 'Worker::MM_log');
+$routes->get('park_view', 'Worker::park_view');
+$routes->get('mch', 'Worker::mch_log');
 
 
 /*

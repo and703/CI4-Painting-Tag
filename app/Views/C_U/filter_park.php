@@ -1,6 +1,3 @@
-<?php
-    header("Refresh:600");
-?>
 <?= $this->extend('layouts/app') ?>
 <?= $this->section('content') ?>
 <br>
@@ -10,16 +7,8 @@
         <div class="container">
             <div class="col-4">
                 <div class="row">
-                    <?php 
-                        $mm = session()->get('logged_in_mm');
-                        if(isset($mm)){
-                            echo '<a href="worker/logout_MM" class="btn btn-danger" >Logout</a>';
-                        }else{
-                            echo '<a href="parking" class="btn btn-success" >Login</a>';
-                        }
-                    ?>
-                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('MM_CODE');?></h5>
-                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('MM_NAME')." ".session()->get('MM_SURNAME');?></h5>
+                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_CODE');?></h5>
+                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_NAME')." ".session()->get('WM_SURNAME');?></h5>
                     <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h5>
                 </div>
             </div>
@@ -32,8 +21,7 @@
 						</div>
 						<h5 class="card-title" style="font-size: 200%; color: #FFF017;">SCAN TAG QRCODE</h4>
 						<div class="col-12">
-							<form action="/worker/get_tag" method="post" autocomplete="off">
-                                <input style="text-align:center; font-weight:bold; width:70%" type="text" class="form-control" id="fill_ip" placeholder="Filter IP">
+							<form action="/worker/get_tag" method="post">
 								<input style="text-align:center; font-weight:bold; width:70%" type="text" class="form-control" name="listTag" placeholder="listTag" required autofocus>
 								<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
 							</form>
@@ -47,11 +35,9 @@
 
 </div>
 <script>
-
 $(document).ready(function(){  
-    const ip_code = document.getElementById('fill_ip');
     setInterval(function(){   
-        $("#h").load("../co.php?ip="+ip_code.value);
+        $("#h").load("../fill_co.php?ip=");
     }, 500);
 });
 </script>

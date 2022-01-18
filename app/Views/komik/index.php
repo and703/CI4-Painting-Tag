@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
         
-<a href="/worker" id="0" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For Painting Tag</a>
+<a href="/worker" id="+" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For Painting Tag</a>
 <div class="container">
     <div class="row">
         <div class="col" align="center">

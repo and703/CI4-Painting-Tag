@@ -27,5 +27,15 @@
         </div>
     </section>
     <!-- validations end -->
+    
+    <?php 
+        $wm = session()->get('logged_in_wm');
+        if(isset($wm)){
+            echo '
+            <script language="JavaScript" type="text/javascript">
+                window.location.href = "mch";
+            </script>';
+        }
+    ?>
 </div>
 <?= $this->endSection() ?>

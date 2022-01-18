@@ -2,6 +2,7 @@
 
 <?= $this->section('content'); ?>
 
+<a href="worker/logout_MM" class="btn btn-success">LOGOUT</a>
 <div class="container">
     <div class="row">
         <div class="col">

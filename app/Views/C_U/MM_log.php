@@ -20,11 +20,26 @@
                             <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                         </form>
                     </div>
+                    <?php if (session()->getFlashdata('pesan')) : ?>
+                    <div class="alert alert-success" role="alert">
+                        <?= session()->getFlashdata('pesan'); ?>
+                    </div>
+                    <?php endif;  ?>
                         <h5 class="card-title" style="font-size: 200%; color: #FFF017;">PLEASE INPUT YOUR EMPLOYEE NUMBER IDENTIFICATION</h4>
                 </div>
             </div>
         </div>
     </section>
     <!-- validations end -->
+    
+    <?php 
+        $mm = session()->get('logged_in_mm');
+        if(isset($mm)){
+            echo '
+            <script language="JavaScript" type="text/javascript">
+                window.location.href = "park_view";
+            </script>';
+        }
+    ?>
 </div>
 <?= $this->endSection() ?>

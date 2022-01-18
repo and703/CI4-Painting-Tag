@@ -14,8 +14,16 @@
             </div>
             <div class="col-4">
                 <div class="row">
-                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= $worker->WM_CODE;?></h4>
-                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= $worker->WM_NAME;?> <?= $worker->WM_SURNAME;?></h4>
+                    <?php 
+                        $wm = session()->get('logged_in_wm');
+                        if(isset($wm)){
+                            echo '<a href="worker/logout_WM" class="btn btn-danger" >Logout</a>';
+                        }else{
+                            echo '<a href="/" class="btn btn-success" >Login</a>';
+                        }
+                    ?>
+                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_CODE');?></h4>
+                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_NAME');?> <?= session()->get('WM_SURNAME');?></h4>
                 </div>
             </div>
         </div>
@@ -36,8 +44,6 @@
                     <div class="col-12">
 						<form action="/worker/save" method="post">
 							<input type="hidden" name="mch" value="<?= $mch;?>">
-							<input type="hidden" name="WM_NAME_WM_SURNAME" value="<?= $worker->WM_NAME;?> <?= $worker->WM_SURNAME;?>">
-							<input type="hidden" name="WM_CODE" value="<?= $worker->WM_CODE;?>">
 							<input type="hidden" name="MAT_DESC" value="<?= $gt_ip->MAT_DESC;?>">
 							<input type="hidden" name="MAT_IP_CODE" value="<?= $gt_ip->MAT_IP_CODE;?>">
 							<input type="hidden" name="Count_Printed" value="1">

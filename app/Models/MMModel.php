@@ -1,0 +1,12 @@
+<?php 
+namespace App\Models;
+use CodeIgniter\Model;
+
+class MMModel extends Model
+{
+	protected $DBGroup       = 'default';
+    protected $table         = 'mman';
+    protected $primaryKey    = 'id';
+    protected $allowedFields = ['id', 'Paint_id', 'Park_id', 'dateTIME'];
+
+}

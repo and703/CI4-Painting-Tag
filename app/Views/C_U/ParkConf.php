@@ -3,13 +3,15 @@
 <?= $this->section('content') ?>
 	<div class="col-4">
 		<div class="row">
-			<h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= $session->get('WM_CODE');?></h5>
-			<h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= $session->get('WM_NAME')." ".$session->get('WM_SURNAME');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('MM_CODE');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('MM_NAME')." ".session()->get('MM_SURNAME');?></h5>
 				<h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
 		</div>
 	</div>
 	<form id="reprint" action="/Worker/tagconf" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
+		<input type="hidden" name="MM_CODE" value="<?= session()->get('MM_CODE'); ?>">
+		<input type="hidden" name="id" value="<?= $painting['id']; ?>">
 		<input type="hidden" name="Park" value="<?= $painting['Park']; ?>">
 		<div class="page-heading">
 							<br>
@@ -33,6 +35,9 @@
 							<br>
 							<br>
 							<input type="submit" class="btn btn-danger" style="font-size: 250%; color: #00ff89; font-weight:bold;" value="CONFIRM"/>
+							<br>
+							<br>
+							<a class="btn btn-danger" href="javascript:history.back()" style="font-size: 250%; color: #00ff89; font-weight:bold;" >Go Back</a>
 						</div>
 					</div>
 				</div>

@@ -25,7 +25,7 @@
 function doPrint() {
 	window.print();
 	window.onafterprint = function(event) {
-		window.location.href = '/worker'
+		window.location.href = '/'
 	};
 }
 </script>

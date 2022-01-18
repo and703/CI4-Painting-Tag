@@ -6,6 +6,7 @@ use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\Worker_model;
 use App\Models\KomikModel;
 use App\Models\ParkModel;
+use App\Models\MMModel;
 
 class Worker extends Controller
 {
@@ -14,33 +15,29 @@ class Worker extends Controller
         $data['title'] = "Input Nik";
         echo view('worker_view', $data);
     }
+
+    public function mch_log()
+    {
+        $data['title'] = "Input Machine Code";
+        echo view('C_U/mch', $data);
+    }
+
+    public function MM_log()
+    {
+        $data['title'] = "Input Machine Code";
+        echo view('C_U/MM_log', $data);
+    }
+
+    public function park_view()
+    {
+        $data['title'] = "Parking View";
+        echo view('C_U/Park', $data);
+    }
     
     public function worker()
     {
-        $session = session();
-        // jika user belum login
-        if(! $session->get('logged_in_wm')){
-            // maka redirct ke halaman login
-            return redirect()->to('worker');
-        // jika user sudah login
-		}else{
-			$data['title'] = "Input Machine Code";
-			echo view('C_U/mch', $data);
-		}
-    }
-    
-    public function Park()
-    {
-        $session = session();
-        // jika user belum login
-        if(! $session->get('logged_in_mm')){
-            // maka redirct ke halaman login
-            return redirect()->to('parking');
-        // jika user sudah login
-		}else{
-			$data['title'] = "Painting Park";
-			echo view('C_U/Park', $data);
-		}
+        $data['title'] = "Painting Login";
+        echo view('worker_view', $data);
     }
     
     public function get_nik_mm()
@@ -48,20 +45,20 @@ class Worker extends Controller
         $session = session();
         $model = new Worker_model();
         $id = $this->request->getPost('WM_CODE');
-        $data['worker'] = $model->getWorker($id)->getRow();
-        if($data['worker']){
+        $data['park'] = $model->getWorker($id)->getRow();
+        $dt = json_decode(json_encode($data['park']), true);
+        if($dt){
 			$ses_data = [
-				'WM_CODE'       => $data['worker']['WM_CODE'],
-				'WM_NAME'     	=> $data['worker']['WM_NAME'],
-				'WM_SURNAME'    => $data['worker']['WM_SURNAME'],
-				'logged_in_mm'  => TRUE
+				'MM_CODE'       => $dt['WM_CODE'],
+				'MM_NAME'     	=> $dt['WM_NAME'],
+				'MM_SURNAME'    => $dt['WM_SURNAME'],
+				'logged_in_mm'  => '1'
 			];
 			$session->set($ses_data);
-			$data['title'] = "Painting Park";
-			echo view('C_U/Park', $data);
+            return redirect()->to('park_view');
         }else{
-            $session->setFlashdata('msg', 'Email not Found');
-            return redirect()->to('parking');
+            session()->setFlashdata('pesan', 'Login Gagal Nik : '.$id.' Tidak terdaftar');
+            return redirect()->to('park_log');
         }
     }
  
@@ -78,19 +75,20 @@ class Worker extends Controller
         $session = session();
         $model = new Worker_model();
         $id = $this->request->getPost('WM_CODE');
-        $data['worker'] = $model->getWorker($id)->getRow();
-        if($data['worker']){
+        $data['painting'] = $model->getWorker($id)->getRow();
+        $dt = json_decode(json_encode($data['painting']), true);
+        if($dt){
 			$ses_data = [
-				'WM_CODE'       => $data['worker']['WM_CODE'],
-				'WM_NAME'     	=> $data['worker']['WM_NAME'],
-				'WM_SURNAME'    => $data['worker']['WM_SURNAME'],
-				'logged_in_wm'  => TRUE
+				'WM_CODE'       => $dt['WM_CODE'],
+				'WM_NAME'     	=> $dt['WM_NAME'],
+				'WM_SURNAME'    => $dt['WM_SURNAME'],
+				'logged_in_wm'  => '1'
 			];
 			$session->set($ses_data);
 			$data['title'] = "Input Machine Code";
 			echo view('C_U/mch', $data);
         }else{
-            $session->setFlashdata('msg', 'Email not Found');
+            session()->setFlashdata('pesan', 'Login Gagal Nik : '.$id.' Tidak terdaftar');
             return redirect()->to('worker');
         }
     }
@@ -181,8 +179,13 @@ class Worker extends Controller
 	
     public function tagconf()
     {
+        $md1 = new KomikModel();
         $md2 = new ParkModel();
+        $md3 = new MMModel();
+        $dateTime = date('d/m/Y H.i');
         $Park = $this->request->getPost('Park');
+        $MM_CODE = $this->request->getPost('MM_CODE');
+        $id = $this->request->getPost('id');
 		$array = ['slot' => $Park, 'id_paint !=' => '0'];
 		$data['park'] = $md2->where($array)->first();
         // tampilkan 404 error jika data tidak ditemukan
@@ -190,12 +193,19 @@ class Worker extends Controller
             throw new \CodeIgniter\Exceptions\PageNotFoundException('Park ' . $Park . ' Tidak di temukan / Sudah Kosong');
 		}else{
 			$dtid = $data['park']['id'];
-			$dt = [
+			$dt1 = [
 				'id_paint'  => '0',
 			];
-			$md2->update($dtid, $dt);
-			
-			return redirect()->to('parking');
+            $dt2 = [
+                'Park_id'     => $dtid,
+                'Paint_id'    => $id,
+                'dateTIME'    => $dateTime,
+            ];
+            
+			$md2->update($dtid, $dt1);
+            $md3->insert($dt2);
+
+            return redirect()->to('parking');
 		}
     }
 }
