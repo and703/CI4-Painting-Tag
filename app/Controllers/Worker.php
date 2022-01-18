@@ -197,6 +197,7 @@ class Worker extends Controller
 				'id_paint'  => '0',
 			];
             $dt2 = [
+                'MM_CODE'     => $MM_CODE,
                 'Park_id'     => $dtid,
                 'Paint_id'    => $id,
                 'dateTIME'    => $dateTime,
