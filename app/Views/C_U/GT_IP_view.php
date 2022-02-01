@@ -14,14 +14,6 @@
             </div>
             <div class="col-4">
                 <div class="row">
-                    <?php 
-                        $wm = session()->get('logged_in_wm');
-                        if(isset($wm)){
-                            echo '<a href="worker/logout_WM" class="btn btn-danger" >Logout</a>';
-                        }else{
-                            echo '<a href="/" class="btn btn-success" >Login</a>';
-                        }
-                    ?>
                     <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_CODE');?></h5>
                     <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_NAME')." ".session()->get('WM_SURNAME');?></h5>
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>

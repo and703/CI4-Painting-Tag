@@ -7,6 +7,6 @@ class MMModel extends Model
 	protected $DBGroup       = 'default';
     protected $table         = 'mman';
     protected $primaryKey    = 'id';
-    protected $allowedFields = ['id', 'Paint_id', 'Park_id', 'dateTIME'];
+    protected $allowedFields = ['MM_CODE', 'Paint_id', 'Park_id', 'dateTIME'];
 
 }

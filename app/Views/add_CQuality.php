@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('content') ?>
+<a href="/reprint" id="+" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For RePrint Tag</a>
 <div class="page-heading">
     <!-- validations start -->
     <section id="input-validation">
@@ -15,17 +16,12 @@
                     </div>
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT NIK</h4>
                     <div class="col-12">
-                        <form action="/worker/get_nik_mm" method="post">
+                        <form action="/worker/get_nik" method="post">
                             <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="WM_CODE" placeholder="NIK" required autofocus>
-                    </div>
-                    <?php if (session()->getFlashdata('pesan')) : ?>
-                    <div class="alert alert-success" role="alert">
-                        <?= session()->getFlashdata('pesan'); ?>
-                    </div>
-                    <?php endif;  ?>
-                        <h5 class="card-title" style="font-size: 200%; color: #FFF017;">PLEASE INPUT YOUR EMPLOYEE NUMBER IDENTIFICATION</h4>
-							<input type="submit" class="btn btn-danger" style="font-size: 250%; color: #00ff89; font-weight:bold;" value="LOGIN"/>
+                            <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                         </form>
+                    </div>
+                        <h5 class="card-title" style="font-size: 200%; color: #FFF017;">PLEASE INPUT YOUR EMPLOYEE NUMBER IDENTIFICATION</h4>
                 </div>
             </div>
         </div>
@@ -33,11 +29,11 @@
     <!-- validations end -->
     
     <?php 
-        $mm = session()->get('logged_in_mm');
-        if(isset($mm)){
+        $wm = session()->get('logged_in_wm');
+        if(isset($wm)){
             echo '
             <script language="JavaScript" type="text/javascript">
-                window.location.href = "park_view";
+                window.location.href = "mch";
             </script>';
         }
     ?>
