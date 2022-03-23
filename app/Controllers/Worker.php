@@ -41,43 +41,40 @@ class Worker extends Controller
         $data["title"] = "Painting Login";
         echo view("worker_view", $data);
     }
-
+    
     public function get_nik_mm()
     {
         $session = session();
         $model = new Worker_model();
-        $id = $this->request->getPost("WM_CODE");
-        if ($id == "irhamkh002") {
-            $ses_data = [
-                "MM_CODE" => $id,
-                "MM_NAME" => "Irham",
-                "MM_SURNAME" => "Khairuman, ID",
-                "logged_in_mm" => "1",
-            ];
-            $session->set($ses_data);
-            return redirect()->to("park_view");
-        } else {
-            $data["park"] = $model->getWorker($id)->getRow();
-            $dt = json_decode(json_encode($data["park"]), true);
-            if ($dt) {
+        $id = $this->request->getPost('WM_CODE');
+        if($id == 'irhamkh002'){
+			$ses_data = [
+				'MM_CODE'       => $id,
+				'MM_NAME'     	=> 'Irham',
+				'MM_SURNAME'    => 'Khairuman, ID',
+				'logged_in_mm'  => '1'
+			];
+			$session->set($ses_data);
+            return redirect()->to('park_view');
+        }else{
+            $data['park'] = $model->getWorker($id)->getRow();
+            $dt = json_decode(json_encode($data['park']), true);
+            if($dt){
                 $ses_data = [
-                    "MM_CODE" => $dt["WM_CODE"],
-                    "MM_NAME" => $dt["WM_NAME"],
-                    "MM_SURNAME" => $dt["WM_SURNAME"],
-                    "logged_in_mm" => "1",
+                    'MM_CODE'       => $dt['WM_CODE'],
+                    'MM_NAME'     	=> $dt['WM_NAME'],
+                    'MM_SURNAME'    => $dt['WM_SURNAME'],
+                    'logged_in_mm'  => '1'
                 ];
                 $session->set($ses_data);
-                return redirect()->to("park_view");
-            } else {
-                session()->setFlashdata(
-                    "pesan",
-                    "Login Gagal Nik : " . $id . " Tidak terdaftar"
-                );
-                return redirect()->to("park_log");
+                return redirect()->to('park_view');
+            }else{
+                session()->setFlashdata('pesan', 'Login Gagal Nik : '.$id.' Tidak terdaftar');
+                return redirect()->to('park_log');
             }
         }
     }
-
+ 
     public function logout_MM()
     {
         $session = session();

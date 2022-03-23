@@ -58,13 +58,22 @@
     <!-- validations end -->
 
 </div>
+<?php 
+    $mm = session()->get('logged_in_mm');
+    $MM_CODE = session()->get('MM_CODE');
+    if(isset($mm) && $MM_CODE == 'irhamkh002'){
+        $co = 'co2';
+    }else{
+        $co = 'co';
+    }
+?>
 <script>
 
 $(document).ready(function(){  
     const ip_code = document.getElementById('fill_ip');
- //   setInterval(function(){   
-        $("#h").load("../co.php?ip="+ip_code.value);
-//    }, 50000);
+    setInterval(function(){   
+        $("#h").load("../<?= $co?>.php?ip="+ip_code.value);
+    }, 500);
 });
 </script>
 <?= $this->endSection() ?>
