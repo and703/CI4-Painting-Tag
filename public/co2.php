@@ -26,7 +26,7 @@ date_default_timezone_set('Asia/Jakarta');
 					if(strtotime($dateNow) <= strtotime($dateCure)){
 ?>
 						<div class="col" >
-					        <a href="/komik/<?= $row1['id_paint']; ?>">
+					        <a href="/re_print/<?= $row1['id_paint']; ?>">
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #dc3545;padding-left: 0px;"></div>
 								<div class="card-body" style="background-color: #dc3545;padding-left: 30px;padding-right: 30px;">
@@ -49,7 +49,7 @@ date_default_timezone_set('Asia/Jakarta');
 					}else{
 ?>
 						<div class="col" >
-					        <a href="/komik/<?= $row1['id_paint']; ?>">
+					        <a href="/re_print/<?= $row1['id_paint']; ?>">
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #ffc107;padding-left: 0px;"></div>
 								<div class="card-body" style="background-color: #ffc107;padding-left: 30px;padding-right: 30px;">
@@ -83,7 +83,7 @@ date_default_timezone_set('Asia/Jakarta');
 					if(strtotime($dateNow) <= strtotime($dateCure)){
 ?>
 						<div class="col" >
-					        <a href="/komik/<?= $row1['id_paint']; ?>">
+					        <a href="/re_print/<?= $row1['id_paint']; ?>">
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #dc3545;padding-left: 0px;"></div>
 								<div class="card-body" style="background-color: #dc3545;padding-left: 30px;padding-right: 30px;">
@@ -106,7 +106,7 @@ date_default_timezone_set('Asia/Jakarta');
 					}else{
 ?>
 						<div class="col" >
-					        <a href="/komik/<?= $row1['id_paint']; ?>">
+					        <a href="/re_print/<?= $row1['id_paint']; ?>">
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #ffc107;padding-left: 0px;"></div>
 								<div class="card-body" style="background-color: #ffc107;padding-left: 30px;padding-right: 30px;">
