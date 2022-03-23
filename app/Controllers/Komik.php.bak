@@ -30,7 +30,7 @@ class Komik extends BaseController
     public function detail($slug)
     {
         $data = [
-            'title' => 'Detail Tag',
+            'title' => 'Detail komik',
             'komik' => $this->komikModel->getKomik($slug)
         ];
 
@@ -41,40 +41,11 @@ class Komik extends BaseController
         return view('komik/detail', $data);
     }
 
-    public function detail2($slug)
-    {
-        $data = [
-            'title' => 'Detail Tag',
-            'komik' => $this->komikModel->getKomik($slug)
-        ];
-
-        //jika komik tidak ada di tabel
-        if (empty($data['komik'])) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul komik' . $slug . 'Tidak di temukan');
-        }
-        return view('komik/detail2', $data);
-    }
-
-    public function parkDet($id)
-    {
-        $data = [
-            'title' => 'Detail Tag',
-            'park' => $this->ParkModel->getPark($id)
-        ];
-
-        //jika komik tidak ada di tabel
-        if (empty($data['komik'])) {
-            throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul komik' . $slug . 'Tidak di temukan');
-        }
-        //return view('komik/detail', $data);
-		print_r($data);
-    }
-
     public function create()
     {
 
         $data = [
-            'title' => 'Form Tambah Data Tag',
+            'title' => 'Form Tambah Data Komik',
             'validation' => \Config\Services::validation()
         ];
         return view('komik/create', $data);
@@ -166,30 +137,6 @@ class Komik extends BaseController
     }
 
     public function update($id)
-    {
-        $data = [
-            'Count_Printed' => $this->request->getVar('Count_Printed'),
-        ];
-        $this->komikModel->update($id, $data);
-
-        session()->setFlashdata('pesan', 'RePrint Success. ');
-
-        return redirect()->to('/komik');
-    }
-
-    public function update2($id)
-    {
-        $data = [
-            'Count_Printed' => $this->request->getVar('Count_Printed'),
-        ];
-        $this->komikModel->update($id, $data);
-
-        session()->setFlashdata('pesan', 'Print Success. ');
-
-        return redirect()->to('worker');
-    }
-	
-    public function get($id)
     {
         $data = [
             'Count_Printed' => $this->request->getVar('Count_Printed'),

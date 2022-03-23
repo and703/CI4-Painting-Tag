@@ -35,8 +35,9 @@
 </head>
 
 <body onload=display_ct();>
-<a href="parking" id=".">.</a>
-<a href="" id="-"></a>
+<a href="park_view" id="."></a>
+<a href="/worker/logout_WM" id="-"></a>
+<a href="worker" id="+"></a>
     <div id="app">
         <!-- Main -->
 		<footer>

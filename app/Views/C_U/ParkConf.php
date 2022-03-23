@@ -105,8 +105,8 @@
 								<p style="font-size: 250%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= $painting['CURE_TIME'];?></p>
 								<br>
 								<br>
-                                <input style="text-align:center; width:100%" type="text" class="form-control" name="Qty_NIK" placeholder="Quality ID" required autofocus>
-								<input style="text-align:center; width:100%" type="password" class="form-control" name="pass_QC" placeholder="Password">
+                                <input style="text-align:center; width:100%" type="text" class="form-control" name="Qty_NIK" placeholder="Quality ID" required autofocus autocomplete="off">
+								<input style="text-align:center; width:100%" type="password" class="form-control" name="pass_QC" placeholder="Password" autocomplete="off">
 								<input type="submit" class="btn btn-danger" style="font-size: 250%; color: #00ff89; font-weight:bold;" value="CONFIRM"/>
 							</div>
 						</div>

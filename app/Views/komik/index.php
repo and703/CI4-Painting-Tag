@@ -2,7 +2,7 @@
 
 <?= $this->section('content'); ?>
         
-<a href="/worker" id="+" style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For Painting Tag</a>
+<p style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For Painting Tag</p>
 <div class="container">
     <div class="row">
         <div class="col" align="center">
@@ -30,7 +30,7 @@
                   <td><?= $k['On_Insert']; ?></td>
                   <td><?= $k['CURE_TIME']; ?></td>
                 <td>
-                    <a href="/komik/<?= $k['id']; ?>" id="<?= $i++;?>"></a>
+                    <a href="/re_print/<?= $k['id']; ?>" id="<?= $i++;?>"></a>
                 </td>
               </tr>
               <?php endForeach; ?>
@@ -44,8 +44,11 @@
         function reprint() {
             document.getElementById("+").click();
         }
-        function park() {
+        function worker() {
             document.getElementById("-").click();
+        }
+        function park() {
+            document.getElementById(".").click();
         }
         function print1() {
             document.getElementById("1").click();
@@ -92,8 +95,12 @@
               console.log("5");
           }
           else if(keysDown["-"] ){
-              park();
+              worker();
               console.log("-");
+          }
+          else if(keysDown["."] ){
+              park();
+              console.log(".");
           }
         }
 

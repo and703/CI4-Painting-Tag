@@ -16,7 +16,7 @@
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT NIK</h4>
                     <div class="col-12">
                         <form action="/worker/get_nik_mm" method="post">
-                            <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="WM_CODE" placeholder="NIK" required autofocus>
+                            <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="WM_CODE" placeholder="NIK" required autofocus autocomplete="off">
                     </div>
                     <?php if (session()->getFlashdata('pesan')) : ?>
                     <div class="alert alert-success" role="alert">

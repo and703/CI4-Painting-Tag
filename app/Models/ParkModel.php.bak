@@ -9,11 +9,4 @@ class ParkModel extends Model
     protected $primaryKey    = 'id';
     protected $allowedFields = ['id', 'slot', 'id_paint'];
 
-    public function getPark($id = false)
-    {
-        if($id == false) {
-            return $this->orderBy('id', 'DESC')->findAll();
-        }
-        return $this->where(['id' => $id])->first();
-    }
 }

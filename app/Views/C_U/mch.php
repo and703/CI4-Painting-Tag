@@ -15,12 +15,31 @@
                     }
                 ?>
             </h5>
-			<h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_CODE');?></h5>
-			<h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_NAME')." ".session()->get('WM_SURNAME');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;">NIK: <?= session()->get('WM_CODE');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;">FULL NAME: <?= session()->get('WM_NAME')." ".session()->get('WM_SURNAME');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;">GROUP: <?= session()->get('GROUP');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;">SHIFT: <?= session()->get('SHIFT');?></h5>
         </div>
         <div class="row" align="center">
             <div class="col-12">
                 <div class="row">
+                    <div class="row" align="left">
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                    </div>
+                    <div class="row" align="left">
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                    </div>
+                    <div class="row" align="left">
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                    </div>
                         <h5 class="card-title" style="font-size: 300%; color: #FFF017;">PAINTING MACHINE</h4>
                     <div class="col-6">
                         <h5 class="card-title" style="font-size: 300%; color: #FFF017;">A1</h4>
@@ -35,6 +54,23 @@
 						<input type="hidden" id="mch" name="mch">
 						<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
 					</form>
+                    <div class="row" align="left">
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                    </div>
+                    <div class="row" align="left">
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                    </div>
+                    <div class="row" align="left">
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                        <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                    </div>
                 </div>
             </div>
         </div>

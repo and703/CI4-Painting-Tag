@@ -19,7 +19,7 @@
         <div class="row" align="left">
             <div class="col-md-12">
                 <div class="text-left">
-                    <form id="reprint" action="/komik/update/<?= $komik['id']; ?>" method="post" enctype="multipart/form-data">
+                    <form id="reprint" action="/komik/update2/<?= $komik['id']; ?>" method="post" enctype="multipart/form-data">
                     <?php
                         $count = $komik['Count_Printed']+1;
                     ?>
@@ -41,7 +41,7 @@
                     <p style="font-size: 450%; font-weight:bold; color: #000;margin-bottom: 0px;"><?= $komik['Park'];?></p>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-8">
                 <div class="text-center">
                     <br>
                     <div id="qrcode"></div>

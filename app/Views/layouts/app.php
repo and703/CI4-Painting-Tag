@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,58 +34,59 @@
         }
     </script>
 
-<script type="text/javascript"> 
-    function reprint() {
-        document.getElementById("+").click();
-    }
-    function Func1() {
-        document.getElementById("mchForm").submit();
-    }
-    function Func2() {
-        document.getElementById(".").click();
-    }
-    function Func3() {
-        document.getElementById("-").click();
-    }
+    <script type="text/javascript"> 
+        function reprint() {
+            document.getElementById("+").click();
+        }
+        function Func1() {
+            document.getElementById("mchForm").submit();
+        }
+        function Func2() {
+            document.getElementById(".").click();
+        }
+        function Func3() {
+            document.getElementById("-").click();
+        }
 
-    let keysDown = {};
-    window.onkeydown = function(e) {
-        keysDown[e.key] = true;
+        let keysDown = {};
+        window.onkeydown = function(e) {
+            keysDown[e.key] = true;
 
-        if (keysDown["+"]) {
-            reprint();
-            console.log("+");
+            if (keysDown["+"]) {
+                reprint();
+                console.log("+");
+            }
+            else if (keysDown["1"]) {
+                document.getElementById("mch").value = "A1"; //set value on myInputID
+                //do what you want when control and a is pressed for example
+                Func1();
+                console.log("1");
+            }
+            else if(keysDown["2"] ){
+                document.getElementById("mch").value = "M1"; //set value on myInputID
+                Func1();
+                console.log("2");
+            }
+            else if(keysDown["."] ){
+                Func2();
+                console.log(".");
+            }
+            else if(keysDown["-"] ){
+                Func3();
+                console.log("-");
+            }
         }
-        else if (keysDown["1"]) {
-            document.getElementById("mch").value = "A1"; //set value on myInputID
-            //do what you want when control and a is pressed for example
-            Func1();
-            console.log("1");
-        }
-        else if(keysDown["2"] ){
-            document.getElementById("mch").value = "M1"; //set value on myInputID
-            Func1();
-            console.log("2");
-        }
-        else if(keysDown["."] ){
-            Func2();
-            console.log(".");
-        }
-        else if(keysDown["-"] ){
-            Func3();
-            console.log("-");
-        }
-    }
 
-    window.onkeyup = function(e) {
-    keysDown[e.key] = false;
-    }
-</script>
+        window.onkeyup = function(e) {
+        keysDown[e.key] = false;
+        }
+    </script>
 </head>
 
 <body onload=display_ct();>
-<a href="/parking" id="."></a>
+<a href="/park_view" id="."></a>
 <a href="/worker/logout_WM" id="-"></a>
+<a href="/reprint" id="+"></a>
     <div id="app">
         <!-- Main -->
             <footer>
@@ -110,6 +110,7 @@
 
     <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/autoRef.js"></script>
 
     <?= $this->renderSection('javascript') ?>
 </body>
