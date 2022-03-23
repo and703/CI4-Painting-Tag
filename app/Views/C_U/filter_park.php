@@ -1,5 +1,5 @@
-<?= $this->extend('layouts/app') ?>
-<?= $this->section('content') ?>
+<?= $this->extend("layouts/app") ?>
+<?= $this->section("content") ?>
 <br>
 <div class="page-heading">
     <!-- validations start -->
@@ -7,8 +7,8 @@
         <div class="container">
             <div class="col-4">
                 <div class="row">
-                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_CODE');?></h5>
-                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get('WM_NAME')." ".session()->get('WM_SURNAME');?></h5>
+                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get("WM_CODE") ?></h5>
+                    <h5 class="card-title" style="font-size: 100%; color: #FFF;"><?= session()->get("WM_NAME") . " " .session()->get("WM_SURNAME") ?></h5>
                     <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h5>
                 </div>
             </div>
