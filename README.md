@@ -1,2 +1,1 @@
-Ini adalah aplikasi CRUD sederhana yang berisi data data Painting-Tag.
-aplikasi ini menggunakan framework codeigniter versi 4
+This is a simple CRUD application containing Painting-Tag data. This application uses codeigniter framework version 4
