@@ -23,7 +23,7 @@
                     <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h5>
                 </div>
             </div>
-            <div id="h" class="row row-cols-12 row-cols-lg-10 g-1 g-lg-1">
+            <div id="h" class="row row-cols-12 row-cols-xs-12 g-2 g-xs-2">
             </div>
 			<div class="row" align="center">
 				<div class="col-12">
@@ -62,9 +62,9 @@
 
 $(document).ready(function(){  
     const ip_code = document.getElementById('fill_ip');
-    setInterval(function(){   
+ //   setInterval(function(){   
         $("#h").load("../co.php?ip="+ip_code.value);
-    }, 500);
+//    }, 50000);
 });
 </script>
 <?= $this->endSection() ?>
