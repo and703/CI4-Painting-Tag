@@ -58,6 +58,22 @@ class Komik extends BaseController
         return view("komik/detail2", $data);
     }
 
+    public function detail3($slug)
+    {
+        $data = [
+            "title" => "Detail Tag",
+            "komik" => $this->komikModel->getKomik($slug),
+        ];
+
+        //jika komik tidak ada di tabel
+        if (empty($data["komik"])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException(
+                "Judul komik" . $slug . "Tidak di temukan"
+            );
+        }
+        return view("komik/detail3", $data);
+    }
+
     public function parkDet($id)
     {
         $data = [
@@ -200,6 +216,6 @@ class Komik extends BaseController
 
         session()->setFlashdata("pesan", "RePrint Success. ");
 
-        return redirect()->to("/komik");
+        return redirect()->to("/parking");
     }
 }

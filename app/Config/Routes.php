@@ -37,6 +37,7 @@ $routes->get('/komik/edit/(:segment)', 'Komik::edit/$1');
 $routes->delete('/komik/(:num)', 'Komik::delete/$1');
 $routes->get('/re_print/(:any)', 'Komik::detail/$1');
 $routes->get('/print/(:any)', 'Komik::detail2/$1');
+$routes->get('/p_park/(:any)', 'Komik::detail3/$1');
 $routes->get('/reprint/update/(:any)', 'Komik::update/$1');
 
 
