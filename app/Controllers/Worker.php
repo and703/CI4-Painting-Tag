@@ -148,14 +148,11 @@ class Worker extends Controller
         $session = session();
         $md1 = new KomikModel();
         $md2 = new ParkModel();
-        if (!($dt["park"] = $md2->where("id_paint", "0")->first())) {
-            throw new \CodeIgniter\Database\Exceptions\DatabaseException();
-        } else {
+        if (($dt["park"] = $md2->where("id_paint", "0")->first())) {
             $slot = $dt["park"]["slot"];
             $startTime = date("d/m/Y H.i");
             $cenvertedTime = date("d/m/Y H.i", strtotime("+2 hours"));
-            $WM_NAME_WM_SURNAME =
-                $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
+            $WM_NAME_WM_SURNAME = $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
             $model = new Worker_model();
             $data = [
                 "WM_CODE" => $session->get("WM_CODE"),
@@ -173,7 +170,6 @@ class Worker extends Controller
             ];
             $model->savePrint($data);
 
-            $session->set($data);
             $data["painting"] = $md1->orderBy("id", "DESC")->first();
             $id = $data["painting"]["id"];
             $slot = $data["painting"]["Park"];
@@ -184,6 +180,8 @@ class Worker extends Controller
             ];
             $md2->update($dtid, $dt);
             return redirect()->to("print/" . $id);
+        } else {
+            throw new \CodeIgniter\Database\Exceptions\DatabaseException();
         }
     }
 
@@ -217,7 +215,7 @@ class Worker extends Controller
         $MM_CODE = $this->request->getPost("MM_CODE");
         $id = $this->request->getPost("id");
         $CURE_TIME = $this->request->getPost("CURE_TIME");
-        $array = ["slot" => $Park, "id_paint !=" => "0"];
+        $array = ["slot" => $Park, "id_paint" => $id];
         $data["park"] = $md2->where($array)->first();
         // tampilkan 404 error jika data tidak ditemukan
         if (!$data["park"]) {
