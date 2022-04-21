@@ -46,10 +46,13 @@
                     <div class="col-12">
 					<form action="/worker/get_ip" method="post">
 						<input type="hidden" name="mch" value="<?= $mch ?>">
-                        <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" name="MAT_IP_CODE" placeholder="MAT_IP_CODE" autofocus required autocomplete="off">
-						<input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
+                        <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" id="MAT_IP_CODE" name="MAT_IP_CODE" placeholder="MAT_IP_CODE" autofocus required autocomplete="off">
+					
+					<div class="data"></div>
+					
 					</form>
                     </div>
+					
                     <h5 class="card-title" style="font-size: 200%; color: #FFF017;">PLEASE INPUT GT IPCODE</h4>
                     <div class="row" align="left">
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
@@ -73,6 +76,37 @@
         </div>
     </section>
     <!-- validations end -->
+	<script>
+		$(document).ready(function(){
+			load_data();
+			function load_data(keyword)
+			{
+				$.ajax({
+					method:"POST",
+					url:"../chIP.php",
+					data: {keyword:keyword},
+					success:function(hasil)
+					{
+						if(hasil.length > 0){
+							$('.data').html(hasil);
+							console.log( "Hasil");
+							$('form').submit( function(e){
+								e.preventDefault();
+							});
+						}else{
+							$('.data').html(hasil);
+							console.log( "Kosong");
+							$('form').unbind( 'submit' );
+						}
+					}
+				});
+		 	}
+			$('#MAT_IP_CODE').keyup(function(){
+	    		var keyword = $("#MAT_IP_CODE").val();
+				load_data(keyword);
+			});
+		});
+	</script>
 
 </div>
 <?= $this->endSection() ?>

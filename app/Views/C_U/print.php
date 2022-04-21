@@ -16,7 +16,6 @@
         </div>
         <div class="col-md-4">
             <div class="text-left">
-                <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik["WM_CODE"] ?></p>
                 <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik["WM_GROUP"] ?></p>
                 <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik["WM_SHIFT"] ?></p>
                 <p style="font-size: 350%; font-weight:bold; color: #000;margin-bottom: 0px;"><?= $komik["Park"] ?></p>

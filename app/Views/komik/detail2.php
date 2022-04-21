@@ -35,7 +35,6 @@
             </div>
             <div class="col-sm-4">
                 <div class="text-left">
-                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['WM_CODE'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik['WM_GROUP'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik['WM_SHIFT'];?></p>
                     <p style="font-size: 450%; font-weight:bold; color: #000;margin-bottom: 0px;"><?= $komik['Park'];?></p>
@@ -45,6 +44,9 @@
                 <div class="text-center">
                     <br>
                     <div id="qrcode"></div>
+					<div class="text-left">
+						<p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['id'];?></p>
+					</div>
                     <?php
                         $Qr = $komik['MAT_IP_CODE'].','.$komik['Amount'].','.$komik['On_Insert'].','.$komik['WM_CODE'].','.$komik['id'];
                     ?>

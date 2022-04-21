@@ -7,12 +7,15 @@
 <div class="page-heading">
     <!-- validations start -->
     <section id="input-validation" align="center">
-        <div class="container">
+        <div class="">
             <div class="col-4">
                 <div class="row">
                     <?php 
                         $mm = session()->get('logged_in_mm');
+                        $qc = session()->get('logged_in_qc');
                         if(isset($mm)){
+                            echo '<a href="worker/logout_MM" class="btn btn-danger" >Logout</a>';
+                        }elseif(isset($qc)){
                             echo '<a href="worker/logout_MM" class="btn btn-danger" >Logout</a>';
                         }else{
                             echo '<a href="parking" class="btn btn-success" >Login</a>';
@@ -35,7 +38,14 @@
 							<form action="/worker/get_tag" method="post" autocomplete="off">
 								<?php 
 									$mm = session()->get('logged_in_mm');
+									$qc = session()->get('logged_in_qc');
 									if(isset($mm)){
+                                        echo '
+                                        <input style="text-align:center; font-weight:bold; width:70%" type="text" class="form-control" id="fill_ip" placeholder="Filter IP" autofocus><br>
+                                        <input type="reset" style="text-align:center; font-weight:bold; width:30%" class="form-control" value="Reset Input"><br>
+                                        <input style="text-align:center; font-weight:bold; width:70%" type="text" class="form-control" name="listTag" placeholder="listTag" required autofocus autocomplete="off">
+                                        ';
+									}elseif(isset($qc)){
                                         echo '
                                         <input style="text-align:center; font-weight:bold; width:70%" type="text" class="form-control" id="fill_ip" placeholder="Filter IP" autofocus><br>
                                         <input type="reset" style="text-align:center; font-weight:bold; width:30%" class="form-control" value="Reset Input"><br>
@@ -60,8 +70,14 @@
 </div>
 <?php 
     $mm = session()->get('logged_in_mm');
+    $qc = session()->get('logged_in_qc');
     $MM_CODE = session()->get('MM_CODE');
-    if(isset($mm) && $MM_CODE == 'irhamkh002'){
+    $QC_CODE = session()->get('QC_ID');
+    $QC_NAME = session()->get('QC_NAME');
+    $pass_QC = session()->get('pass_QC');
+    if(isset($qc)){
+        $co = 'co3';
+    }elseif(isset($mm) && $MM_CODE == 'irhamkh002'){
         $co = 'co2';
     }else{
         $co = 'co';

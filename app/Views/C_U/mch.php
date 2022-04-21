@@ -15,10 +15,10 @@
                     }
                 ?>
             </h5>
-			<h5 class="card-title" style="font-size: 100%; color: #FFF;">NIK: <?= session()->get('WM_CODE');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;">NIK: 		<?= session()->get('WM_CODE');?></h5>
 			<h5 class="card-title" style="font-size: 100%; color: #FFF;">FULL NAME: <?= session()->get('WM_NAME')." ".session()->get('WM_SURNAME');?></h5>
-			<h5 class="card-title" style="font-size: 100%; color: #FFF;">GROUP: <?= session()->get('GROUP');?></h5>
-			<h5 class="card-title" style="font-size: 100%; color: #FFF;">SHIFT: <?= session()->get('SHIFT');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;">GROUP: 	<?= session()->get('GROUP');?></h5>
+			<h5 class="card-title" style="font-size: 100%; color: #FFF;">SHIFT: 	<?= session()->get('SHIFT');?></h5>
         </div>
         <div class="row" align="center">
             <div class="col-12">
@@ -78,4 +78,30 @@
     <!-- validations end -->
 
 </div>
+
+<script type="text/javascript"> 
+	function Func1() {
+		document.getElementById("mchForm").submit();
+	}
+	let keysDown1 = {};
+	window.onkeydown = function(e) {
+		keysDown1[e.key] = true;
+
+		if (keysDown1["1"]) {
+			document.getElementById("mch").value = "A1"; //set value on myInputID
+			//do what you want when control and a is pressed for example
+			Func1();
+			console.log("1");
+		}
+		else if(keysDown1["2"] ){
+			document.getElementById("mch").value = "M1"; //set value on myInputID
+			Func1();
+			console.log("2");
+		}
+	}
+
+	window.onkeyup = function(e) {
+	keysDown1[e.key] = false;
+	}
+</script>
 <?= $this->endSection() ?>

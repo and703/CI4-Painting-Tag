@@ -36,6 +36,12 @@ class Worker extends Controller
         echo view("C_U/Park", $data);
     }
 
+    public function park_Show()
+    {
+        $data["title"] = "Parking Monitor";
+        echo view("C_U/Park_m", $data);
+    }
+
     public function worker()
     {
         $data["title"] = "Painting Login";
@@ -45,8 +51,8 @@ class Worker extends Controller
     public function get_nik_mm()
     {
         $session = session();
-        $model = new Worker_model();
         $id = $this->request->getPost('WM_CODE');
+        $pass = $this->request->getPost('Pass');
         if($id == 'irhamkh002'){
 			$ses_data = [
 				'MM_CODE'       => $id,
@@ -56,7 +62,22 @@ class Worker extends Controller
 			];
 			$session->set($ses_data);
             return redirect()->to('park_view');
+        }elseif($pass != ''){
+			$md4 = new CQModel();
+			$data['QC'] = $md4->getQC($id)->getRow();
+			$dt = json_decode(json_encode($data["QC"]), true);
+			if($dt['pass'] == $pass){
+				$ses_data = [
+					'QC_ID'       => $id,
+					'QC_NAME'     	=> $dt['Full_Name'],
+					'pass_QC'     	=> $dt['pass'],
+					'logged_in_qc'  => '1'
+				];
+				$session->set($ses_data);
+				return redirect()->to('park_view');
+			}
         }else{
+			$model = new Worker_model();
             $data['park'] = $model->getWorker($id)->getRow();
             $dt = json_decode(json_encode($data['park']), true);
             if($dt){
@@ -239,6 +260,76 @@ class Worker extends Controller
             $md3->insert($dt2);
 
             return redirect()->to("parking");
+        }
+    }
+
+    public function tagconf_manual()
+    {
+        $session = session();
+        $md1 = new KomikModel();
+        $md2 = new ParkModel();
+        $md3 = new MMModel();
+        $md4 = new CQModel();
+        $md5 = new QModel();
+        $dateTime = date("d/m/Y H.i");
+        $Qty_NIK = $session->get("QC_ID");
+        $pass_QC = $session->get("pass_QC");
+        $Park = $this->request->getPost("Park");
+        $id = $this->request->getPost("id");
+        $CURE_TIME = $this->request->getPost("CURE_TIME");
+        $arr_park = ["slot" => $Park, "id_paint !=" => "0"];
+        $arr_Qty = ["Qty_NIK" => $Qty_NIK];
+        $data["park"] = $md2->where($arr_park)->first();
+        $data["QC"] = $md4->getQC($Qty_NIK)->getRow();
+        $dt = json_decode(json_encode($data["QC"]), true);
+        // tampilkan 404 error jika data tidak ditemukan
+        if (!$data["park"]) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException(
+                "Park " . $Park . " Tidak di temukan / Sudah Kosong"
+            );
+        } else {
+            if (!$data["QC"]) {
+                throw new \CodeIgniter\Exceptions\PageNotFoundException(
+                    "User " . $Qty_NIK . "  QC Tidak Ditemukan"
+                );
+            } else {
+                if ($dt["pass"] !== $pass_QC) {
+                    $data["painting"] = $md1->where("id", $id)->first();
+                    $data["title"] = "Tag Confirm";
+                    $data["message"] = '							    
+										<div class="alert alert-danger" role="alert">
+											<strong>Password Salah</strong>
+										</div>
+										';
+                    echo view("C_U/ParkConf", $data);
+                } else {
+                    $dtid = $data["park"]["id"];
+                    $dt1 = [
+                        "id_paint" => "0",
+                    ];
+                    $dt2 = [
+                        "MM_CODE" => $Qty_NIK,
+                        "Park_id" => $dtid,
+                        "Paint_id" => $id,
+                        "CURE_TIME" => $CURE_TIME,
+                        "dateTIME" => $dateTime,
+                    ];
+                    $dt3 = [
+                        "Qty_NIK" => $Qty_NIK,
+                        "MM_CODE" => "",
+                        "Park_id" => $dtid,
+                        "Paint_id" => $id,
+                        "CURE_TIME" => $CURE_TIME,
+                        "dateTIME" => $dateTime,
+                    ];
+
+                    $md2->update($dtid, $dt1);
+                    $md3->insert($dt2);
+                    $md5->insert($dt3);
+
+                    return redirect()->to("park_view");
+                }
+            }
         }
     }
 

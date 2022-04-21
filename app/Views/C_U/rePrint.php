@@ -15,7 +15,6 @@
             <div class="text-left">
                 <p style="font-size: 200%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $painting->On_Insert;?></p>
                 <p style="font-size: 200%; color: #000;margin-bottom: 0px;"><?= $painting->WM_NAME_WM_SURNAME;?></p>
-                <p style="font-size: 200%; color: #000;margin-bottom: 0px;"><?= $painting->WM_CODE;?></p>
             </div>
         </div>
         <div class="col-md-4">

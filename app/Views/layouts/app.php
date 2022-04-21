@@ -38,9 +38,6 @@
         function reprint() {
             document.getElementById("+").click();
         }
-        function Func1() {
-            document.getElementById("mchForm").submit();
-        }
         function Func2() {
             document.getElementById(".").click();
         }
@@ -55,17 +52,6 @@
             if (keysDown["+"]) {
                 reprint();
                 console.log("+");
-            }
-            else if (keysDown["1"]) {
-                document.getElementById("mch").value = "A1"; //set value on myInputID
-                //do what you want when control and a is pressed for example
-                Func1();
-                console.log("1");
-            }
-            else if(keysDown["2"] ){
-                document.getElementById("mch").value = "M1"; //set value on myInputID
-                Func1();
-                console.log("2");
             }
             else if(keysDown["."] ){
                 Func2();
