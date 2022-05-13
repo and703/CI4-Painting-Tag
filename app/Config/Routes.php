@@ -39,11 +39,17 @@ $routes->get('/re_print/(:any)', 'Komik::detail/$1');
 $routes->get('/print/(:any)', 'Komik::detail2/$1');
 $routes->get('/p_park/(:any)', 'Komik::detail3/$1');
 $routes->get('/reprint/update/(:any)', 'Komik::update/$1');
-$routes->get('report', 'Report::index');
-$routes->post('data_tables', 'Report::data_tables');
+//$routes->get('report', 'Report::index');
+//$routes->post('data_tables', 'Report::data_tables');
 $routes->get('chart', 'Chart::index');
-$routes->get('report_parking', 'Report_parking::index');
-$routes->post('data_tables', 'Report_parking::data_tables');
+//$routes->get('report_parking', 'Report_parking::index');
+//$routes->post('data_tables', 'Report_parking::data_tables');
+
+$routes->get('r_status', 'R_status::index');
+$routes->post('data_tables', 'R_status::data_tables');
+
+$routes->get('report_paint', 'Report_paint::index');
+$routes->post('data_tables', 'Report_paint::data_tables');
 
 
 

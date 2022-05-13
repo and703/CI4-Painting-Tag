@@ -30,7 +30,7 @@ date_default_timezone_set('Asia/Jakarta');
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
-								<a href="javascript:;" onclick="parentNode.submit();">
+								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #dc3545;padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #dc3545;padding-left: 30px;padding-right: 30px;">
@@ -58,7 +58,7 @@ date_default_timezone_set('Asia/Jakarta');
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
-								<a href="javascript:;" onclick="parentNode.submit();">
+								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #ffc107;padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #ffc107;padding-left: 30px;padding-right: 30px;">
@@ -97,7 +97,7 @@ date_default_timezone_set('Asia/Jakarta');
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
-								<a href="javascript:;" onclick="parentNode.submit();">
+								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #dc3545;padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #dc3545;padding-left: 30px;padding-right: 30px;">
@@ -125,7 +125,7 @@ date_default_timezone_set('Asia/Jakarta');
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
-								<a href="javascript:;" onclick="parentNode.submit();">
+								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #ffc107;padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #ffc107;padding-left: 30px;padding-right: 30px;">

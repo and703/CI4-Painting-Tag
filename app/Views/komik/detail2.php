@@ -66,6 +66,16 @@
             <div class="col-md-12">
                 <div class="text-left">
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">CURE AFTER : <?= $komik['CURE_TIME'];?></p>
+                    <?php
+                        date_default_timezone_set("Asia/Bangkok");
+                        $Date1 = $komik['On_Insert'];
+                        $text1 = str_replace('/', '-', $Date1);
+                        $text2 = str_replace('.', ':', $text1);
+                        $date = new DateTime($text2);
+                        $date->add(new DateInterval('P5D')); // P1D means a period of 1 day
+                        $Date2 = $date->format('d/m/Y H.i');
+                    ?>
+                    <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Expired AFTER : <?= $Date2;?></p>
                 </div>
             </div>
         </div>
