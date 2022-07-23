@@ -11,7 +11,7 @@ date_default_timezone_set('Asia/Jakarta');
 	if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error);
 	}
-	$sql1 = "SELECT *  FROM parking ORDER BY id ASC";
+	$sql1 = "SELECT *  FROM parking_m ORDER BY id ASC";
 	$result1 = $conn->query($sql1);
 	while($row1 = $result1->fetch_assoc()) {
 		if(! $_GET['ip'] == ''){
@@ -29,7 +29,7 @@ date_default_timezone_set('Asia/Jakarta');
 							<form id="<?= $row1['slot'];?>" action="/Worker/tagconf_manual" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
-								<input type="hidden" name="T_Park" value="A">
+								<input type="hidden" name="T_Park" value="M">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
 								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">
@@ -58,7 +58,7 @@ date_default_timezone_set('Asia/Jakarta');
 							<form id="<?= $row1['slot'];?>" action="/Worker/tagconf_manual" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
-								<input type="hidden" name="T_Park" value="A">
+								<input type="hidden" name="T_Park" value="M">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
 								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">
@@ -98,7 +98,7 @@ date_default_timezone_set('Asia/Jakarta');
 							<form id="<?= $row1['slot'];?>" action="/Worker/tagconf_manual" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
-								<input type="hidden" name="T_Park" value="A">
+								<input type="hidden" name="T_Park" value="M">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
 								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">
@@ -127,7 +127,7 @@ date_default_timezone_set('Asia/Jakarta');
 							<form id="<?= $row1['slot'];?>" action="/Worker/tagconf_manual" method="post" enctype="multipart/form-data">
 								<input type="hidden" name="id" value="<?= $row['id']; ?>">
 								<input type="hidden" name="Park" value="<?= $row['Park']; ?>">
-								<input type="hidden" name="T_Park" value="A">
+								<input type="hidden" name="T_Park" value="M">
 								<input type="hidden" name="CURE_TIME" value="<?= $timeCure; ?>">
 								<a href="javascript:;" onclick="if (confirm('Are you sure TakeOut Manual\r\n Park : <?= $row1['slot'];?>\r\n IP : <?= $row['MAT_IP_CODE'];?>')) parentNode.submit(); else return false;">
 								<div class="card rounded-pill shadow-sm">

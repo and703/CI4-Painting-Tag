@@ -5,7 +5,9 @@ use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\Worker_model;
 use App\Models\KomikModel;
+use App\Models\CustAgeIP;
 use App\Models\ParkModel;
+use App\Models\Park_M_Model;
 use App\Models\MMModel;
 use App\Models\CQModel;
 use App\Models\QModel;
@@ -157,22 +159,43 @@ class Worker extends Controller
     {
         $session = session();
         $model = new Worker_model();
+        $md = new CustAgeIP();
         $id = $this->request->getPost("MAT_IP_CODE");
         $data["mch"] = $this->request->getPost("mch");
         $data["gt_ip"] = $model->getGtip($id)->getRow();
+        $dt = $md->getIpExp($id);
+		if($dt){
+			$data["AG_time"] = $dt['Exp_Time'];
+		}else{
+			$data["AG_time"] = '0';
+		}
         $data["title"] = "Input Amount GT";
         echo view("C_U/input_amount", $data);
+		//print_r($data);
     }
 
     public function save()
     {
         $session = session();
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
+        if(strncmp($this->request->getPost("mch"), "A", 1) === 0){
+            $md2 = new ParkModel();
+        }
+        if(strncmp($this->request->getPost("mch"), "M", 1) === 0){
+            $md2 = new Park_M_Model();
+        }
         if (($dt["park"] = $md2->where("id_paint", "0")->first())) {
             $slot = $dt["park"]["slot"];
             $startTime = date("d/m/Y H.i");
-            $cenvertedTime = date("d/m/Y H.i", strtotime("+2 hours"));
+			if($this->request->getPost("AG_time") == '0'){
+				$cenvertedTime = date("d/m/Y H.i", strtotime("+2 hours"));
+			}else {
+				$list = $this->request->getPost("AG_time");
+				$timepicker = explode(":", $list);
+				$hours = $timepicker[0];
+				$minute = $timepicker[1];
+				$cenvertedTime = date("d/m/Y H.i", strtotime("+".$hours." hours +".$minute." minutes"));
+			}
             $WM_NAME_WM_SURNAME = $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
             $model = new Worker_model();
             $data = [
@@ -199,6 +222,7 @@ class Worker extends Controller
             $dt = [
                 "id_paint" => $id,
             ];
+            
             $md2->update($dtid, $dt);
             return redirect()->to("print/" . $id);
         } else {
@@ -229,9 +253,16 @@ class Worker extends Controller
     public function tagconf()
     {
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
+        $MCH = $this->request->getPost("MCH");
+        if(strncmp($MCH, "A", 1) === 0){
+            $md2 = new ParkModel();
+        }
+        if(strncmp($MCH, "M", 1) === 0){
+            $md2 = new Park_M_Model();
+        }
         $md3 = new MMModel();
         $dateTime = date("d/m/Y H.i");
+
         $Park = $this->request->getPost("Park");
         $MM_CODE = $this->request->getPost("MM_CODE");
         $id = $this->request->getPost("id");
@@ -267,7 +298,13 @@ class Worker extends Controller
     {
         $session = session();
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
+        $T_Park = $this->request->getPost("T_Park");
+        if($T_Park == "A"){
+            $md2 = new ParkModel();
+        }
+        if($T_Park == "M"){
+            $md2 = new Park_M_Model();
+        }
         $md3 = new MMModel();
         $md4 = new CQModel();
         $md5 = new QModel();
@@ -336,11 +373,18 @@ class Worker extends Controller
     public function tagconf_qty()
     {
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
+        $MCH = $this->request->getPost("MCH");
+        if(strncmp($MCH, "A", 1) === 0){
+            $md2 = new ParkModel();
+        }
+        if(strncmp($MCH, "M", 1) === 0){
+            $md2 = new Park_M_Model();
+        }
         $md3 = new MMModel();
         $md4 = new CQModel();
         $md5 = new QModel();
         $dateTime = date("d/m/Y H.i");
+        
         $Qty_NIK = $this->request->getPost("Qty_NIK");
         $pass_QC = $this->request->getPost("pass_QC");
         $Park = $this->request->getPost("Park");

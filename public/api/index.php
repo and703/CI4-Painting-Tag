@@ -33,3 +33,4 @@
         echo json_encode("Employee not found.");
     }
 ?>
+<p><?=$item->slot?><p>

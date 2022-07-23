@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\KomikModel;
+use App\Models\CustAgeIP;
 
 class Komik extends BaseController
 {
     protected $komikModel;
+    protected $custAgeIP;
     public function __construct()
     {
         $this->komikModel = new KomikModel();
+        $this->custAgeIP = new CustAgeIP();
     }
 
     public function index()
@@ -44,9 +47,10 @@ class Komik extends BaseController
 
     public function detail2($slug)
     {
+		$dtGT = $this->komikModel->getKomik($slug);
         $data = [
             "title" => "Detail Tag",
-            "komik" => $this->komikModel->getKomik($slug),
+            "komik" => $dtGT,
         ];
 
         //jika komik tidak ada di tabel
@@ -56,6 +60,7 @@ class Komik extends BaseController
             );
         }
         return view("komik/detail2", $data);
+		//print_r($data);
     }
 
     public function detail3($slug)
