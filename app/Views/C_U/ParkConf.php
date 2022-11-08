@@ -21,6 +21,7 @@
 		<input type="hidden" name="MM_CODE" value="<?= session()->get('MM_CODE'); ?>">
 		<input type="hidden" name="id" value="<?= $painting['id']; ?>">
 		<input type="hidden" name="Park" value="<?= $painting['Park']; ?>">
+		<input type="hidden" name="MCH" value="<?= $painting['MCH']; ?>">
 		<input type="hidden" name="CURE_TIME" value="<?= $painting['CURE_TIME']; ?>">
 		<div class="page-heading">
 							<br>
@@ -83,6 +84,7 @@
 			<input type="hidden" name="MM_CODE" value="<?= session()->get('MM_CODE'); ?>">
 			<input type="hidden" name="id" value="<?= $painting['id']; ?>">
 			<input type="hidden" name="Park" value="<?= $painting['Park']; ?>">
+			<input type="hidden" name="MCH" value="<?= $painting['MCH']; ?>">
 			<input type="hidden" name="CURE_TIME" value="<?= $painting['CURE_TIME']; ?>">
 			<div class="page-heading">
 								<br>

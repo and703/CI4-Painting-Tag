@@ -5,7 +5,10 @@ use CodeIgniter\Controller;
 use CodeIgniter\Exceptions\PageNotFoundException;
 use App\Models\Worker_model;
 use App\Models\KomikModel;
+use App\Models\CustAgeIP;
 use App\Models\ParkModel;
+use App\Models\Park_M_Model;
+use App\Models\Park_B_Model;
 use App\Models\MMModel;
 use App\Models\CQModel;
 use App\Models\QModel;
@@ -17,11 +20,19 @@ class Worker extends Controller
         $data["title"] = "Input Nik";
         echo view("worker_view", $data);
     }
+	
+	public function api_jumlah(){
+		header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin,X-Requested-With, Content-Type, Accept, Access-Control-Requested-Method, Authorization");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PATCH, PUT, DELETE");
+		$model = new Worker_model();
+		return json_encode($model->ajaxPaint());
+	}
 
     public function mch_log()
     {
         $data["title"] = "Input Machine Code";
-        echo view("C_U/mch", $data);
+        echo view("C_U/GT_IP_view", $data);
     }
 
     public function MM_log()
@@ -68,9 +79,8 @@ class Worker extends Controller
 			$dt = json_decode(json_encode($data["QC"]), true);
 			if($dt['pass'] == $pass){
 				$ses_data = [
-					'QC_ID'       => $id,
-					'QC_NAME'     	=> $dt['Full_Name'],
-					'pass_QC'     	=> $dt['pass'],
+					'MM_CODE'       => $id,
+					'MM_NAME'     	=> $dt['Full_Name'],
 					'logged_in_qc'  => '1'
 				];
 				$session->set($ses_data);
@@ -124,7 +134,7 @@ class Worker extends Controller
             ];
             $session->set($ses_data);
             $data["title"] = "Input Machine Code";
-            echo view("C_U/mch", $data);
+            echo view("C_U/GT_IP_view", $data);
         } else {
             session()->setFlashdata(
                 "pesan",
@@ -157,62 +167,222 @@ class Worker extends Controller
     {
         $session = session();
         $model = new Worker_model();
-        $id = $this->request->getPost("MAT_IP_CODE");
-        $data["mch"] = $this->request->getPost("mch");
-        $data["gt_ip"] = $model->getGtip($id)->getRow();
-        $data["title"] = "Input Amount GT";
-        echo view("C_U/input_amount", $data);
+        $md = new CustAgeIP();
+        $md1 = new KomikModel();
+        $MAT_IP_CODE = $this->request->getPost("MAT_IP_CODE");
+        $id = $this->request->getPost("id");
+        if($MAT_IP_CODE == 'i'){
+            $data["painting"] 		= $md1->where("id", $id)->first();
+			$data["gt_ip"] 			= $model->getGtip($data["painting"]["MAT_IP_CODE"])->getRow();
+			
+			$dt = $md->getIpExp($data["painting"]["MAT_IP_CODE"]);
+			if($dt){
+				$data["AG_time"] 	= $dt['Exp_Time'];
+			}else{
+				$data["AG_time"] 	= '0';
+			}
+			$data["title"] 			= "Input Amount GT";
+			echo view("C_U/input_amount_m2", $data);
+
+        }else{
+            $data["mch"] = $this->request->getPost("mch");
+            $data["gt_ip"] = $model->getGtip($MAT_IP_CODE)->getRow();
+            $dt = $md->getIpExp($id);
+            if($dt){
+                $data["AG_time"] = $dt['Exp_Time'];
+            }else{
+                $data["AG_time"] = '0';
+            }
+            $data["title"] = "Input Amount GT";
+            echo view("C_U/input_amount", $data);
+            //print_r($data);
+        }
     }
 
     public function save()
     {
         $session = session();
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
-        if (($dt["park"] = $md2->where("id_paint", "0")->first())) {
-            $slot = $dt["park"]["slot"];
-            $startTime = date("d/m/Y H.i");
-            $cenvertedTime = date("d/m/Y H.i", strtotime("+2 hours"));
-            $WM_NAME_WM_SURNAME = $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
-            $model = new Worker_model();
-            $data = [
-                "WM_CODE" => $session->get("WM_CODE"),
-                "WM_GROUP" => $session->get("GROUP"),
-                "WM_SHIFT" => $session->get("SHIFT"),
-                "MCH" => $this->request->getPost("mch"),
-                "WM_NAME_WM_SURNAME" => $WM_NAME_WM_SURNAME,
-                "MAT_DESC" => $this->request->getPost("MAT_DESC"),
-                "MAT_IP_CODE" => $this->request->getPost("MAT_IP_CODE"),
-                "Amount" => $this->request->getPost("Amount"),
-                "On_Insert" => $startTime,
-                "CURE_TIME" => $cenvertedTime,
-                "Count_Printed" => $this->request->getPost("Count_Printed"),
-                "Park" => $slot,
-            ];
-            $model->savePrint($data);
+        if(strncmp($this->request->getPost("mch"), "A", 1) === 0){
+			$md2 							= new ParkModel();
+			
+			if (($dt["park"] = $md2->where("id_paint", "0")->first())) {
+				$slot 						= $dt["park"]["slot"];
+				$startTime 					= date("d/m/Y H.i");
+				if($this->request->getPost("AG_time") == '0'){
+					$cenvertedTime 			= date("d/m/Y H.i", strtotime("+2 hours"));
+				}else {
+					$id 					= $this->request->getPost("id");
+					$list 					= $this->request->getPost("AG_time");
+					$timepicker 			= explode(":", $list);
+					$hours 					= $timepicker[0];
+					$minute 				= $timepicker[1];
+					
+					$cenvertedTime 		    = date("d/m/Y H.i", strtotime("+".$hours." hours +".$minute." minutes"));
+				}
+				$WM_NAME_WM_SURNAME 		= $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
+				$model 						= new Worker_model();
+				$data 						= [
+					"WM_CODE" 				=> $session->get("WM_CODE"),
+					"WM_GROUP" 				=> $session->get("GROUP"),
+					"WM_SHIFT" 				=> $session->get("SHIFT"),
+					"MCH" 					=> $this->request->getPost("mch"),
+					"WM_NAME_WM_SURNAME" 	=> $WM_NAME_WM_SURNAME,
+					"MAT_DESC" 				=> $this->request->getPost("MAT_DESC"),
+					"MAT_IP_CODE" 			=> $this->request->getPost("MAT_IP_CODE"),
+					"Amount" 				=> $this->request->getPost("Amount"),
+					"On_Insert" 			=> $startTime,
+					"CURE_TIME" 			=> $cenvertedTime,
+					"Count_Printed" 		=> $this->request->getPost("Count_Printed"),
+					"Park" 					=> $slot,
+				];
+				$model->savePrint($data);
 
-            $data["painting"] = $md1->orderBy("id", "DESC")->first();
-            $id = $data["painting"]["id"];
-            $slot = $data["painting"]["Park"];
-            $data["park"] = $md2->where("slot", $slot)->first();
-            $dtid = $data["park"]["id"];
-            $dt = [
-                "id_paint" => $id,
-            ];
-            $md2->update($dtid, $dt);
-            return redirect()->to("print/" . $id);
-        } else {
-            throw new \CodeIgniter\Database\Exceptions\DatabaseException();
-        }
+				$data["painting"] 			= $md1->orderBy("id", "DESC")->first();
+				$id 						= $data["painting"]["id"];
+				$slot 						= $data["painting"]["Park"];
+				$data["park"] 				= $md2->where("slot", $slot)->first();
+				$dtid 						= $data["park"]["id"];
+				$dt 						= [
+					"id_paint" 				=> $id,
+				];
+				
+				$md2->update($dtid, $dt);
+				return redirect()->to("print/" . $id);
+			} 
+			else {
+				throw new \CodeIgniter\Database\Exceptions\DatabaseException();
+			}
+		}elseif(strncmp($this->request->getPost("mch"), "M", 1) === 0){
+            if($this->request->getPost("mch") == "M3"){
+                $md2 = new Park_B_Model();
+            }else{
+                $md2 = new Park_M_Model();
+            }
+			
+			if (($dt["park"] = $md2->where("id_paint", "0")->first())) {
+				$slot 						= $dt["park"]["slot"];
+				$startTime 					= date("d/m/Y H.i");
+				if($this->request->getPost("AG_time") == '0'){
+					$cenvertedTime 			= date("d/m/Y H.i", strtotime("+2 hours"));
+				}else {
+					$id 					= $this->request->getPost("id");
+					$list 					= $this->request->getPost("AG_time");
+					$timepicker 			= explode(":", $list);
+					$hours 					= $timepicker[0];
+					$minute 				= $timepicker[1];
+					
+					$cenvertedTime 		= date("d/m/Y H.i", strtotime("+".$hours." hours +".$minute." minutes"));
+				}
+				$WM_NAME_WM_SURNAME 		= $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
+				$model 						= new Worker_model();
+				$data 						= [
+					"WM_CODE" 				=> $session->get("WM_CODE"),
+					"WM_GROUP" 				=> $session->get("GROUP"),
+					"WM_SHIFT" 				=> $session->get("SHIFT"),
+					"MCH" 					=> $this->request->getPost("mch"),
+					"WM_NAME_WM_SURNAME" 	=> $WM_NAME_WM_SURNAME,
+					"MAT_DESC" 				=> $this->request->getPost("MAT_DESC"),
+					"MAT_IP_CODE" 			=> $this->request->getPost("MAT_IP_CODE"),
+					"Amount" 				=> $this->request->getPost("Amount"),
+					"On_Insert" 			=> $startTime,
+					"CURE_TIME" 			=> $cenvertedTime,
+					"Count_Printed" 		=> $this->request->getPost("Count_Printed"),
+					"Park" 					=> $slot,
+				];
+				$model->savePrint($data);
+
+				$data["painting"] 			= $md1->orderBy("id", "DESC")->first();
+				$id 						= $data["painting"]["id"];
+				$slot 						= $data["painting"]["Park"];
+				$data["park"] 				= $md2->where("slot", $slot)->first();
+				$dtid 						= $data["park"]["id"];
+				$dt 						= [
+					"id_paint" 				=> $id,
+				];
+				
+				$md2->update($dtid, $dt);
+				return redirect()->to("print/" . $id);
+			} 
+			else {
+				throw new \CodeIgniter\Database\Exceptions\DatabaseException();
+			}
+			
+		}else{
+            $model 						    = new Worker_model();
+			$md2 							= new Park_B_Model();
+			$md3 							= new Park_M_Model();
+			
+			$Park_A 						= $this->request->getPost("Park");
+			$id_A 							= $this->request->getPost("id");
+			$cenvertedTime 					= $this->request->getPost("CURE_TIME");
+		
+			$array_A 						= [
+				"slot" 						=> $Park_A, 
+				"id_paint" 					=> $id_A
+			];
+			
+			$data_A["park"] 				= $md2->where($array_A)->first();
+			// tampilkan 404 error jika data tidak ditemukan
+			if (!$data_A["park"]) {
+				throw new \CodeIgniter\Exceptions\PageNotFoundException(
+					"Park " . $Park_A . " Tidak di temukan / Sudah Kosong"
+				);
+			} else {
+				$dtid_A 					= $data_A["park"]["id"];
+				
+				$dt_A 						= [
+					"id_paint" 				=> "0",
+				];
+
+				$md2->update($dtid_A, $dt_A);
+			}
+			
+			if (($dt_B["park"] = $md3->where("id_paint", "0")->first())) {
+				$slot 						= $dt_B["park"]["slot"];
+				$startTime 					= date("d/m/Y H.i");
+				$WM_NAME_WM_SURNAME 		= $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
+				$data_B						= [
+					"WM_CODE" 				=> $session->get("WM_CODE"),
+					"WM_GROUP" 				=> $session->get("GROUP"),
+					"WM_SHIFT" 				=> $session->get("SHIFT"),
+					"WM_NAME_WM_SURNAME" 	=> $WM_NAME_WM_SURNAME,
+					"MCH" 					=> $this->request->getPost("mch1"),
+					"MAT_IP_CODE" 			=> $this->request->getPost("MAT_IP_CODE"),
+					"MAT_DESC" 				=> $this->request->getPost("MAT_DESC"),
+					"Amount" 				=> $this->request->getPost("Amount"),
+					"On_Insert" 			=> $startTime,
+					"CURE_TIME" 			=> $cenvertedTime,
+					"Count_Printed" 		=> $this->request->getPost("Count_Printed"),
+					"Park" 					=> $slot,
+					"M_id" 					=> $this->request->getPost("id"),
+				];
+				$model->savePrint($data_B);
+
+				$data_B["painting"] 		= $md1->orderBy("id", "DESC")->first();
+				$id_B 						= $data_B["painting"]["id"];
+				$slot 						= $data_B["painting"]["Park"];
+				$data_B["park"] 			= $md3->where("slot", $slot)->first();
+				$dtid_B 					= $data_B["park"]["id"];
+				$dt_B 						= [
+					"id_paint" 				=> $id_B,
+				];
+				
+				$md3->update($dtid_B, $dt_B);
+				return redirect()->to("p_man/" . $id_B);
+			} 
+			else {
+				throw new \CodeIgniter\Database\Exceptions\DatabaseException();
+			}
+		}
     }
 
     public function print()
     {
         $md1 = new KomikModel();
-        $data["painting"] = $md1->orderBy("id", "DESC")->first();
         $data["title"] = "Print Tag";
-        //print_r($dtid);
-        echo view("C_U/print", $data);
+        $data["painting"] = $md1->orderBy("id", "DESC")->first();
+            echo view("C_U/print", $data);
     }
 
     public function get_tag()
@@ -229,9 +399,16 @@ class Worker extends Controller
     public function tagconf()
     {
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
+        $MCH = $this->request->getPost("MCH");
+        if(strncmp($MCH, "A", 1) === 0){
+            $md2 = new ParkModel();
+        }
+        if(strncmp($MCH, "M", 1) === 0){
+            $md2 = new Park_M_Model();
+        }
         $md3 = new MMModel();
         $dateTime = date("d/m/Y H.i");
+
         $Park = $this->request->getPost("Park");
         $MM_CODE = $this->request->getPost("MM_CODE");
         $id = $this->request->getPost("id");
@@ -267,13 +444,18 @@ class Worker extends Controller
     {
         $session = session();
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
+        $T_Park = $this->request->getPost("T_Park");
+        if($T_Park == "A"){
+            $md2 = new ParkModel();
+        }
+        if($T_Park == "M"){
+            $md2 = new Park_M_Model();
+        }
         $md3 = new MMModel();
         $md4 = new CQModel();
         $md5 = new QModel();
         $dateTime = date("d/m/Y H.i");
         $Qty_NIK = $session->get("QC_ID");
-        $pass_QC = $session->get("pass_QC");
         $Park = $this->request->getPost("Park");
         $id = $this->request->getPost("id");
         $CURE_TIME = $this->request->getPost("CURE_TIME");
@@ -288,59 +470,49 @@ class Worker extends Controller
                 "Park " . $Park . " Tidak di temukan / Sudah Kosong"
             );
         } else {
-            if (!$data["QC"]) {
-                throw new \CodeIgniter\Exceptions\PageNotFoundException(
-                    "User " . $Qty_NIK . "  QC Tidak Ditemukan"
-                );
-            } else {
-                if ($dt["pass"] !== $pass_QC) {
-                    $data["painting"] = $md1->where("id", $id)->first();
-                    $data["title"] = "Tag Confirm";
-                    $data["message"] = '							    
-										<div class="alert alert-danger" role="alert">
-											<strong>Password Salah</strong>
-										</div>
-										';
-                    echo view("C_U/ParkConf", $data);
-                } else {
-                    $dtid = $data["park"]["id"];
-                    $dt1 = [
-                        "id_paint" => "0",
-                    ];
-                    $dt2 = [
-                        "MM_CODE" => $Qty_NIK,
-                        "Park_id" => $dtid,
-                        "Paint_id" => $id,
-                        "CURE_TIME" => $CURE_TIME,
-                        "dateTIME" => $dateTime,
-                    ];
-                    $dt3 = [
-                        "Qty_NIK" => $Qty_NIK,
-                        "MM_CODE" => "",
-                        "Park_id" => $dtid,
-                        "Paint_id" => $id,
-                        "CURE_TIME" => $CURE_TIME,
-                        "dateTIME" => $dateTime,
-                    ];
+			$dtid = $data["park"]["id"];
+			$dt1 = [
+				"id_paint" => "0",
+			];
+			$dt2 = [
+				"MM_CODE" => $Qty_NIK,
+				"Park_id" => $dtid,
+				"Paint_id" => $id,
+				"CURE_TIME" => $CURE_TIME,
+				"dateTIME" => $dateTime,
+			];
+			$dt3 = [
+				"Qty_NIK" => $Qty_NIK,
+				"MM_CODE" => "",
+				"Park_id" => $dtid,
+				"Paint_id" => $id,
+				"CURE_TIME" => $CURE_TIME,
+				"dateTIME" => $dateTime,
+			];
 
-                    $md2->update($dtid, $dt1);
-                    $md3->insert($dt2);
-                    $md5->insert($dt3);
+			$md2->update($dtid, $dt1);
+			$md3->insert($dt2);
+			$md5->insert($dt3);
 
-                    return redirect()->to("park_view");
-                }
-            }
+			return redirect()->to("park_view");
         }
     }
 
     public function tagconf_qty()
     {
         $md1 = new KomikModel();
-        $md2 = new ParkModel();
+        $MCH = $this->request->getPost("MCH");
+        if(strncmp($MCH, "A", 1) === 0){
+            $md2 = new ParkModel();
+        }
+        if(strncmp($MCH, "M", 1) === 0){
+            $md2 = new Park_M_Model();
+        }
         $md3 = new MMModel();
         $md4 = new CQModel();
         $md5 = new QModel();
         $dateTime = date("d/m/Y H.i");
+        
         $Qty_NIK = $this->request->getPost("Qty_NIK");
         $pass_QC = $this->request->getPost("pass_QC");
         $Park = $this->request->getPost("Park");

@@ -89,14 +89,11 @@
 
 		if (keysDown1["1"]) {
 			document.getElementById("mch").value = "A1"; //set value on myInputID
-			//do what you want when control and a is pressed for example
 			Func1();
-			console.log("1");
 		}
 		else if(keysDown1["2"] ){
 			document.getElementById("mch").value = "M1"; //set value on myInputID
 			Func1();
-			console.log("2");
 		}
 	}
 

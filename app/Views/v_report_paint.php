@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>GT painting Report</title>
 
-	<!-- Google Font: Source Sans Pro -->
+	<!-- Google Font: Source Sans Pro
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="<?= base_url() ?>/template/plugins/fontawesome-free/css/all.min.css">
@@ -203,7 +203,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 							}
 						},
 					],
-					"order": [[ 4, "desc" ]],
+					"order": [[ 7, "desc" ]],
 					// Load data for the table's content from an Ajax source
 					"ajax": {
 						"url": "<?= site_url('report_paint/data_tables'); ?>",
@@ -226,7 +226,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					"fixedHeader": true,
 					"colReorder": true,
 					"pageLength": 5,
-					"lengthMenu": [5,10000],
+					"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
 
 
 					"footerCallback": function(row, data, start, end, display) {

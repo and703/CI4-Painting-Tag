@@ -18,6 +18,12 @@
     <div class="error-page">
         <div class="row" align="left">
             <div class="col-md-12">
+                <div class="text-center">
+                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= $komik['MAT_DESC'];?></p>
+                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= $komik['MAT_IP_CODE'];?>(<?= $komik['Amount'];?> Pcs) <?= $komik['MCH'];?></p>
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="text-left">
                     <form id="reprint" action="/komik/update2/<?= $komik['id']; ?>" method="post" enctype="multipart/form-data">
                     <?php
@@ -25,35 +31,43 @@
                     ?>
                         <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                         <input type="hidden" name="Count_Printed" value="<?= $count; ?>">
-                        <input type="hidden" name="mch" value="<?= $mch; ?>">
+                        <input type="hidden" name="mch" value="<?= $komik['On_Insert']; ?>">
                         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                     </form>
-                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= $komik['MAT_DESC'];?></p>
-                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= $komik['MAT_IP_CODE'];?>(<?= $komik['Amount'];?> Pcs) <?= $komik['MCH'];?></p>
+                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px; text-decoration: underline;">OUTSIDE</p>
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $komik['On_Insert'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['WM_NAME_WM_SURNAME'];?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik['WM_GROUP'];?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik['WM_SHIFT'];?></p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="text-left">
+                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px; text-decoration: underline;">INSIDE</p>
+                    <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $komik2['On_Insert'];?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik2['WM_NAME_WM_SURNAME'];?></p>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="text-left">
-                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik['WM_GROUP'];?></p>
-                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik['WM_SHIFT'];?></p>
-                    <p style="font-size: 450%; font-weight:bold; color: #000;margin-bottom: 0px;"><?= $komik['Park'];?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik2['WM_GROUP'];?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik2['WM_SHIFT'];?></p>
+                    <p style="font-size: 450%; font-weight:bold; color: #000;margin-bottom: 0px;"><?= $komik2['Park'];?></p>
                 </div>
             </div>
-            <div class="col-sm-8">
-                <div class="text-left">
+            <div class="col-sm-7">
+                <div class="text-center">
                     <br>
-                    <div id="qrcode"></div>
+                    <div id="qrcode2"></div>
 					<div class="text-left">
-						<p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['id'];?></p>
+						<p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik2['id'];?></p>
 					</div>
                     <?php
-                        $Qr = $komik['MAT_IP_CODE'].','.$komik['Amount'].','.$komik['On_Insert'].','.$komik['WM_CODE'].','.$komik['id'];
+                        $Qr2 = $komik2['MAT_IP_CODE'].','.$komik2['Amount'].','.$komik2['On_Insert'].','.$komik2['WM_CODE'].','.$komik2['id'];
                     ?>
                     <script type="text/javascript">
-                    var qrcode = new QRCode(document.getElementById("qrcode"), {
-                        text: "<?= $Qr?>",
+                    var qrcode = new QRCode(document.getElementById("qrcode2"), {
+                        text: "<?= $Qr2?>",
                         width: 250,
                         height: 250,
                         colorDark : "#000000",
@@ -65,7 +79,7 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="text-left">
+                <div class="text-center">
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">CURE AFTER : <?= $komik['CURE_TIME'];?></p>
                     <?php
                         date_default_timezone_set("Asia/Bangkok");

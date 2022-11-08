@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\KomikModel;
+use App\Models\CustAgeIP;
 
 class Komik extends BaseController
 {
     protected $komikModel;
+    protected $custAgeIP;
     public function __construct()
     {
         $this->komikModel = new KomikModel();
+        $this->custAgeIP = new CustAgeIP();
     }
 
     public function index()
@@ -44,11 +47,13 @@ class Komik extends BaseController
 
     public function detail2($slug)
     {
+		$dtGT = $this->komikModel->getKomik($slug);
         $data = [
             "title" => "Detail Tag",
-            "komik" => $this->komikModel->getKomik($slug),
+            "komik" => $dtGT,
+            "mch" => $dtGT["MCH"],
         ];
-
+        
         //jika komik tidak ada di tabel
         if (empty($data["komik"])) {
             throw new \CodeIgniter\Exceptions\PageNotFoundException(
@@ -56,6 +61,7 @@ class Komik extends BaseController
             );
         }
         return view("komik/detail2", $data);
+		//print_r($data);
     }
 
     public function detail3($slug)
@@ -72,6 +78,20 @@ class Komik extends BaseController
             );
         }
         return view("komik/detail3", $data);
+    }
+
+    public function detail4($slug)
+    {
+        $data["title"]  = "Detail Tag";
+        $data["komik2"]  = $this->komikModel->getKomik($slug);
+        $data["komik"] = $this->komikModel->getKomik($data["komik2"]["M_id"]);
+        //jika komik tidak ada di tabel
+        if (empty($data["komik"])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException(
+                "Judul komik" . $slug . "Tidak di temukan"
+            );
+        }
+        return view("komik/detail4", $data);
     }
 
     public function parkDet($id)
@@ -197,14 +217,28 @@ class Komik extends BaseController
 
     public function update2($id)
     {
-        $data = [
-            "Count_Printed" => $this->request->getVar("Count_Printed"),
-        ];
-        $this->komikModel->update($id, $data);
+        $session = session();
+        if($this->request->getVar("mch") == 'A1'){
+            $data = [
+                "Count_Printed" => $this->request->getVar("Count_Printed"),
+            ];
+            $this->komikModel->update($id, $data);
+    
+            session()->setFlashdata("pesan", "Print Success. ");
+    
+            return redirect()->to("worker");
 
-        session()->setFlashdata("pesan", "Print Success. ");
-
-        return redirect()->to("worker");
+        }else{
+            $data = [
+                "Count_Printed" => $this->request->getVar("Count_Printed"),
+            ];
+            $this->komikModel->update($id, $data);
+    
+            session()->setFlashdata("pesan", "Print Success. ");
+    
+            $session->destroy();
+            return redirect()->to("worker");
+        }
     }
 
     public function get($id)

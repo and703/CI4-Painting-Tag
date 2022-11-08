@@ -38,6 +38,7 @@ $routes->delete('/komik/(:num)', 'Komik::delete/$1');
 $routes->get('/re_print/(:any)', 'Komik::detail/$1');
 $routes->get('/print/(:any)', 'Komik::detail2/$1');
 $routes->get('/p_park/(:any)', 'Komik::detail3/$1');
+$routes->get('/p_man/(:any)', 'Komik::detail4/$1');
 $routes->get('/reprint/update/(:any)', 'Komik::update/$1');
 //$routes->get('report', 'Report::index');
 //$routes->post('data_tables', 'Report::data_tables');
@@ -45,6 +46,8 @@ $routes->get('chart', 'Chart::index');
 //$routes->get('report_parking', 'Report_parking::index');
 //$routes->post('data_tables', 'Report_parking::data_tables');
 
+$routes->get('api_app/jumlah', 'Worker::api_jumlah');
+$routes->get('api_app/result', 'Worker::api_result');
 $routes->get('r_status', 'R_status::index');
 $routes->post('data_tables', 'R_status::data_tables');
 

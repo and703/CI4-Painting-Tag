@@ -42,15 +42,15 @@ class M_Report_paint extends Model
         // $this->db_rpot->where("mat_code!=","mat_code");
        
 
-         $f1=$this->request->getPost("f1");
+        $f1=$this->request->getPost("f1");
 		
         
         if($f1)
 		{
 			$tgl1 = $this->rangeindo($f1, 0);
 			$tgl2 = $this->rangeindo($f1, 1);
-            $this->db_rpot->where("SUBSTR(PRINT_OUT,1,10)>=", $tgl1);
-            $this->db_rpot->where("SUBSTR(PRINT_OUT,1,10)<=", $tgl2);
+            $this->db_rpot->where("CAST(PRINT_OUT AS DATE)>=", $tgl1);
+            $this->db_rpot->where("CAST(PRINT_OUT AS DATE)<=", $tgl2);
 		}
 
         $f2=$this->request->getPost("f2");
@@ -60,20 +60,17 @@ class M_Report_paint extends Model
 		 {
              if($f2==1)
              {
-                $this->db_rpot->where("SUBSTR(PRINT_OUT,12,12)>=",'00.00'); 
-                $this->db_rpot->where("SUBSTR(PRINT_OUT,12,12)<=",'07.59'); 
+                $this->db_rpot->where("CAST(PRINT_OUT AS TIME) BETWEEN '00:00' and '08:00'", NULL, FALSE ); 
              }
 			
              if($f2==2)
              {
-                $this->db_rpot->where("SUBSTR(PRINT_OUT,12,12)>=",'08.00'); 
-                $this->db_rpot->where("SUBSTR(PRINT_OUT,12,12)<=",'15.59'); 
+                $this->db_rpot->where("CAST(PRINT_OUT AS TIME) BETWEEN '08:00' and '16:00'", NULL, FALSE ); 
              }
 			
              if($f2==3)
              {
-                $this->db_rpot->where("SUBSTR(PRINT_OUT,12,12)>=",'16.00'); 
-                $this->db_rpot->where("SUBSTR(PRINT_OUT,12,12)<=",'23.59'); 
+                $this->db_rpot->where("CAST(PRINT_OUT AS TIME) BETWEEN '16:00' and '23:59'", NULL, FALSE ); 
              }
 
 		}
@@ -81,7 +78,7 @@ class M_Report_paint extends Model
 
         $column_order = array('','MCH','IP_CODE','','AMOUNT','SLOT','PRINT_OUT','','','GT_STATUS','','','',''); //field yang ada di table
         $column_search = array('IP_CODE','SLOT');
-        $order = array('AMOUNT','desc');
+        //$order = array('PRINT_OUT','ASC');
 
         $i = 0;
         foreach ($column_search as $item) // looping awal

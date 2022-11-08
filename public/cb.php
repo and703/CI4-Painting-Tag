@@ -1,7 +1,7 @@
 <?php
 include 'conn.php';
 
-	$sql1 = "SELECT *  FROM parking ORDER BY id ASC";
+	$sql1 = "SELECT * FROM parking_b ORDER BY id ASC";
 	$result1 = $conn->query($sql1);
 	while($row1 = $result1->fetch_assoc()) {
 		if(! $_GET['ip'] == ''){
