@@ -50,7 +50,6 @@ class Komik extends BaseController
 		$dtGT = $this->komikModel->getKomik($slug);
         $data = [
             "title" => "Detail Tag",
-            "komik" => $dtGT,
             "mch" => $dtGT["MCH"],
         ];
         
