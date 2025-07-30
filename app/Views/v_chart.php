@@ -56,7 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               
                 <thead>
                     <tr>
-                        <th>Data statistik GT Parking</th>
+                        <th>Data statistik GT Parking AUTO</th>
                     </tr>
                     <tr>
                         <th>No</th>
@@ -66,7 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </thead>
                 <tbody>
                         <?php $no = 1;
-                        foreach ($tbl_statistik as $m) { ?>
+                        foreach ($tbl_statistik_1 as $m) { ?>
                             <tr>
                                 <td><?= $no++ ?></td>
                                 <td><?= $m->MAT_IP_CODE ?></td>
@@ -83,7 +83,58 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 
                                     <th>Total</th>
                                     <th></th>
-                                    <th><?php echo $total_semua ?></th> 
+                                    <th><?php echo $total_semua_1 ?></th> 
+                                </tr>
+
+                            </thead>            
+					
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+<div class="row">
+      <div class="col-md-6 border bg-area">
+        <p></p>
+        <div id="container2"></div>
+
+      </div>
+      <div class="col-md-6 border bg-area">
+        <p></p>
+        <div class="card bg-area text-yellow text-bold">
+        <div style="overflow:auto;height:400px">
+          <table class="table">
+              
+                <thead>
+                    <tr>
+                        <th>Data statistik GT Parking MANUAL</th>
+                    </tr>
+                    <tr>
+                        <th>No</th>
+                        <th>IP Code</th>
+                        <th>Jumlah</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <?php $no = 1;
+                        foreach ($tbl_statistik_2 as $m) { ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td><?= $m->MAT_IP_CODE ?></td>
+                                <td><?php echo $m->Total ?></td>
+                                
+                                
+                            </tr>
+                        <?php } ?>
+
+                    </tbody>
+					
+					<thead>
+                            <tr>
+                                
+                                    <th>Total</th>
+                                    <th></th>
+                                    <th><?php echo $total_semua_2 ?></th> 
                                 </tr>
 
                             </thead>            
@@ -95,85 +146,144 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
 
 
-		<script type="text/javascript">
-// Radialize the colors
-Highcharts.setOptions({
-    colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
-        return {
-            radialGradient: {
-                cx: 0.5,
-                cy: 0.3,
-                r: 0.7
-            },
-            stops: [
-                [0, color],
-                [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
-            ]
-        };
-    })
-});
+<script type="text/javascript">
+    // Radialize the colors
+    Highcharts.setOptions({
+        colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+            return {
+                radialGradient: {
+                    cx: 0.5,
+                    cy: 0.3,
+                    r: 0.7
+                },
+                stops: [
+                    [0, color],
+                    [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+                ]
+            };
+        })
+    });
 
 
-// Build the chart
-Highcharts.chart('container1', {
-    chart: {
-        renderTo: 'container1',
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
+    // Build the chart
+    Highcharts.chart('container1', {
+        chart: {
+            renderTo: 'container1',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        credits: {
+        enabled: false
     },
-    credits: {
-    enabled: false
-},
-    title: {
-        text: 'GT Painting Parking Percentage %'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    accessibility: {
-        point: {
-            valueSuffix: '%'
-        }
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                connectorColor: 'silver'
+        title: {
+            text: 'GT Painting Parking AUTO Percentage by %'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
             }
-        }
-    },
-    series: [{
-        name: 'Share',
-        data: [ 
-          <?php $n = 1;
-                foreach ($pieparking as $ppark) {
-                    $matcode = isset($ppark->MAT_IP_CODE) ? ($ppark->MAT_IP_CODE) : '';
-                    $total = isset($ppark->Total) ? ($ppark->Total) : '';
-                    $no = $n++;
-                ?>
-                    <?php if ($no == 1) { ?> {
-                            name: '<?php echo $matcode ?>',
-                            y: <?php echo $total ?>,
-                            sliced: true,
-                            selected: true
-                        },
-                    <?php } else { ?> {
-                            name: '<?php echo $matcode ?>',
-                            y: <?php echo $total ?>
-                        },
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            name: 'Share',
+            data: [ 
+            <?php $n = 1;
+                    foreach ($pieparking_1 as $ppark) {
+                        $matcode = isset($ppark->MAT_IP_CODE) ? ($ppark->MAT_IP_CODE) : '';
+                        $total = isset($ppark->Total) ? ($ppark->Total) : '';
+                        $no = $n++;
+                    ?>
+                        <?php if ($no == 1) { ?> {
+                                name: '<?php echo $matcode ?>',
+                                y: <?php echo $total ?>,
+                                sliced: true,
+                                selected: true
+                            },
+                        <?php } else { ?> {
+                                name: '<?php echo $matcode ?>',
+                                y: <?php echo $total ?>
+                            },
+                        <?php } ?>
                     <?php } ?>
-                <?php } ?>
-        ]
-    }]
-});
-		</script>
+            ]
+        }]
+    });
+    // Build the chart
+    Highcharts.chart('container2', {
+        chart: {
+            renderTo: 'container2',
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        credits: {
+        enabled: false
+    },
+        title: {
+            text: 'GT Painting Parking MANUAL Percentage by %'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    connectorColor: 'silver'
+                }
+            }
+        },
+        series: [{
+            name: 'Share',
+            data: [ 
+            <?php $n = 1;
+                    foreach ($pieparking_2 as $ppark) {
+                        $matcode = isset($ppark->MAT_IP_CODE) ? ($ppark->MAT_IP_CODE) : '';
+                        $total = isset($ppark->Total) ? ($ppark->Total) : '';
+                        $no = $n++;
+                    ?>
+                        <?php if ($no == 1) { ?> {
+                                name: '<?php echo $matcode ?>',
+                                y: <?php echo $total ?>,
+                                sliced: true,
+                                selected: true
+                            },
+                        <?php } else { ?> {
+                                name: '<?php echo $matcode ?>',
+                                y: <?php echo $total ?>
+                            },
+                        <?php } ?>
+                    <?php } ?>
+            ]
+        }]
+    });
+</script>
 </div>
 	</body>
 </html>
-
+u1cyxpNlprapEUjAXIwYdmWrUREQxkn
+u1cyxpNlprapEUjAXIwYdmWrURERQxkn

@@ -50,6 +50,7 @@ class Komik extends BaseController
 		$dtGT = $this->komikModel->getKomik($slug);
         $data = [
             "title" => "Detail Tag",
+            "komik" => $dtGT,
             "mch" => $dtGT["MCH"],
         ];
         
@@ -217,7 +218,7 @@ class Komik extends BaseController
     public function update2($id)
     {
         $session = session();
-        if($this->request->getVar("mch") == 'A1'){
+        if(strncmp($this->request->getVar("mch"), "A", 1) === 0){
             $data = [
                 "Count_Printed" => $this->request->getVar("Count_Printed"),
             ];

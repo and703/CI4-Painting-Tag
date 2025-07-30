@@ -133,7 +133,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td>Cure Time</td>
 												<td>Hours</td>
 												<td>Waktu Expired</td>
-												<td>GT Status</td>
+												
 
 											</tr>
 
@@ -165,7 +165,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						buttons: [{
 								extend: 'excelHtml5',
 								exportOptions: {
-									columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+									columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 								},
 								text: '<span class="fas fa-file-excel"></span> Download Excell',
 								className: "btn btn-light btn-sm",
@@ -196,11 +196,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						},
 						//Set column definition initialisation properties.
 						"columnDefs": [{
-							"targets": [-1, -2, -4, -6, -9, -10, -12], //last column
+							"targets": [-1, -2, -4, -6, -9, -10], //last column
 							"orderable": true, //set not orderable
 						}, ],
-
+						
+						/*
 						rowCallback: function(row, data) {
+							
 							console.log(data[11]);
 
 							if (data[11] === 'NORMAL') {
@@ -211,6 +213,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 								$(row).addClass('Highlight_3');
 							}
 						},
+						*/
 
 
 					});

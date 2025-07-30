@@ -28,14 +28,23 @@ class Chart extends BaseController
 
 	{
 
-        $data["pieparking"]=$this->db->query("SELECT b.MAT_IP_CODE ,SUM(b.Amount) as Total
+        $data["pieparking_1"]=$this->db->query("SELECT b.MAT_IP_CODE ,SUM(b.Amount) as Total
         FROM parking a LEFT JOIN painting b ON a.id_paint = b.id 
         where a.id_paint >0 GROUP BY b.MAT_IP_CODE order BY Total Desc")->getResult();
 
-		$data["tbl_statistik"]=$this->db->table('v_tbl_statistik')->get()->getResult();
+		$data["tbl_statistik_1"]=$this->db->table('v_tbl_statistik')->get()->getResult();
 		
 		$total_semua =$this->db->query("SELECT SUM(Total) as Total FROM v_tbl_statistik")->getRow();
-		$data['total_semua'] = $total_semua->Total?? '0';
+		$data['total_semua_1'] = $total_semua->Total?? '0';
+
+        $data["pieparking_2"]=$this->db->query("SELECT b.MAT_IP_CODE ,SUM(b.Amount) as Total
+        FROM parking_m a LEFT JOIN painting b ON a.id_paint = b.id 
+        where a.id_paint >0 GROUP BY b.MAT_IP_CODE order BY Total Desc")->getResult();
+
+		$data["tbl_statistik_2"]=$this->db->table('v_tbl_statistik_2')->get()->getResult();
+		
+		$total_semua =$this->db->query("SELECT SUM(Total) as Total FROM v_tbl_statistik_2")->getRow();
+		$data['total_semua_2'] = $total_semua->Total?? '0';
 
 		
   return view('v_chart',$data) ;

@@ -1,7 +1,6 @@
 <?= $this->extend('layouts/app') ?>
 
 <?= $this->section('content') ?>
-<p style="font-size: 250%; color: #FFF017; font-weight:bold; margin-bottom: 0px;">Press "+" For RePrint Tag</p>
 <div class="page-heading">
     <!-- validations start -->
     <section id="input-validation">
@@ -14,7 +13,6 @@
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                     </div>
-					<h5 class="card-title" style="font-size: 300%; color: #FFF017;">AUTO MACHINE 1</h4>
                     <div class="row" align="left">
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
@@ -23,7 +21,7 @@
                     </div>
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT NIK</h4>
                     <div class="col-12">
-                        <form action="/worker/get_nik" method="post">
+                        <form action="/worker/cure_log" method="post">
                             <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="WM_CODE" placeholder="NIK" required autofocus autocomplete="off">
                             <input oninput="this.value = this.value.toUpperCase()" style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="GROUP" placeholder="GROUP" required autofocus autocomplete="off">
                             <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="SHIFT" placeholder="SHIFT" required autofocus autocomplete="off">
@@ -50,11 +48,11 @@
     <!-- validations end -->
     
     <?php 
-        $wm = session()->get('logged_in_wm');
+        $wm = session()->get('logged_in_cm');
         if(isset($wm)){
             echo '
             <script language="JavaScript" type="text/javascript">
-                window.location.href = "mch";
+                window.location.href = "cure_mch";
             </script>';
         }
     ?>

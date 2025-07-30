@@ -2,12 +2,12 @@
 
 namespace App\Controllers;
 
-class Report_paint extends BaseController
+class Report_paint_out extends BaseController
 {
 
 	// Deklarasikan tabel dan service yg akan dipakai
 	/*model*/
-	protected $M_Report_paint;
+	protected $M_Report_paint_out;
 	//inconstruct
 	protected $request; // pengganti this input untuk get parameter yg dipost dan diget
 	protected $db; // untuk database deklarasi tabel
@@ -17,7 +17,7 @@ class Report_paint extends BaseController
 	// deklarasikan semua
 	public function __construct()
 	{
-		$this->mdl = new \App\Models\M_Report_paint(); //load model terlebih dahulu
+		$this->mdl = new \App\Models\M_Report_paint_out(); //load model terlebih dahulu
 		$this->db = \Config\Database::connect(); // load services koneksi database
 		$request = \Config\Services::request(); // load services request
 		$this->request = $request;
@@ -27,7 +27,7 @@ class Report_paint extends BaseController
 
 	public function index()
 	{
-		echo view('v_report_paint') ;
+		echo view('v_report_paint_out') ;
 		//echo view('v_report_paint') ;
 	}
 
@@ -40,8 +40,6 @@ class Report_paint extends BaseController
 		$no = $no + 1;
 		foreach ($list as $v) {
 
-			$id=isset($v->id)?($v->id):'';
-			$mch=isset($v->MCH)?($v->MCH):'';
 			$ipcode=isset($v->IP_CODE)?($v->IP_CODE):'';
 			$matdesc=isset($v->MAT_DESC)?($v->MAT_DESC):'';
 			$jumlah=isset($v->AMOUNT)?($v->AMOUNT):'';
@@ -51,11 +49,13 @@ class Report_paint extends BaseController
 			$operator=isset($v->USERNAME)?($v->USERNAME):'';
 			$group=isset($v->GROUP_PAINT)?($v->GROUP_PAINT):'';
 			$shift=isset($v->SHIFT)?($v->SHIFT):'';
+			$expired_time=isset($v->EXPIRED_TIME)?($v->EXPIRED_TIME):'';
+			$cure_time=isset($v->CURE_TIME)?($v->CURE_TIME):'';
+			$checkout_time=isset($v->CHECKOUT_TIME)?($v->CHECKOUT_TIME):'';
 		
 			$row = array();
 			$row[] = $no++;	
 			// $row[] = "<a href='javascript:void(0)' class='size linehover' onclick='view(`".$id."`)'>".$mat_code." </a>";
-			$row[] = $mch;
 			$row[] = $ipcode;	
 			$row[] = $matdesc;
 			$row[] = $jumlah;
@@ -65,6 +65,9 @@ class Report_paint extends BaseController
 			$row[] = $operator;
 			$row[] = $group;
 			$row[] = $shift;	
+			$row[] = $expired_time;	
+			$row[] = $cure_time;	
+			$row[] = $checkout_time;	
 							
 			//$row[] = "<span class='size' >  ".$profilename."</span>";
 			//add html for action

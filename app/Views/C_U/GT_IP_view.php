@@ -9,6 +9,7 @@
             </div>
             <div class="col-1">
                 <div class="row">
+                    <h5 class="card-title" style="font-size: 300%; color: #FFF017;">AUTO MACHINE 1</h4>
                 </div>
             </div>
             <div class="col-4">

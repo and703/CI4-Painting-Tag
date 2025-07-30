@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GT painting Report</title>
+  <title>GT painting Takeout Report</title>
 
   <!-- Google Font: Source Sans Pro
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -69,7 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                       GT Painting Report
+                       GT Painting Takeout Report
                         <!-- <a href="" class="btn btn-primary btn-sm float-right">New Record</a> -->
                     </div>
                     <div class="card-body">

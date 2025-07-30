@@ -21,6 +21,9 @@ class R_status extends BaseController
 		$this->db = \Config\Database::connect(); // load services koneksi database
 		$request = \Config\Services::request(); // load services request
 		$this->request = $request;
+		
+		error_reporting(-1);
+		ini_set('display_errors', '1');
 	}
 
 	
@@ -28,8 +31,8 @@ class R_status extends BaseController
 	public function index()
 	{
 		
- echo view('v_r_status') ;
- //echo view('v_report_paint') ;
+		echo view('v_r_status');
+		//echo view('v_report_paint') ;
 	}
 
 
@@ -39,8 +42,10 @@ class R_status extends BaseController
 		$data = array();
 		$no = $this->request->getPost("start");
 		$no = $no + 1;
+		//var_dump($list); die;
 		foreach ($list as $v) {
-
+			
+			/*
 			$id=isset($v->id)?($v->id):'';
 			$ipcode=isset($v->IP_CODE)?($v->IP_CODE):'';
 			$mch=isset($v->MCH)?($v->MCH):'';
@@ -52,7 +57,22 @@ class R_status extends BaseController
 			$curetime=isset($v->CURE_TIME)?($v->CURE_TIME):'';
 			$hours=isset($v->HOURS)?($v->HOURS):'';
 			$expired=isset($v->EXPIRED_TIME)?($v->EXPIRED_TIME):'';
-			$gtstatus=isset($v->GT_STATUS)?($v->GT_STATUS):'';
+			*/
+			
+			
+			$id=isset($v['id'])?($v['id']):'';
+			$ipcode=isset($v['IP_CODE'])?($v['IP_CODE']):'';
+			$mch=isset($v['MCH'])?($v['MCH']):'';
+			$matdesc=isset($v['MAT_DESC'])?($v['MAT_DESC']):'';
+			$parkir=isset($v['SLOT'])?($v['SLOT']):'';
+			$jumlah=isset($v['AMOUNT'])?($v['AMOUNT']):'';
+			$operator=isset($v['USERNAME'])?($v['USERNAME']):'';
+			$printout=isset($v['PRINT_OUT'])?($v['PRINT_OUT']):'';
+			$curetime=isset($v['CURE_TIME'])?($v['CURE_TIME']):'';
+			$hours=isset($v['HOURS'])?($v['HOURS']):'';
+			$expired=isset($v['EXPIRED_TIME'])?($v['EXPIRED_TIME']):'';
+			
+			//$gtstatus=isset($v->GT_STATUS)?($v->GT_STATUS):'';
 		
 			$row = array();
 			$row[] = "<span class='size'  >".$no++."</span>";	
@@ -67,13 +87,15 @@ class R_status extends BaseController
 			$row[] = "<span class='size' >".$curetime."</span>";
 			$row[] = "<span class='size' >  ".$hours." </span>";		
 			$row[] = "<span class='size' >".$expired."</span>";
-			$row[] = $gtstatus;	
+			//$row[] = $gtstatus;	
 							
 			//$row[] = "<span class='size' >  ".$profilename."</span>";
 			//add html for action
 			$data[] = $row;
 
 		}
+		
+		//return json_encode($data);
 		$output = array(
 			"draw" => $this->request->getPost("draw"),
 			"recordsTotal" => $this->mdl->count_all(),

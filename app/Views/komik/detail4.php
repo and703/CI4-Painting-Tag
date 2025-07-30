@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <div class="text-center">
                     <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= $komik['MAT_DESC'];?></p>
-                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= $komik['MAT_IP_CODE'];?>(<?= $komik['Amount'];?> Pcs) <?= $komik['MCH'];?></p>
+                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= $komik['MAT_IP_CODE'];?>(<?= $komik2['Amount'];?> Pcs) <?= $komik['MCH'];?></p>
                 </div>
             </div>
             <div class="col-md-4">
