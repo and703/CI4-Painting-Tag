@@ -40,8 +40,8 @@ $routes->get('/print/(:any)', 'Komik::detail2/$1');
 $routes->get('/p_park/(:any)', 'Komik::detail3/$1');
 $routes->get('/p_man/(:any)', 'Komik::detail4/$1');
 $routes->get('/reprint/update/(:any)', 'Komik::update/$1');
-//$routes->get('report', 'Report::index');
-//$routes->post('data_tables', 'Report::data_tables');
+$routes->get('report_out', 'Report::index');
+$routes->post('data_tables', 'Report::data_tables');
 $routes->get('chart', 'Chart::index');
 //$routes->get('report_parking', 'Report_parking::index');
 //$routes->post('data_tables', 'Report_parking::data_tables');
@@ -49,10 +49,21 @@ $routes->get('chart', 'Chart::index');
 $routes->get('api_app/jumlah', 'Worker::api_jumlah');
 $routes->get('api_app/result', 'Worker::api_result');
 $routes->get('r_status', 'R_status::index');
-$routes->post('data_tables', 'R_status::data_tables');
+$routes->get('rku', function(){
+	echo "Test";
+});
+
+/*
+$routes->post('r_status/data_tables', function(){
+	echo "Post";
+});
+*/
+$routes->post('r_status/data_tables', 'R_status::data_tables');
 
 $routes->get('report_paint', 'Report_paint::index');
 $routes->post('data_tables', 'Report_paint::data_tables');
+$routes->get('report_paint_out', 'Report_paint_out::index');
+$routes->post('data_tables_out', 'Report_paint_out::data_tables');
 
 
 
@@ -60,8 +71,13 @@ $routes->get('/', 'Worker::index');
 $routes->get('worker', 'Worker::index');
 $routes->get('parking', 'Worker::MM_log');
 $routes->get('park_view', 'Worker::park_view');
+$routes->get('park_cure', 'Worker::park_cure');
+$routes->get('stock', 'Worker::stock');
+$routes->get('t_stock', 'Worker::t_stock');
 $routes->get('p_show', 'Worker::park_Show');
 $routes->get('mch', 'Worker::mch_log');
+$routes->get('cure', 'Worker::cure');
+$routes->get('cure_mch', 'Worker::cure_mch');
 
 // Setting Routes
 $routes->get('users/userRoleAccess', 'Users::userRoleAccess');

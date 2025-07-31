@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class M_R_status extends Model
 {
     //table = deklarasikan nama tabel yg akan dipanggil
-    protected $v_tbl_list_parking_status = "v_tbl_list_parking_status";
+    protected $v_tbl_list_parking_status = "v_tbl_list_parking_1";
     
     
     //inconstruct
@@ -22,6 +22,9 @@ class M_R_status extends Model
         $this->request = $request;
         //deklartabel
         $this->db_stat = $this->db->table($this->v_tbl_list_parking_status);
+		
+		error_reporting(-1);
+		ini_set('display_errors', '1');
        
     }
     //library
@@ -29,19 +32,24 @@ class M_R_status extends Model
     //---------------------------------------------------------
     public function get_data()
     {
+		
+		//var_dump($_POST);
         $this->_get_datatables();
-        if ($this->request->getPost("length") != -1)
+        if ($this->request->getPost("length") != -1){
             $this->db_stat->limit($this->request->getPost("length"), $this->request->getPost("start"));
+		}
+		
         $query = $this->db_stat->get();
-        return $query->getResult();
+		//var_dump($query);
+        // return $query->getResult();
+		return $query->getResultArray();
     }
     function _get_datatables()
     {
        
        
         
-
-        $column_order = array('','IP_CODE','','','SLOT','','','PRINT_OUT','','HOURS','',''); //field yang ada di table
+        $column_order = array('','MAT_IP_CODE','','','Park','','','On_Insert','','HOURS','',''); //field yang ada di table
         $column_search = array('IP_CODE','SLOT');
         $order = array('HOURS','desc');
 
@@ -57,8 +65,9 @@ class M_R_status extends Model
                 } else {
                     $this->db_stat->orLike($item, $this->request->getPost('search')['value']);
                 }
-                if (count($column_search) - 1 == $i)
+                if (count($column_search) - 1 == $i){
                     $this->db_stat->groupEnd();
+				}
             }
             $i++;
         }

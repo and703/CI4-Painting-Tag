@@ -24,7 +24,7 @@
 				echo '<h5 class="card-title" style="font-size: 400%; color: #FFF017;">Outside+Inside Process</h4>
 				<input type="hidden" name="mch" value="M3">';
 			}elseif($row['CAT_IP'] == '3'){
-				echo '<h5 class="card-title" style="font-size: 400%; color: #FFF017;">Auto Process</h4>
+				echo '<h5 class="card-title" style="font-size: 400%; color: #FFF017;">Auto Process MCH 1</h4>
 				<input type="hidden" name="mch" value="A1">';
 			}
 		} 

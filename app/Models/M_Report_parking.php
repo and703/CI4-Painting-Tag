@@ -40,47 +40,6 @@ class M_Report_parking extends Model
     }
     function _get_datatables()
     {
-       
-       
-       
-
-       
-        $f1=$this->request->getPost("f1");
-		
-        
-        if($f1)
-		{
-			$tgl1 = $this->rangeindo($f1, 0);
-			$tgl2 = $this->rangeindo($f1, 1);
-            $this->db_park->where("SUBSTR(On_Insert,1,10)>=", $tgl1);
-            $this->db_park->where("SUBSTR(On_Insert,1,10)<=", $tgl2);
-		}
-
-        $f2=$this->request->getPost("f2");
-		
-         if($f2)
-
-		 {
-             if($f2==1)
-             {
-                $this->db_park->where("SUBSTR(On_Insert,12,12)>=",'00.00'); 
-                $this->db_park->where("SUBSTR(On_Insert,12,12)<=",'07.59'); 
-             }
-			
-             if($f2==2)
-             {
-                $this->db_park->where("SUBSTR(On_Insert,12,12)>=",'08.00'); 
-                $this->db_park->where("SUBSTR(On_Insert,12,12)<=",'15.59'); 
-             }
-			
-             if($f2==3)
-             {
-                $this->db_park->where("SUBSTR(On_Insert,12,12)>=",'16.00'); 
-                $this->db_park->where("SUBSTR(On_Insert,12,12)<=",'23.59'); 
-             }
-
-		}
-		
 
         $column_order = array('','MAT_IP_CODE','','slot','Amount','On_Insert','CURE_TIME'); //field yang ada di table
         $column_search = array('MAT_IP_CODE','slot');

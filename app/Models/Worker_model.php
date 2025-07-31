@@ -34,6 +34,24 @@ class Worker_model extends Model
         }
     }
 
+    public function getMch($mch,$side,$ip)
+    {
+        $query = $this->pcs->query("SELECT
+                                        DISTINCT de.MCH_CODE, mmc.MCH_DESC, 
+                                        mm.MAT_CODE, de.EVS_MCH_SIDE 
+                                    FROM PCS.dbo.DC_EVENTS de, 
+                                            PCS.dbo.MD_MATERIALS mm, 
+                                            PCS.dbo.MD_MACHINES mmc
+                                    WHERE CONVERT(VARCHAR(10),de.EVS_START,101) = CONVERT(VARCHAR(10),GETDATE(),101)
+                                        AND de.MAT_SAP_CODE = mm.MAT_SAP_CODE 
+                                        AND de.MCH_CODE = mmc.MCH_CODE
+                                        AND mmc.PP_CODE = 'V01'
+                                        AND de.MCH_CODE = '".$mch."'
+                                        AND de.EVS_MCH_SIDE = '".$side."'
+                                        AND mm.MAT_CODE = '".$ip."'");
+        return $query->getResultArray();
+    }
+
     public function savePrint($data)
     {
         $query = $this->db1->table("painting")->insert($data);
