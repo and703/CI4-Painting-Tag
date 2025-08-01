@@ -272,6 +272,7 @@ class Worker extends Controller
 
     public function cure_conf()
     {
+        $session = session();
         $md4 = new Park_BF_CURR_Model();
         $dateTime = date("d/m/Y H.i");
 
