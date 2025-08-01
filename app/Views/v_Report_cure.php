@@ -4,14 +4,13 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="en">
-<meta http-equiv="refresh" content="30">
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>GT painting Report</title>
 
-	<!-- Google Font: Source Sans Pro -->
+	<!-- Google Font: Source Sans Pro
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 	<!-- Font Awesome Icons -->
 	<link rel="stylesheet" href="<?= base_url() ?>/template/plugins/fontawesome-free/css/all.min.css">
@@ -21,22 +20,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	<link rel="stylesheet" href="<?= base_url() ?>/template/datatables/bootstrap.min.css">
 
 
-	<!-- jQuery -->
-	<script src="<?= base_url() ?>/template/plugins/jquery/jquery.min.js"></script>
-	<!-- Highchart -->
-	<!-- <script src="<?= base_url() ?>/template/plugins/Highcharts-9.3.2/code/highcharts.js"></script>
-<script src="<?= base_url() ?>/template/plugins/Highcharts-9.3.2/code/series-label.js"></script>
-<script src="<?= base_url() ?>/template/plugins/Highcharts-9.3.2/code/exporting.js.js"></script>
-<script src="<?= base_url() ?>/template/plugins/Highcharts-9.3.2/code/offline-exporting.js"></script>
-<script src="<?= base_url() ?>/template/plugins/Highcharts-9.3.2/code/export-data.js"></script>
-<script src="<?= base_url() ?>/template/plugins/Highcharts-9.3.2/code/highcharts-3d.js"></script> -->
-
-
-	<!-- Datatables -->
+<!-- jQuery Datatables -->
+<script src="<?= base_url() ?>/template/plugins/jquery/jquery.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/template/datatables/css.css" />
+	<link rel="stylesheet" type="text/css" href="<?= base_url() ?>/sumfooter/css/jquery.dataTables.css" />
+	<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" /> -->
+	<!-- <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" /> -->
+
+
+	<!-- JS Datatables -->
+
 	<script type="text/javascript" src="<?= base_url() ?>/template/datatables/pdf.js"></script>
 	<script type="text/javascript" src="<?= base_url() ?>/template/datatables/font.js"></script>
 	<script type="text/javascript" src="<?= base_url() ?>/template/datatables/datatable.js"></script>
+	<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script> -->
+	<!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+	<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>  -->
+	<script type="text/javascript" src="<?= base_url() ?>/sumfooter/js/dataTables.colReorder.min.js"></script>
+
+
+	<!-- <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.2/js/dataTables.colReorder.min.js"></script> -->
+
 
 	<!-- Bootstrap Tagsinput Css -->
 	<!-- <link href="<?= base_url() ?>/public/new/plugins/bootstrap-tagsinput/bootstrap-tagsinput.css" rel="stylesheet">
@@ -71,26 +75,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					<div class="col-md-12">
 						<div class="card">
 							<div class="card-header">
-								GT Painting Parking List
+								GT Boiacca Report
 								<!-- <a href="" class="btn btn-primary btn-sm float-right">New Record</a> -->
 							</div>
 							<div class="card-body">
 
 								<div class="row clearfix">
-									<!-- <div class="col-sm-4">
-						<label>Date Range</label>
-						<input required type="text" id="f1" name="periode" class="cursor form-control" onchange="reload_table()">
-					</div>
-					<div class="col-sm-4">
-						<label>SHIFT</label>
-						<select class="form-control show-tick" id="f2" data-live-search="true" onchange="reload_table()">
-							<option value="">=== Pilih ===</option>
-							<option value="1">1</option>
-  							<option value="2">2</option>
-  							<option value="3">3</option>
-							
-						</select>
-					</div> -->
+									<div class="col-sm-4">
+										<label>Date Range</label>
+										<input required type="text" id="f1" name="periode" class="cursor form-control" onchange="reload_table()">
+									</div>
+									<div class="col-sm-4">
+										<label>SHIFT</label>
+										<select class="form-control show-tick" id="f2" data-live-search="true" onchange="reload_table()">
+											<option value="">=== Pilih ===</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+
+										</select>
+									</div>
 
 
 
@@ -102,16 +106,37 @@ scratch. This page gets rid of all links and provides the needed markup only.
 										<thead>
 											<tr>
 												<td>No</td>
+												<td>Machine</td>
 												<td>IP Code</td>
 												<td>Material Deskripsi</td>
-												<td>Lokasi</td>
 												<td>Jumlah</td>
-												<td>Tgl Release</td>
-												<td>Waktu Cure</td>
+												<td>Slot</td>
+												<td>Print Out</td>
+												<td>Operator</td>
+												<td>Group</td>
+												<td>Shift</td>
+
 											</tr>
 										</thead>
+										
 										<tbody>
 										</tbody>
+
+										<tfoot>
+											<tr>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td>Jumlah</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+
+											</tr>
+										</tfoot>
 									</table>
 								</div>
 
@@ -129,19 +154,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					rangetanggal();
 				}, 100);
 			</script>
-			<script>
-				$(function() {
-					// $('.select3').selectpicker();
-				});
-			</script>
-
-
+			
 			<script type="text/javascript">
 				var dataTable = $('#report1').DataTable({
 					"paging": true,
 					"processing": false, //Feature control the processing indicator.
 					"language": {
-						"sSearch": "Pencarian",
+						"sSearch": "Search Barcode",
 						"processing": ' <span class="sr-only dataTables_processing">Loading...</span> <br><b style="color:black;background:white">Process of displaying data<br> Please wait..</b>',
 						"oPaginate": {
 							"sFirst": "Page First",
@@ -157,10 +176,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 					"serverSide": true, //Feature control DataTables' server-side processing mode.
 					"responsive": false,
 					"searching": true,
-					"lengthMenu": [
-						[5, 200, 500],
-						[5, 200, 500]
-					],
 					dom: 'Blfrtip',
 					buttons: [{
 
@@ -174,30 +189,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						{
 							extend: 'excelHtml5',
 							exportOptions: {
-								columns: [0, 1, 2, 3, 4, 5, 6]
+								columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 							},
+							footer: true,
 							text: '<span class="fas fa-file-excel"></span> Download Excell',
 							className: "btn btn-light btn-sm",
-							title: 'Painting_parkir',
+							title: 'Painting',
 							messageTop: 'DI CETAK : <?php echo date("d/m/Y H:i") ?>',
-							filename: 'painting_report_parkir',
+							filename: 'painting_report',
 							customize: function(xlsx) {
 								var source = xlsx.xl['workbook.xml'].getElementsByTagName('sheet')[0];
-								source.setAttribute('name', 'painting_parkir');
+								source.setAttribute('name', 'painting');
 							}
 						},
-
-						/*{
-				extend: 'colvis',
-				exportOptions: {
-				columns:[ 0,1,2,3,4,5]
-				},text:' Coloumn',	
-			},*/
 					],
-
+					"order": [[ 7, "desc" ]],
 					// Load data for the table's content from an Ajax source
 					"ajax": {
-						"url": "<?= site_url('report_parking/data_tables'); ?>",
+						"url": "<?= site_url('report_cure/data_tables'); ?>",
 						"type": "POST",
 						"data": function(data) {
 							data.f1 = $('#f1').val(); //inputan value 1
@@ -214,10 +223,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						},
 
 					},
+					"fixedHeader": true,
+					"colReorder": true,
+					"pageLength": 5,
+					"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+
+
+					"footerCallback": function(row, data, start, end, display) {
+						var api = this.api(),
+							data;
+
+						// Remove the formatting to get integer data for summation
+						var intVal = function(i) {
+							return typeof i === 'string' ?
+								i.replace(/[\,]/g, '') * 1 :
+								typeof i === 'number' ?
+								i : 0;
+						};
+
+						// Total over all pages
+						total = api
+							.column(api.colReorder.transpose(4))
+							.data()
+							.reduce(function(a, b) {
+								return intVal(a) + intVal(b);
+							}, 0);
+
+						// Total over this page
+						pageTotal = api
+							.column(api.colReorder.transpose(4), {
+								page: 'current'
+							})
+							.data()
+							.reduce(function(a, b) {
+								return intVal(a) + intVal(b);
+							}, 0);
+
+						// Update footer
+						$(api.column(api.colReorder.transpose(4)).footer()).html(
+							+ pageTotal + '   Total'
+						);
+					},
 
 					//Set column definition initialisation properties.
 					"columnDefs": [{
-						"targets": [-3,-5,-7], //last column
+						"targets": [-1, -2, -3, -4, -6, -7], //last column
 						"orderable": false, //set not orderable
 					}, ],
 
@@ -226,33 +276,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
 				function reload_table() {
 					dataTable.ajax.reload(null, false);
 				}
-
-				// function view(id) {
-				// 	$("#title_mdl_view").html("VIEW DATA");
-				// 	$("#mdl_formSubmit_view").modal();
-				// 	$("#formSubmit_view").attr("url", "<?= base_url("report_rem/view_data"); ?>");
-				// 	$("#view_page").html('<br><br><br><center>Loading...</center><br><br><br>');
-				// 	$.post("<?= site_url("report_rem/view_data"); ?>", {id:id}, function(data) {
-				// 		$("#view_page").html('<iframe src="<?= base_url(); ?>/report_rem/view_data?id=' + id + '" style="width:100%;height:500px">' + data + '</iframe>');
-				// 	});
-
-				// }
-
-
-
-
-
-				// // function downloadXL() {
-				// // 	var f1 = $('#f1').val();
-				// // 	var f2 = $('#f2').val();
-				// // 	var f3 = $('#f3').val();
-				// // 	var f4 = $('#f4').val();
-				// // 	var s = $('.whatever').val();
-				// // 	window.open(
-				// 		"<?= base_url() ?>/report_rem/downloadXL/?f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&s=" + s,
-				// // 		'_blank' // <- This is what makes it open in a new window.
-				// // 	);
-				// // }
 			</script>
 
 			<script>
@@ -306,7 +329,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 						"endDate": moment(),
 						"opens": "left"
 					}, function(start, end, label) {
-						console.log('New date range selected: ' + start.format('DD-MM-YYYY') + ' to ' + end.format('DD-MM-YYYY') + ' (predefined range: ' + label + ')');
+						console.log('New date range selected: ' + start.format('DD/MM/YYYY') + ' to ' + end.format('DD/MM/YYYY') + ' (predefined range: ' + label + ')');
 
 					});
 				}

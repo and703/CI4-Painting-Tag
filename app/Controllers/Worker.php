@@ -283,6 +283,7 @@ class Worker extends Controller
         $dt_cure_stts = $md4->where($array)->first();
         // tampilkan 404 error jika data tidak ditemukan
 
+		$WM_NAME_WM_SURNAME = $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
         if (!$dt_cure_stts) {
             throw new PageNotFoundException(
                 "Park " . $MAT_CODE . " Tidak di temukan / Sudah CURED"
@@ -292,6 +293,7 @@ class Worker extends Controller
             $dt = [
                 "cured_stts" => "CURED",
                 "MM_CODE" => $MM_CODE,
+                "WM_NAME_WM_SURNAME" => $WM_NAME_WM_SURNAME,
                 "dateCURE" => $dateTime,
             ];
 
