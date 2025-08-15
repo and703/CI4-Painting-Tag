@@ -7,7 +7,7 @@
 				<?php 
 					$wm = session()->get('logged_in_cm');
 					if(isset($wm)){
-						echo '<a href="worker/logout_CURE" class="btn btn-danger" >Logout</a>';
+						echo '<a href="/logout_CURE" class="btn btn-danger" >Logout</a>';
 					}else{
 						echo '<a href="/cure" class="btn btn-success" >Login</a>';
 					}
@@ -19,13 +19,15 @@
 			<h5 class="card-title" style="font-size: 100%; color: #FFF;">SHIFT: <?= session()->get("SHIFT") ?></h5>
 		</div>
 	</div>
-	<form id="reprint" action="/Worker/cure_conf" method="post" enctype="multipart/form-data">
+	<form id="reprint" action="/tagconf_stock" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
 		<input type="hidden" name="WM_CODE" value="<?= session()->get('WM_CODE'); ?>">
 		<input type="hidden" name="id" value="<?= $painting['id']; ?>">
 		<input type="hidden" name="Park" value="<?= $painting['Park']; ?>">
 		<input type="hidden" name="MAT_CODE" value="<?= $painting['MAT_IP_CODE']; ?>">
+		<input type="hidden" name="MAT_DESC" value="<?= $painting['MAT_DESC']; ?>">
 		<input type="hidden" name="CURE_TIME" value="<?= $painting['CURE_TIME']; ?>">
+		<input type="hidden" name="Amount" value="<?= $painting['Amount']; ?>">
 		<div class="page-heading">
 							<br>
 			<!-- validations start -->
@@ -40,8 +42,24 @@
 							<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?= $painting['Park'];?></p>
 							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Amount on TAG</p>
 							<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?= $painting['Amount'];?></p>
-							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
-							<input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="Amount" required autofocus autocomplete="off" value="<?= $painting['Amount'];?>">
+							<?php
+							if($bf_cure){
+								echo '
+									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Actual Amount</p>
+									<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;">'.$bf_cure['adj_stock'].'</p>
+									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
+									<input style="text-align:center; font-weight:bold; width:50%" type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="adjust" required autofocus autocomplete="off" value="'.$bf_cure['adj_stock'].'">
+								';
+							} 
+							else {
+								echo '
+									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Actual Amount</p>
+									<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;">'.$painting['Amount'].'</p>
+									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
+									<input style="text-align:center; font-weight:bold; width:50%" type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="adjust" required autofocus autocomplete="off" value="'.$painting['Amount'].'">
+								';
+							}
+							?>
 							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount if Actual on trolly different</p>
 						</div>
 					</div>
@@ -86,7 +104,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-		<form id="reprint" action="/Worker/cure_conf" method="post" enctype="multipart/form-data">
+		<form id="reprint" action="/cure_conf" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
 			<input type="hidden" name="MM_CODE" value="<?= session()->get('MM_CODE'); ?>">
 			<input type="hidden" name="id" value="<?= $painting['id']; ?>">

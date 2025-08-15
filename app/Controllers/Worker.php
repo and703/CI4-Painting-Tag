@@ -13,6 +13,7 @@ use App\Models\ParkModel;
 use App\Models\Park_M_Model;
 use App\Models\Park_B_Model;
 use App\Models\Park_BF_CURR_Model;
+use App\Models\Park_BF_CURE_Stock_Model;
 use App\Models\Cured_GT_Model;
 use App\Models\MMModel;
 use App\Models\CQModel;
@@ -238,38 +239,128 @@ class Worker extends Controller
 
     public function get_cure_mch()
     {
+        $session = session();
         $md1 = new KomikModel();
         $model = new Worker_model();
         $md4 = new Park_BF_CURR_Model();
+        $md5 = new Park_BF_CURE_Stock_Model();
         // $MCH = $this->request->getPost("MCH");
         $TAG = $this->request->getPost("TAG");
         $id_TAG = explode(",", $TAG);
         // $id_MCH = explode(",", $MCH);
+		$dateAdj = date_create()->format("Y-m-d H:i");
+		// Use current time or set manually, e.g. $time = '23:30';
+		// Parse hour/minute
+		$ts = strtotime($dateAdj);
 
-        $array = ["id_paint" => $id_TAG[4]];
-        // $data["park"] = $md4->where($array)->first();
-        $dt1 = $md1->where("id", $id_TAG[4])->first();
-        
-        // $dt2 = $model->getMch($id_MCH[0],$id_MCH[1],$dt1["MAT_IP_CODE"]);
-        // $dt2     = json_decode(json_encode($dt2), true);
-        $data     = [
-            "title" => "Tag Confirm",
-            "painting"     => $dt1,
-            "message"     => "",
-        ];
-		
-/*         $data     = [
-            "title" => "Tag Confirm",
-            "painting"     => $dt1,
-            "MCH"     => $dt2,
-            "message"     => "",
-        ]; */
+		$H  = (int)date('G', $ts);   // 0–23
+		$M  = (int)date('i', $ts);   // 00–59
+		$t  = $H * 60 + $M;          // minutes since midnight
 
-        $data["title"] = "Tag CURE Confirm";
-        $data["message"] = "";
-        echo view("C_U/CURE_GT_MCH_conf", $data);
+		// Shift rules (start inclusive, end exclusive except last line):
+		if ($t >=  6*60 && $t <  8*60) {
+			$shift = 1;              // 06:00–07:59
+		} elseif ($t >= 14*60 && $t < 16*60) {
+			$shift = 2;              // 14:00–15:59
+		} elseif ($t >= 22*60 && $t <= 23*60 + 59) {
+			$shift = 3;              // 22:00–23:59
+		} else {
+			$shift = 0;             // all other times
+		}
+		if ($shift == 0){
+			$dt2 = $md5->where("id_paint", $id_TAG[4])->orderBy('id', 'desc')->first();
+			$dt2     = json_decode(json_encode($dt2), true);
+			if($dt2){
+				$dt1 = $md1->where("id", $id_TAG[4])->first();
+				$data     = [
+					"title" 	  => "Tag Confirm",
+					"painting"    => $dt1,
+					"bf_cure"     => $dt2,
+					"message"     => "",
+				];
+				
+		/*         $data     = [
+					"title" => "Tag Confirm",
+					"painting"     => $dt1,
+					"MCH"     => $dt2,
+					"message"     => "",
+				]; */
+
+				$data["title"] = "Tag CURE Confirm";
+				$data["message"] = "";
+				echo view("C_U/CURE_GT_MCH_conf", $data);
+			} else{
+				$dt1 = $md1->where("id", $id_TAG[4])->first();
+				$dt3 = $md4->where("id_paint", $id_TAG[4])->orderBy('id', 'desc')->first();
+				$dt3     = json_decode(json_encode($dt3), true);
+				$data     = [
+					"title" 	  => "Tag Confirm",
+					"painting"    => $dt1,
+					"bf_cure"     => $dt3,
+					"message"     => "",
+				];
+				
+		/*         $data     = [
+					"title" => "Tag Confirm",
+					"painting"     => $dt1,
+					"MCH"     => $dt2,
+					"message"     => "",
+				]; */
+
+				$data["title"] = "Tag CURE Confirm";
+				$data["message"] = "";
+				echo view("C_U/CURE_GT_MCH_conf", $data);
+			}
+		}
     }
 
+    public function tagconf_stock()
+    {
+        $session = session();
+        $md1 = new Park_BF_CURR_Model();
+        $md2 = new Park_BF_CURE_Stock_Model();
+        $dateTime = date("d/m/Y H.i");
+
+        $WM_CODE = $this->request->getPost("WM_CODE");
+        $paint_id = $this->request->getPost("id");
+        $Park = $this->request->getPost("Park");
+        $MAT_CODE = $this->request->getPost("MAT_CODE");
+        $MAT_DESC = $this->request->getPost("MAT_DESC");
+        $Amount = $this->request->getPost("Amount");
+        $adjust = $this->request->getPost("adjust");
+        $CURE_TIME = $this->request->getPost("CURE_TIME");
+
+        $array = ["id_paint" => $paint_id, "cured_stts" => "UNCURED"];
+        $dt_cure_stts = $md1->where($array)->first();
+        // tampilkan 404 error jika data tidak ditemukan
+
+		$WM_NAME_WM_SURNAME = $session->get("WM_NAME") . " " . $session->get("WM_SURNAME");
+        // tampilkan 404 error jika data tidak ditemukan
+        if (!$dt_cure_stts) {
+            throw new PageNotFoundException(
+                "IP Code " . $MAT_CODE . " Tidak di temukan / Sudah CURED"
+            );
+        } else {
+            $dt = [
+                "MM_CODE" => $WM_CODE,
+                "WM_NAME_WM_SURNAME" => $WM_NAME_WM_SURNAME,
+                "id_paint" => $paint_id,
+                "Park" => $Park,
+                "MAT_IP_CODE" => $MAT_CODE,
+                "MAT_DESC" => $MAT_DESC,
+                "tag_stock" => $Amount,
+                "adj_stock" => $adjust,
+                "dateCURE" => $CURE_TIME,
+                "cured_stts" => "UNCURED",
+                "dateAdj" => $dateTime,
+            ];
+
+            $md2->insert($dt);
+
+            return redirect()->to("cure");
+        }
+    }
+	
     public function cure_conf()
     {
         $md4 = new Park_BF_CURR_Model();

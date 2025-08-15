@@ -47,17 +47,17 @@ if($searchCured_stts != ''){
 
 
 ## Total number of records without filtering
-$sel = mysqli_query($con,"select count(*) as allcount from bf_cure");
+$sel = mysqli_query($con,"select count(*) as allcount from parking_bf_curr_stock");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 ## Total number of records with filtering
-$sel = mysqli_query($con,"select count(*) as allcount from bf_cure WHERE 1 ".$searchQuery);
+$sel = mysqli_query($con,"select count(*) as allcount from parking_bf_curr_stock WHERE 1 ".$searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$empQuery = "select * from bf_cure WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+$empQuery = "select * from parking_bf_curr_stock WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
 $empRecords = mysqli_query($con, $empQuery);
 $data = array();
 
@@ -65,13 +65,15 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
     $data[] = array(
     		"MM_CODE"=>$row['MM_CODE'],
     		"WM_NAME_WM_SURNAME"=>$row['WM_NAME_WM_SURNAME'],
+    		"id_paint"=>$row['id_paint'],
     		"MAT_IP_CODE"=>$row['MAT_IP_CODE'],
     		"MAT_DESC"=>$row['MAT_DESC'],
-    		"Amount"=>$row['Amount'],
+    		"tag_stock"=>$row['tag_stock'],
+    		"adj_stock"=>$row['adj_stock'],
     		"Park"=>$row['Park'],
-    		"CURE_TIME"=>$row['CURE_TIME'],
+    		"dateCURE"=>$row['dateCURE'],
     		"cured_stts"=>$row['cured_stts'],
-    		"actual_cure"=>$row['actual_cure'],
+    		"dateAdj"=>$row['dateAdj'],
     	);
 }
 

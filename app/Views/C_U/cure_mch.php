@@ -41,8 +41,7 @@
                     </div>
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT TAG</h4>
                     <div class="col-12">
-                        <form action="/worker/get_cure_mch" method="post">
-                            <!-- <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="MCH" placeholder="MCH" required autofocus autocomplete="off"> -->
+                        <form action="/get_cure_mch" method="post">
                             <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="TAG" placeholder="TAG Painting" required autofocus autocomplete="off">
                             <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                         </form>

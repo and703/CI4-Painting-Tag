@@ -79,6 +79,10 @@ $routes->get('t_stock', 'Worker::t_stock');
 $routes->get('p_show', 'Worker::park_Show');
 $routes->get('mch', 'Worker::mch_log');
 $routes->get('cure', 'Worker::cure');
+$routes->post('tagconf_stock', 'Worker::tagconf_stock');
+$routes->post('get_cure_mch', 'Worker::get_cure_mch');
+$routes->post('cure_conf', 'Worker::cure_conf');
+$routes->get('logout_CURE', 'Worker::logout_CURE');
 $routes->get('cure_mch', 'Worker::cure_mch');
 
 // Setting Routes

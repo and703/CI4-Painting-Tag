@@ -48,19 +48,21 @@
                     <tr rowspan="2" style="border: 1px;">
                         <td colspan="2">EVOLUZIONE TYRES</td>
                         <td colspan="5">FORM REPORT CURED</td>
-                        <td colspan="2">
+                        <td colspan="4">
                         </td>
                     </tr>
                     <tr>
                         <th>MM_CODE</th>
                         <th>WM_NAME_WM_SURNAME</th>
+                        <th>id_paint</th>
                         <th>IP Code</th>
                         <th>Material Description</th>
-                        <th>Amount</th>
+                        <th>tag_stock</th>
+                        <th>adj_stock</th>
                         <th>Park</th>
-                        <th>CURE_TIME</th>
+                        <th>dateCURE</th>
                         <th>Status</th>
-                        <th>Actual Cure</th>
+                        <th>dateAdj</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -69,6 +71,8 @@
                         <td></td>
                         <td></td>
                         <td>Total</td>
+                        <td></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -111,7 +115,7 @@
                     {
                         extend: 'excelHtml5',
                         exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                         },
                         footer: true,
                         text: '<span class="fas fa-file-excel"></span> Download Excell',
@@ -176,13 +180,15 @@
                 'columns': [
                     { data: 'MM_CODE' },
                     { data: 'WM_NAME_WM_SURNAME' },
+                    { data: 'id_paint' },
                     { data: 'MAT_IP_CODE' },
                     { data: 'MAT_DESC' },
-                    { data: 'Amount' },
+                    { data: 'tag_stock' },
+                    { data: 'adj_stock' },
                     { data: 'Park' },
-                    { data: 'CURE_TIME' },
+                    { data: 'dateCURE' },
                     { data: 'cured_stts' },
-                    { data: 'actual_cure' },
+                    { data: 'dateAdj' },
                 ]
             });
 
