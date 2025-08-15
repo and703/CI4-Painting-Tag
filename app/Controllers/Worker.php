@@ -267,7 +267,7 @@ class Worker extends Controller
 		} else {
 			$shift = 0;             // all other times
 		}
-		if ($shift == 0){
+		if ($shift > 0){
 			$dt2 = $md5->where("id_paint", $id_TAG[4])->orderBy('id', 'desc')->first();
 			$dt2     = json_decode(json_encode($dt2), true);
 			if($dt2){
@@ -275,7 +275,7 @@ class Worker extends Controller
 				$data     = [
 					"title" 	  => "Tag Confirm",
 					"painting"    => $dt1,
-					"bf_cure"     => $dt2,
+					"bf_cure"     => $dt2['adj_stock'],
 					"message"     => "",
 				];
 				
@@ -291,12 +291,10 @@ class Worker extends Controller
 				echo view("C_U/CURE_GT_MCH_conf", $data);
 			} else{
 				$dt1 = $md1->where("id", $id_TAG[4])->first();
-				$dt3 = $md4->where("id_paint", $id_TAG[4])->orderBy('id', 'desc')->first();
-				$dt3     = json_decode(json_encode($dt3), true);
 				$data     = [
 					"title" 	  => "Tag Confirm",
 					"painting"    => $dt1,
-					"bf_cure"     => $dt3,
+					"bf_cure"     => $dt1['Amount'],
 					"message"     => "",
 				];
 				
@@ -311,6 +309,10 @@ class Worker extends Controller
 				$data["message"] = "";
 				echo view("C_U/CURE_GT_MCH_conf", $data);
 			}
+		} else{
+            throw new PageNotFoundException(
+                "Tag Nomor " . $id_TAG[4] . " Waktu Stock Tidak Tepat / Tag Tidak Ditemukan"
+            );
 		}
     }
 

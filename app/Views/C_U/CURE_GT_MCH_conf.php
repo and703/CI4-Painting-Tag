@@ -42,24 +42,10 @@
 							<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?= $painting['Park'];?></p>
 							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Amount on TAG</p>
 							<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?= $painting['Amount'];?></p>
-							<?php
-							if($bf_cure){
-								echo '
-									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Actual Amount</p>
-									<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;">'.$bf_cure['adj_stock'].'</p>
-									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
-									<input style="text-align:center; font-weight:bold; width:50%" type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="adjust" required autofocus autocomplete="off" value="'.$bf_cure['adj_stock'].'">
-								';
-							} 
-							else {
-								echo '
-									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Actual Amount</p>
-									<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;">'.$painting['Amount'].'</p>
-									<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
-									<input style="text-align:center; font-weight:bold; width:50%" type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="adjust" required autofocus autocomplete="off" value="'.$painting['Amount'].'">
-								';
-							}
-							?>
+							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Actual Amount</p>
+							<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?=$bf_cure;?></p>
+							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
+							<input style="text-align:center; font-weight:bold; width:50%" type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="adjust" required autofocus autocomplete="off" value="<?= $bf_cure;?>">
 							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount if Actual on trolly different</p>
 						</div>
 					</div>
