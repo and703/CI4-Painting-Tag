@@ -27,45 +27,15 @@ $config = require __DIR__ . '/config.php';
     <div class="card-body">
       <div class="row g-2 align-items-end">
         <div class="col-md-2">
-          <label class="form-label">Date from</label>
-          <input type="date" id="date_from" class="form-control">
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Date to</label>
-          <input type="date" id="date_to" class="form-control">
-        </div>
-		<div class="col-md-2">
-		  <label class="form-label">Shift (dateAdj)</label>
-		  <select id="shift_adj" class="form-select">
-			<option value="">All shifts</option>
-			<option value="1">Shift 1 (01:00–07:00)</option>
-			<option value="2">Shift 2 (07:00–16:00)</option>
-			<option value="3">Shift 3 (16:00–23:59)</option>
-		  </select>
-		</div>
-
-        <div class="col-md-2">
           <label class="form-label">MAT_IP_CODE</label>
           <input type="text" id="sku" class="form-control" placeholder="MAT_IP_CODE contains...">
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">MM_CODE</label>
-          <input type="text" id="barcode" class="form-control" placeholder="MM_CODE contains...">
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Status</label>
-          <input type="text" id="cured_stts" class="form-control" placeholder="Status contains...">
-        </div>
-        <div class="col-md-2">
-          <label class="form-label">Park</label>
-          <input type="text" id="Park" class="form-control" placeholder="Park contains...">
         </div>
 
         <div class="col-12 d-flex gap-2 mt-3">
           <button id="btnSearch" class="btn btn-primary">Search</button>
           <button id="btnReset" class="btn btn-outline-secondary">Reset</button>
           <a id="btnCsv" class="btn btn-success" href="#">Export CSV</a>
-		  <a id="btnXlsx" class="btn btn-success" href="#">Export XLSX</a>
+		      <a id="btnXlsx" class="btn btn-success" href="#">Export XLSX</a>
 
         </div>
       </div>
@@ -78,10 +48,10 @@ $config = require __DIR__ . '/config.php';
       <div class="alert alert-primary mb-0"><strong>Total Rows:</strong> <span id="sum_rows">-</span></div>
     </div>
     <div class="col-md-4">
-      <div class="alert alert-secondary mb-0"><strong>Sum tag_stock:</strong> <span id="sum_tag_stock">-</span></div>
+      <div class="alert alert-secondary mb-0"><strong>Sum Total_Amount:</strong> <span id="sum_Total_Amount">-</span></div>
     </div>
     <div class="col-md-4">
-      <div class="alert alert-secondary mb-0"><strong>Sum adj_stock:</strong> <span id="sum_adj_stock">-</span></div>
+      <div class="alert alert-secondary mb-0"><strong>Sum Total_AdjStock:</strong> <span id="sum_Total_AdjStock">-</span></div>
     </div>
   </div>
 
@@ -113,13 +83,7 @@ let dt, inflight = false, debounceTimer = null;
 /* Send the names PHP expects */
 function currentFilters() {
   return {
-    date_from:   $('#date_from').val() || '',
-    date_to:     $('#date_to').val()   || '',
-    MAT_IP_CODE: $('#sku').val()       || '',   // sku -> MAT_IP_CODE
-    MM_CODE:     $('#barcode').val()   || '',   // barcode -> MM_CODE
-    cured_stts:  $('#cured_stts').val()|| '',
-    Park:        $('#Park').val()      || '',
-    shift_adj:   $('#shift_adj').val() || ''
+    MAT_IP_CODE: $('#sku').val()       || ''
   };
 }
 
@@ -140,11 +104,11 @@ function refreshSummary() {
   const qs = new URLSearchParams(currentFilters()).toString();
   $.getJSON('./api/summary.php?' + qs, function (s) {
     $('#sum_rows').text(s && Number(s.rows_count)    ? s.rows_count    : 0);
-    $('#sum_tag_stock').text(s && Number(s.sum_tag_stock) ? s.sum_tag_stock : 0);
-    $('#sum_adj_stock').text(s && Number(s.sum_adj_stock) ? s.sum_adj_stock : 0);
+    $('#sum_Total_Amount').text(s && Number(s.sum_Total_Amount) ? s.sum_Total_Amount : 0);
+    $('#sum_Total_AdjStock').text(s && Number(s.sum_Total_AdjStock) ? s.sum_Total_AdjStock : 0);
   }).fail(function (xhr) {
     console.error('summary.php failed:', xhr.status, xhr.responseText);
-    $('#sum_rows, #sum_tag_stock, #sum_adj_stock').text(0);
+    $('#sum_rows, #sum_Total_Amount, #sum_Total_AdjStock').text(0);
   });
 }
 
@@ -155,20 +119,12 @@ function scheduleReload(ms=250){ clearTimeout(debounceTimer); debounceTimer = se
 $(function () {
   // Build headers to match your aliases (optional — you already have them)
   const DT_COLUMNS = [
-    { data:'id',                 title:'ID' },
-    { data:'MM_CODE',            title:'Worker Code' },
-    { data:'WM_NAME_WM_SURNAME', title:'Worker' },
     { data:'MAT_IP_CODE',        title:'Material IP' },
-    { data:'MAT_DESC',           title:'Material Description' },
-    { data:'id_paint',           title:'Paint ID' },
-    { data:'Park',               title:'Park' },
-    { data:'tag_stock',          title:'Tag Stock' },
-    { data:'adj_stock',          title:'Adj Stock' },
-    { data:'dateCURE',           title:'Date CURE' },
-    { data:'cured_stts',         title:'Status' },
-    { data:'dateAdj',            title:'Date Adj' },
+    { data:'Total_Amount',          title:'Park Stock' },
+    { data:'Total_AdjStock',          title:'Adj Stock' },
+    { data:'Grand_Total',           title:'Total Stock' },
   ];
-
+MAT_IP_CODE, Total_Amount, Total_AdjStock, Grand_Total
   dt = $('#reportTable').DataTable({
     serverSide: true,
     processing: true,

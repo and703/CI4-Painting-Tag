@@ -16,13 +16,13 @@ return [
     ],
     // IMPORTANT: set this to your table or view or a SELECT query.
     // Example: 'SELECT * FROM report_cure_view'
-    'source_sql' => getenv('SOURCE_SQL') ?: 'SELECT * FROM parking_bf_curr_stock',
+    'source_sql' => getenv('SOURCE_SQL') ?: 'SELECT * FROM vw_matip_totals',
 
     // Optional: limit which columns are searchable for global search (empty = all text columns)
     'searchable_columns' => [
-        'WM_NAME_WM_SURNAME','MAT_IP_CODE','MAT_DESC','Park','cured_stts','dateCURE','dateAdj','MM_CODE'
+        'MAT_IP_CODE'
     ],
 
     // Optional: declare which columns are date fields to enable date range filter.
-    'date_columns' => [ 'dateCURE','dateAdj' ],
+    'date_columns' => [],
 ];

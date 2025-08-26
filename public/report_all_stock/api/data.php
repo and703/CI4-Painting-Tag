@@ -25,14 +25,7 @@ $searchVal = $_POST['search']['value'] ?? '';
 /* ---------- UI filters ---------- */
 $filters = [
   'MAT_IP_CODE' => $_POST['MAT_IP_CODE'] ?? $_GET['MAT_IP_CODE'] ?? null,
-  'MM_CODE'     => $_POST['MM_CODE']     ?? $_GET['MM_CODE']     ?? null,
-  'cured_stts'  => $_POST['cured_stts']  ?? $_GET['cured_stts']  ?? null,
-  'Park'        => $_POST['Park']        ?? $_GET['Park']        ?? null,
 ];
-
-$dateFrom = $_POST['date_from'] ?? $_GET['date_from'] ?? null;
-$dateTo   = $_POST['date_to']   ?? $_GET['date_to']   ?? null;
-$shiftAdj = $_POST['shift_adj'] ?? $_GET['shift_adj'] ?? '';
 
 /* ---------- ORDER BY (defensive) ---------- */
 $colIndex = (int)($order['column'] ?? 0);
