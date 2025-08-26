@@ -124,7 +124,7 @@ $(function () {
     { data:'Total_AdjStock',          title:'Adj Stock' },
     { data:'Grand_Total',           title:'Total Stock' },
   ];
-MAT_IP_CODE, Total_Amount, Total_AdjStock, Grand_Total
+  
   dt = $('#reportTable').DataTable({
     serverSide: true,
     processing: true,
