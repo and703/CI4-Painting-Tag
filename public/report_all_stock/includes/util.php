@@ -25,16 +25,6 @@ function build_where(array $filters, array $allowedCols, array $dateCols, array 
 
         $colQuoted = '`' . str_replace('`', '``', $col) . '`'; // backtick-safe
 
-        // Date range: expect ['from'=>..,'to'=>..] and column declared as date
-        if (is_array($val) && isset($val['from'], $val['to']) && in_array($col, $dateCols, true)) {
-            $pFrom = ':' . $col . '_from';
-            $pTo   = ':' . $col . '_to';
-            $parts[] = "$colQuoted BETWEEN $pFrom AND $pTo";
-            $params[$pFrom] = $val['from'];
-            $params[$pTo]   = $val['to'];
-            continue;
-        }
-
         // Array values -> IN list with unique param names
         if (is_array($val)) {
             $inParams = [];

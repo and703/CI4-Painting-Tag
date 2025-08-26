@@ -44,28 +44,6 @@ $whereParts = [];
 $w = build_where($filters, $allColumns, $dateCols, $params);
 if ($w) $whereParts[] = preg_replace('/^WHERE\s+/i', '', $w);
 
-// 2) dateAdj (varchar 'dd/mm/YYYY HH.mm') -> default to today range
-$dtExpr   = "STR_TO_DATE(`dateAdj`, '%d/%m/%Y %H.%i')";
-$dayExpr  = "DATE($dtExpr)";
-$timeExpr = "TIME($dtExpr)";
-
-$today = date('Y-m-d');
-$from  = $dateFrom ?: $today;
-$to    = $dateTo   ?: $today;
-
-$whereParts[] = "$dayExpr BETWEEN :adj_from AND :adj_to";
-$params[':adj_from'] = $from;
-$params[':adj_to']   = $to;
-
-// 3) shift windows on time of day
-if ($shiftAdj === '1') {
-  $whereParts[] = "($timeExpr >= '01:00:00' AND $timeExpr < '07:00:00')";
-} elseif ($shiftAdj === '2') {
-  $whereParts[] = "($timeExpr >= '07:00:00' AND $timeExpr < '16:00:00')";
-} elseif ($shiftAdj === '3') {
-  $whereParts[] = "($timeExpr >= '16:00:00' AND $timeExpr <= '23:59:59')";
-}
-
 // 4) global search (named params :g0, :g1, ...)
 $g = build_global_search($searchVal, $searchable, $params);
 if ($g) $whereParts[] = $g;
