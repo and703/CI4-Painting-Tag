@@ -275,6 +275,7 @@ class Worker extends Controller
 				$data     = [
 					"title" 	  => "Tag Confirm",
 					"painting"    => $dt1,
+					"bf_cure_id"  => $dt2['id'],
 					"bf_cure"     => $dt2['adj_stock'],
 					"message"     => "",
 				];
@@ -294,6 +295,7 @@ class Worker extends Controller
 				$data     = [
 					"title" 	  => "Tag Confirm",
 					"painting"    => $dt1,
+					"bf_cure_id"  => $id_TAG[4],
 					"bf_cure"     => $dt1['Amount'],
 					"message"     => "",
 				];
@@ -324,6 +326,7 @@ class Worker extends Controller
         $dateTime = date("d/m/Y H.i");
 
         $WM_CODE = $this->request->getPost("WM_CODE");
+        $bf_cure_id = $this->request->getPost("bf_cure_id");
         $paint_id = $this->request->getPost("id");
         $Park = $this->request->getPost("Park");
         $MAT_CODE = $this->request->getPost("MAT_CODE");
@@ -356,9 +359,13 @@ class Worker extends Controller
                 "cured_stts" => "UNCURED",
                 "dateAdj" => $dateTime,
             ];
-
-            $md2->insert($dt);
-
+			$dt2 = $md2->where("id", $bf_cure_id)->orderBy('id', 'desc')->first();
+			$dt2     = json_decode(json_encode($dt2), true);
+			if($dt2){
+				$md2->update($bf_cure_id, $dt);
+			} else{
+				$md2->insert($dt);
+			}
             return redirect()->to("cure");
         }
     }
