@@ -48,10 +48,13 @@ $config = require __DIR__ . '/config.php';
       <div class="alert alert-primary mb-0"><strong>Total Rows:</strong> <span id="sum_rows">-</span></div>
     </div>
     <div class="col-md-4">
-      <div class="alert alert-secondary mb-0"><strong>Sum Total_Amount:</strong> <span id="sum_Total_Amount">-</span></div>
+      <div class="alert alert-secondary mb-0"><strong>Sum Total_Park:</strong> <span id="sum_Total_Amount">-</span></div>
     </div>
     <div class="col-md-4">
       <div class="alert alert-secondary mb-0"><strong>Sum Total_AdjStock:</strong> <span id="sum_Total_AdjStock">-</span></div>
+    </div>
+    <div class="col-md-4">
+      <div class="alert alert-secondary mb-0"><strong>Sum Grand_TotalTotal:</strong> <span id="sum_Grand_Total">-</span></div>
     </div>
   </div>
 
@@ -113,6 +116,7 @@ function refreshSummary() {
     $('#sum_rows').text(s && Number(s.rows_count)    ? s.rows_count    : 0);
     $('#sum_Total_Amount').text(s && Number(s.sum_Total_Amount) ? s.sum_Total_Amount : 0);
     $('#sum_Total_AdjStock').text(s && Number(s.sum_Total_AdjStock) ? s.sum_Total_AdjStock : 0);
+    $('#sum_Grand_Total').text(s && Number(s.sum_Total_Amount + s.sum_Total_AdjStock) ? s.sum_Total_AdjStock : 0);
   }).fail(function (xhr) {
     console.error('summary.php failed:', xhr.status, xhr.responseText);
     $('#sum_rows, #sum_Total_Amount, #sum_Total_AdjStock').text(0);
