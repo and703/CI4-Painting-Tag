@@ -116,7 +116,7 @@ function refreshSummary() {
     $('#sum_rows').text(s && Number(s.rows_count)    ? s.rows_count    : 0);
     $('#sum_Total_Amount').text(s && Number(s.sum_Total_Amount) ? s.sum_Total_Amount : 0);
     $('#sum_Total_AdjStock').text(s && Number(s.sum_Total_AdjStock) ? s.sum_Total_AdjStock : 0);
-    $('#sum_Grand_Total').text(s && Number(s.sum_Total_Amount + s.sum_Total_AdjStock) ? s.sum_Total_AdjStock : 0);
+    $('#sum_Grand_Total').text(Number(s.sum_Total_Amount + s.sum_Total_AdjStock));
   }).fail(function (xhr) {
     console.error('summary.php failed:', xhr.status, xhr.responseText);
     $('#sum_rows, #sum_Total_Amount, #sum_Total_AdjStock').text(0);
