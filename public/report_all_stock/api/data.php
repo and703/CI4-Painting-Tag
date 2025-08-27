@@ -17,7 +17,7 @@ $dateCols   = $config['date_columns'] ?? [];
 /* ---------- DataTables params ---------- */
 $draw   = isset($_POST['draw'])   ? (int)$_POST['draw']   : 0;
 $start  = isset($_POST['start'])  ? max(0,(int)$_POST['start'])  : 0;
-$length = isset($_POST['length']) ? max(10,(int)$_POST['length']) : 10;
+$length = isset($_POST['length']) ? (int)$_POST['length'] : 10;
 $order  = $_POST['order'][0] ?? ['column'=>0,'dir'=>'asc'];
 $colsIn = $_POST['columns'] ?? [];
 $searchVal = $_POST['search']['value'] ?? '';
@@ -62,10 +62,14 @@ $filtered = (int)$stmt->fetchColumn();
    Safely inline validated integers. */
 $limit  = (int)$length;
 $offset = (int)$start;
-$sqlPage = 'SELECT * FROM (' . $sourceSql . ') src ' . $whereSql .
-           ' ORDER BY ' . $colNameQuoted . ' ' . $dir .
-           ' LIMIT ' . $limit . ' OFFSET ' . $offset;
-
+if($limit == -1){
+	$sqlPage = 'SELECT * FROM (' . $sourceSql . ') src ' . $whereSql .
+			   ' ORDER BY ' . $colNameQuoted . ' ' . $dir;
+} else{
+	$sqlPage = 'SELECT * FROM (' . $sourceSql . ') src ' . $whereSql .
+			   ' ORDER BY ' . $colNameQuoted . ' ' . $dir .
+			   ' LIMIT ' . $limit . ' OFFSET ' . $offset;
+}
 $stmt = $pdo->prepare($sqlPage);
 // bind ONLY the named params built above
 foreach ($params as $k => $v) {

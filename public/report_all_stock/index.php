@@ -6,7 +6,7 @@ $config = require __DIR__ . '/config.php';
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Advanced Report (Native PHP)</title>
+  <title>Report Summarizer Per IP-CODE</title>
 
   <!-- Bootstrap 5 -->
   <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -72,6 +72,13 @@ $config = require __DIR__ . '/config.php';
 <!-- DataTables core (your existing combined bundle is fine) -->
 <link  href="assets/css/datatables.min.css" rel="stylesheet">
 <script src="assets/js/datatables.min.js"></script>
+
+<!-- DataTables Buttons HTML5 dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+
 
 <!-- Buttons add-ons that the combo may not include -->
 <link  href="assets/css/buttons.bootstrap5.min.css" rel="stylesheet">
@@ -140,13 +147,24 @@ $(function () {
     },
     columns: DT_COLUMNS,
     order: [[0,'desc']],
-    lengthMenu: [[10,25,50,100,250,500],[10,25,50,100,250,500]],
+    lengthMenu: [[10, 25, 50, 100, 250, 500, -1],[10,25,50,100,250,500,'All']],
     dom: 'Bfrtip',
-    buttons: [
-      { extend: 'pageLength', text: 'Rows' },
-      { extend: 'print', text: 'Print' }
-    ]
-  });
+	buttons: [
+	  { extend: 'pageLength', text: 'Rows' },
+	  
+	  // Column visibility toggle
+	  { extend: 'colvis', text: 'Columns' },
+
+	  // Export only VISIBLE columns
+	  { extend: 'copyHtml5',  text: 'Copy',  exportOptions: { columns: ':visible' } },
+	  { extend: 'csvHtml5',   text: 'CSV',   exportOptions: { columns: ':visible' } },
+	  { extend: 'excelHtml5', text: 'Excel', exportOptions: { columns: ':visible' } },
+	  { extend: 'pdfHtml5',   text: 'PDF',   exportOptions: { columns: ':visible' } },
+
+	  // Print only visible columns
+	  { extend: 'print', text: 'Print', exportOptions: { columns: ':visible' } }
+	],
+    });
 
   // Single-flight + post-load updates
   $('#reportTable')
