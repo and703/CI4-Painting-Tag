@@ -102,10 +102,41 @@
 </html>
 
 <script>
-function doPrint() {
-  window.print();
-  window.onafterprint = function(event) {
-    document.getElementById("reprint").submit();
-  };
-}
+  function parseDMY_HM(str) {
+    if (!str) return null;
+    const s = String(str).trim();
+    const m = s.match(/^(\d{1,2})[\/-](\d{1,2})[\/-](\d{4})\s+(\d{1,2})[.:](\d{1,2})$/);
+    if (!m) return null;
+    const dd = parseInt(m[1], 10), mm = parseInt(m[2], 10), yyyy = parseInt(m[3], 10);
+    const HH = parseInt(m[4], 10), Min = parseInt(m[5], 10);
+    return new Date(yyyy, mm - 1, dd, HH, Min, 0, 0);
+  }
+
+  // --- Values from PHP
+  const onInsertRaw = "<?= $komik['On_Insert'];?>"; // "27/08/2025 19.03"
+  const cureTimeRaw = "<?= $komik['CURE_TIME'];?>"; // "27/08/2025 23.30"
+
+  const onInsertDT = parseDMY_HM(onInsertRaw);
+  const cureDT     = parseDMY_HM(cureTimeRaw);
+
+  if (!onInsertDT || !cureDT) {
+    console.warn("Cannot parse datetime(s).", { onInsertRaw, cureTimeRaw });
+  } else {
+    const diffMs = cureDT - onInsertDT;
+    const totalHours = diffMs / (1000 * 60 * 60); // gap in hours (decimal)
+
+    console.log("Gap Hours:", totalHours.toFixed(2));
+
+    if (totalHours >= 4) {
+      console.log("OEM");
+    } else {
+      console.log("RE");
+    }
+  }
+    function doPrint() {
+        window.print();
+        window.onafterprint = function(event) {
+            document.getElementById("reprint").submit();
+        };
+    }
 </script>
