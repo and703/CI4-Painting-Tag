@@ -74,10 +74,10 @@ $config = require __DIR__ . '/config.php';
 <script src="assets/js/datatables.min.js"></script>
 
 <!-- DataTables Buttons HTML5 dependencies -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+<script src="assets/js/jszip.min.js"></script>
+<script src="assets/js/pdfmake.min.js"></script>
+<script src="assets/js/vfs_fonts.js"></script>
+<script src="assets/js/buttons.html5.min.js"></script>
 
 
 <!-- Buttons add-ons that the combo may not include -->
