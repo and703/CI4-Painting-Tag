@@ -162,7 +162,33 @@ $(function () {
 	  { extend: 'colvis', text: 'Columns' },
 
 	  // Export only VISIBLE columns
-	  { extend: 'copyHtml5',  text: 'Copy',  exportOptions: { columns: ':visible' } },
+		{
+		  extend: 'copyHtml5',
+		  text: 'Copy',
+		  exportOptions: {
+			columns: ':visible',
+			header: false,      // don't export headers
+			footer: false,      // don't export footers
+			modifier: { search: 'applied', order: 'applied' }
+		  },
+		  title: '',            // prevent page <title> from being prepended
+		  messageTop: '',       // no extra lines
+		  messageBottom: '',
+		  // Final safety net: strip any first line if it looks like a header/title
+		  customize: function (data) {
+			const lines = data.split('\n');
+
+			// trim leading empties
+			while (lines.length && !lines[0].trim()) lines.shift();
+
+			// if first line looks like a header/title, drop it
+			if (lines.length && /material\s*ip|park\s*stock|adj\s*stock|total\s*stock/i.test(lines[0])) {
+			  lines.shift();
+			}
+
+			return lines.join('\n');
+		  }
+		},
 	  { extend: 'csvHtml5',   text: 'CSV',   exportOptions: { columns: ':visible' } },
 	  { extend: 'excelHtml5', text: 'Excel', exportOptions: { columns: ':visible' } },
 	  { extend: 'pdfHtml5',   text: 'PDF',   exportOptions: { columns: ':visible' } },
