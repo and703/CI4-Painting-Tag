@@ -153,7 +153,7 @@ $(function () {
     },
     columns: DT_COLUMNS,
     order: [[0,'desc']],
-    lengthMenu: [[10, 25, 50, 100, 250, 500, -1],[10,25,50,100,250,500,'All']],
+    lengthMenu: [[-1, 10, 25, 50, 100, 250, 500],['All',10,25,50,100,250,500]],
     dom: 'Bfrtip',
 	buttons: [
 	  { extend: 'pageLength', text: 'Rows' },
@@ -189,8 +189,6 @@ $(function () {
 			return lines.join('\n');
 		  }
 		},
-	  { extend: 'csvHtml5',   text: 'CSV',   exportOptions: { columns: ':visible' } },
-	  { extend: 'excelHtml5', text: 'Excel', exportOptions: { columns: ':visible' } },
 	  { extend: 'pdfHtml5',   text: 'PDF',   exportOptions: { columns: ':visible' } },
 
 	  // Print only visible columns

@@ -58,7 +58,7 @@ class Database extends Config
 
     public $pcs = [
 		'DSN'      => '',
-		'hostname' => '172.21.202.142',
+		'hostname' => '172.21.202.240', //'172.21.202.142',
 		'username' => 'Traceability',
 		'password' => 'ability',
 		'database' => 'PCS',

@@ -46,7 +46,7 @@
 							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Actual Amount</p>
 							<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?=$bf_cure;?></p>
 							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
-							<input style="text-align:center; font-weight:bold; width:50%" type="text" inputmode="numeric" pattern="[0-9]*" class="form-control" name="adjust" required autofocus autocomplete="off" value="<?= $bf_cure;?>">
+							<input style="text-align:center; font-weight:bold; width:50%" type="number" inputmode="numeric" pattern="[0-9]*" class="form-control" min="0" max="<?= $bf_cure;?>" name="adjust" required autofocus autocomplete="off" value="<?= $bf_cure;?>">
 							<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount if Actual on trolly different</p>
 						</div>
 					</div>
@@ -56,22 +56,8 @@
 							<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?= $painting['CURE_TIME'];?></p>
 							<br>
 							<br>
+							<input type="submit" class="btn btn-danger" style="font-size: 250%; color: #00ff89; font-weight:bold;" value="CONFIRM"/>
 							<?= $message?>
-<?php
-							$dateCure = date_create_from_format("d/m/Y H.i", $painting['CURE_TIME'])->format("Y-m-d H:i:s");
-							$dateNow =  date_create()->format('Y-m-d H:i:s');
-							
-							if($dateNow >= $dateCure){
-								echo '<input type="submit" class="btn btn-danger" style="font-size: 250%; color: #00ff89; font-weight:bold;" value="CONFIRM"/>';
-							}else{
-								echo '
-									<!-- Button trigger modal -->
-									<button type="button" class="btn btn-danger" style="font-size: 250%; color: #00ff89; font-weight:bold;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-									  Need Confirm Quality
-									</button>
-									';
-							}
-?>
 							<br>
 							<br>
 							<a class="btn btn-danger" href="javascript:history.back()" style="font-size: 250%; color: #00ff89; font-weight:bold;" >Go Back</a>
@@ -114,7 +100,7 @@
 								<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Amount on TAG</p>
 								<p style="font-size: 250%; color: #00ff89; font-weight:bold; margin-bottom: 0px;"><?= $painting['Amount'];?></p>
 								<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount</p>
-								<input style="text-align:center; font-weight:bold; width:auto" type="text" class="form-control" name="Amount" required autofocus autocomplete="off" value="<?= $painting['Amount'];?>">
+							<input style="text-align:center; font-weight:bold; width:50%" type="number" inputmode="numeric" pattern="[0-9]*" class="form-control" min="0" max="<?= $bf_cure;?>" name="adjust" required autofocus autocomplete="off" value="<?= $bf_cure;?>">
 								<p style="font-size: 150%; color: #FFF017; margin-bottom: 0px;">Edit Amount if Actual on trolly different</p>
 							</div>
 						</div>

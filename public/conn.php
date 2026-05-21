@@ -14,7 +14,7 @@ define('PASS1','');
 define('DB2', 'pcs');
 
 //SQLSERVER CON
-$serverName = "172.21.202.142"; 
+$serverName = "172.21.202.240"; //'172.21.202.142',
 $uid = "Traceability";   
 $pwd = "ability";  
 $databaseName = "PCS"; 

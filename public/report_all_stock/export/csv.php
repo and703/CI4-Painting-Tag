@@ -40,8 +40,8 @@ $COLUMNS = [
 ];
 $ALIASES = [
   'MAT_IP_CODE'        => 'Material IP',
-  'Total_Amount'       => 'Total Amount',
-  'Total_AdjStock'     => 'Total AdjStock',
+  'Total_Amount'       => 'Stock at Parking area',
+  'Total_AdjStock'     => 'Stock in front of machine',
   'Grand_Total'        => 'Grand Total',
 ];
 
