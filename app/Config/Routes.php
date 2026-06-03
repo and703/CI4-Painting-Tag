@@ -39,6 +39,7 @@ $routes->get('/re_print/(:any)', 'Komik::detail/$1');
 $routes->get('/print/(:any)', 'Komik::detail2/$1');
 $routes->get('/p_park/(:any)', 'Komik::detail3/$1');
 $routes->get('/p_man/(:any)', 'Komik::detail4/$1');
+$routes->get('/p_reb/(:any)', 'Komik::reboaiaca/$1');
 $routes->get('/reprint/update/(:any)', 'Komik::update/$1');
 $routes->get('report_out', 'Report::index');
 $routes->post('data_tables', 'Report::data_tables');

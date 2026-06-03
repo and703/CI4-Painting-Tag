@@ -94,6 +94,19 @@ class Komik extends BaseController
         return view("komik/detail4", $data);
     }
 
+    public function reboaiaca($slug)
+    {
+        $data["title"]   = "Detail Tag";
+        $data["komik"]  = $this->komikModel->getKomik($slug);
+        //jika komik tidak ada di tabel
+        if (empty($data["komik"])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException(
+                "Judul komik" . $slug . "Tidak di temukan"
+            );
+        }
+        return view("komik/reboiaca", $data);
+    }
+
     public function parkDet($id)
     {
         $data = [

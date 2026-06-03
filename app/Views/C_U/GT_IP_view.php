@@ -126,6 +126,28 @@
 					}
 				});
 		 	};
+			function load_reid(id)
+			{
+				$.ajax({
+					method:"POST",
+					url:"../reID.php",
+					data: {id:id},
+					success:function(hasil)
+					{
+						if(hasil.length > 0){
+							$('.data').html(hasil);
+							console.log('ID Hasil');
+							$('form').unbind( 'submit' );
+						}else{
+							$('.data').html(hasil);
+							console.log('ID Kosong');
+							$('form').submit( function(e){
+								e.preventDefault();
+							});
+						}
+					}
+				});
+		 	};
 			$('#MAT_IP_CODE').keyup(function(){
 	    		var keyword = $("#MAT_IP_CODE").val();
 	    		var id = $("#id").val();
@@ -138,6 +160,15 @@
                     $('#id').keyup(function(){
                         var id = $("#id").val();
                         load_id(id);
+                    });
+                }else if(keyword === 'r'){
+                    var element = document.getElementById("id"); // notice the change
+                    element.parentNode.removeChild(element);
+                    $(wrapper).append('<input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="id" id="id" placeholder="INPUT ID" required autofocus autocomplete="off">'); //add input box
+                    $('#id').focus();
+                    $('#id').keyup(function(){
+                        var id = $("#id").val();
+                        load_reid(id);
                     });
                 }else{
                     var element = document.getElementById("id"); // notice the change
