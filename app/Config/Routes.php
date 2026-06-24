@@ -67,6 +67,8 @@ $routes->post('data_tables', 'Report_paint::data_tables');
 //$routes->post('data_cure', 'Report_cure::data_tables');
 $routes->get('report_paint_out', 'Report_paint_out::index');
 $routes->post('data_tables_out', 'Report_paint_out::data_tables');
+$routes->get('report_paint_re', 'Report_paint_re::index');
+$routes->post('data_tables_re', 'Report_paint_re::data_tables');
 
 
 
