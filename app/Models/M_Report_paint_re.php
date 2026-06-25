@@ -49,8 +49,9 @@ class M_Report_paint_re extends Model
         $column_search = array('MAT_IP_CODE', 'Park', 'WM_CODE');
 
         $i = 0;
+        $search = $this->request->getPost('search');
         foreach ($column_search as $item) {
-            if ($this->request->getPost('search')['value']) {
+            if (isset($search['value']) && $search['value']) {
                 if ($i === 0) {
                     $this->db_rpot->groupStart();
                     $this->db_rpot->like($item, $this->request->getPost('search')['value']);
