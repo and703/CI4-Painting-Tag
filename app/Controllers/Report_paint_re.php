@@ -62,7 +62,7 @@ class Report_paint_re extends BaseController
             $data[] = $row;
         }
         $output = array(
-            "draw" => $this->request->getPost("draw"),
+            "draw" => (int) ($this->request->getPost("draw") ?? 0),
             "recordsTotal" => $this->mdl->count_all(),
             "recordsFiltered" => $this->mdl->count_filtered(),
             "data" => $data,
