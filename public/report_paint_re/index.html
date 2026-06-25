@@ -1,0 +1,176 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Data Report Painting RePrint</title>
+
+        <link rel="stylesheet" type="text/css" href="../report_paint/jquery-ui.min.css"/>
+        <link rel="stylesheet" type="text/css" href="../report_paint/DataTables/datatables.min.css"/>
+        <link rel="stylesheet" href="../template/datatables/bootstrap.min.css">
+        <script type="text/javascript" src="../report_paint/DataTables/datatables.min.js"></script>
+        <script type="text/javascript" src="../report_paint/jquery-ui.min.js"></script>
+        
+    </head>
+    <body>
+
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <input type='text' readonly id='search_fromdate' class="datepicker" placeholder='From date'>
+                    </td>
+                    <td>
+                        <input type='text' readonly id='search_todate' class="datepicker" placeholder='To date'>
+                    </td>
+                    <td>
+                        <input type='text' id='Shift' placeholder='Shift'>
+                    </td>
+                    <td>
+                        <input type='button' id="btn_search" value="Filter">
+                    </td>
+                </tr>
+            </table>
+            
+            <table id='empTable' class='display dataTable'>
+                <thead>
+                    <tr>
+                        <th>WM Code</th>
+                        <th>Machine</th>
+                        <th>IP Code</th>
+                        <th>Material Deskripsi</th>
+                        <th>Jumlah</th>
+                        <th>Slot</th>
+                        <th>On Insert</th>
+                        <th>Cure Time</th>
+                        <th>Count Printed</th>
+                        <th>Operator</th>
+                        <th>Group</th>
+                        <th>Shift</th>
+                        <th>Re</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td>Jumlah</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                
+            </table>
+        </div>
+        
+        <script>
+        $(document).ready(function(){
+
+            $(".datepicker").datepicker({
+                "dateFormat": "yy-mm-dd",
+                changeYear: true
+            });
+
+            var dataTable = $('#empTable').DataTable({    
+                lengthMenu: [
+                    [10, 100, 500, 1000, 5000, 10000],
+                    [10, 100, 500, 1000, 5000, 10000],
+                ],
+                'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'searching': true,
+                dom: 'Blfrtip',
+                buttons: [{
+                        text: '<span class="fas fa-sync-alt"></span> Refresh',
+                        className: "btn btn-light btn-sm",
+                        action: function(e, dt, node, config) {
+                            reload_table();
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                        },
+                        footer: true,
+                        text: '<span class="fas fa-file-excel"></span> Download Excell',
+                        className: "btn btn-light btn-sm",
+                        title: 'Report RePrint',
+                        filename: 'painting_reprint_report'
+                    },
+                ],
+                'ajax': {
+                    'url':'ajaxfile.php',
+                    'data': function(data){
+                        var from_date = $('#search_fromdate').val();
+                        var to_date = $('#search_todate').val();
+                        var Shift = $('#Shift').val();
+
+                        data.searchByFromdate = from_date;
+                        data.searchByTodate = to_date;
+                        data.searchShift = Shift;
+                    }
+                },
+                'footerCallback': function(row, data, start, end, display) {
+                    var api = this.api(),
+                        data;
+
+                    var intVal = function(i) {
+                        return typeof i === 'string' ?
+                            i.replace(/[\,]/g, '') * 1 :
+                            typeof i === 'number' ?
+                            i : 0;
+                    };
+
+                    total = api
+                        .column(4)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    pageTotal = api
+                        .column(4, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    $(api.column(2).footer()).html(
+                        + pageTotal + '   Total'
+                    );
+                },
+                'columns': [
+                    { data: 'WM_CODE' },
+                    { data: 'MCH' },
+                    { data: 'IP_CODE' },
+                    { data: 'MAT_DESC' },
+                    { data: 'AMOUNT' },
+                    { data: 'SLOT' },
+                    { data: 'PRINT_OUT' },
+                    { data: 'CURE_TIME' },
+                    { data: 'COUNT_PRINTED' },
+                    { data: 'USERNAME' },
+                    { data: 'GROUP_PAINT' },
+                    { data: 'SHIFT' },
+                    { data: 'RE' },
+                ]
+            });
+
+            $('#btn_search').click(function(){
+                dataTable.draw();
+            });
+        });
+        </script>
+    </body>
+
+</html>
