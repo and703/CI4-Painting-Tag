@@ -113,57 +113,6 @@
 	
 
 			<script type="text/javascript">
-				function rangetanggal() {
-					$('#f1').daterangepicker({
-						"showDropdowns": true,
-						ranges: {
-							'Today': [moment(), moment()],
-							'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-							'1 week ago': [moment().subtract(7, 'days'), moment()],
-						},
-						"locale": {
-							"format": "DD/MM/YYYY",
-							"separator": " - ",
-							"applyLabel": "Apply",
-							"cancelLabel": "Cancel",
-							"fromLabel": "From",
-							"toLabel": "To",
-							"customRangeLabel": "Customize",
-							"weekLabel": "W",
-							"daysOfWeek": [
-								"Min",
-								"Sen",
-								"Sel",
-								"Rab",
-								"Kam",
-								"Jum",
-								"Sab",
-
-							],
-							"monthNames": [
-								"Januari",
-								"Februari",
-								"Maret",
-								"April",
-								"Mei",
-								"Juni",
-								"Juli",
-								"Agustus",
-								"September",
-								"Oktober",
-								"November",
-								"Desember"
-							],
-							"firstDay": 1
-						},
-						"startDate": moment(),
-						"endDate": moment(),
-						"opens": "left"
-					}, function(start, end, label) {
-						console.log('New date range selected: ' + start.format('DD/MM/YYYY') + ' to ' + end.format('DD/MM/YYYY') + ' (predefined range: ' + label + ')');
-					});
-				}
-				rangetanggal();
 				var dataTable = $('#report1').DataTable({
 					"paging": true,
 					"processing": false,
@@ -218,6 +167,7 @@
 						"data": function(data) {
 							data.f1 = $('#f1').val();
 							data.f2 = $('#f2').val();
+							return data;
 						},
 						beforeSend: function() {
 							loading('area_lod');
@@ -272,6 +222,54 @@
 					}, ],
 
 				});
+
+				setTimeout(function() {
+					$('#f1').daterangepicker({
+						"showDropdowns": true,
+						ranges: {
+							'Today': [moment(), moment()],
+							'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+							'1 week ago': [moment().subtract(7, 'days'), moment()],
+						},
+						"locale": {
+							"format": "DD/MM/YYYY",
+							"separator": " - ",
+							"applyLabel": "Apply",
+							"cancelLabel": "Cancel",
+							"fromLabel": "From",
+							"toLabel": "To",
+							"customRangeLabel": "Customize",
+							"weekLabel": "W",
+							"daysOfWeek": [
+								"Min",
+								"Sen",
+								"Sel",
+								"Rab",
+								"Kam",
+								"Jum",
+								"Sab",
+							],
+							"monthNames": [
+								"Januari",
+								"Februari",
+								"Maret",
+								"April",
+								"Mei",
+								"Juni",
+								"Juli",
+								"Agustus",
+								"September",
+								"Oktober",
+								"November",
+								"Desember"
+							],
+							"firstDay": 1
+						},
+						"startDate": moment(),
+						"endDate": moment(),
+						"opens": "left"
+					});
+				}, 100);
 
 				function reload_table() {
 					if (typeof dataTable !== 'undefined') {
