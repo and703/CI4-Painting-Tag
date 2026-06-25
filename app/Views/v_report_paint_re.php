@@ -227,7 +227,7 @@
 				});
 
 				function reload_table() {
-					dataTable.ajax.reload(null, false);
+					dataTable.draw();
 				}
 			</script>
 
