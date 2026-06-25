@@ -54,8 +54,6 @@
                     <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="WM_GROUP" name="WM_GROUP" value="<?= $painting['WM_GROUP'];?>" disabled>
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">SHIFT</h4>
                     <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="WM_SHIFT" name="WM_SHIFT" value="<?= $painting['WM_SHIFT'];?>" disabled>
-                    <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT MACHINE</h4>
-                    <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch1" value="<?= $painting['MCH'];?>">
                 </div>
                 <div class="col-6">
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">IP CODE</h4>
@@ -70,6 +68,9 @@
                 </div>
             </div>
             <div class="col-12" align="center">
+                <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT MACHINE</h4>
+                <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch1" autofocus required autocomplete="off" value="<?= $painting['MCH'];?>">
                 <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                 <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT AMOUNT TYRE REBOIACCA</h4>
                 <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="Amount" name="Amount" autofocus required autocomplete="off" value="<?= $painting['Amount'];?>" maxlength="2">
