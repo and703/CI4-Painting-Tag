@@ -102,7 +102,6 @@
             ],
             'processing': true,
             'serverSide': true,
-            'serverMethod': 'post',
             'searching': true,
             dom: 'Blfrtip',
             buttons: [{
@@ -127,6 +126,7 @@
             ],
             'ajax': {
                 'url':'ajaxfile.php',
+                'type': 'POST',
                 'data': function(data){
                     var from_date = $('#search_fromdate').val();
                     var to_date = $('#search_todate').val();

@@ -3,61 +3,79 @@ error_reporting(0);
 include 'config.php';
 header('Content-Type: application/json');
 
-$draw = $_POST['draw'];
-$row = $_POST['start'];
-$rowperpage = $_POST['length'];
-$columnIndex = $_POST['order'][0]['column'];
-$columnName = $_POST['columns'][$columnIndex]['data'];
-$columnSortOrder = $_POST['order'][0]['dir'];
-$searchValue = $_POST['search']['value'];
+if (!$con) {
+    echo json_encode(["draw"=>intval($_POST['draw']??1),"iTotalRecords"=>0,"iTotalDisplayRecords"=>0,"aaData"=>[]]);
+    die;
+}
 
-$searchByFromdate = mysqli_real_escape_string($con, $_POST['searchByFromdate']);
-$searchByTodate = mysqli_real_escape_string($con, $_POST['searchByTodate']);
-$searchShift = mysqli_real_escape_string($con, $_POST['searchShift']);
+$draw = $_POST['draw']??1;
+$row = $_POST['start']??0;
+$rowperpage = $_POST['length']??10;
+$columnIndex = $_POST['order'][0]['column']??0;
+$columnSortOrder = $_POST['order'][0]['dir']??'desc';
+$searchValue = $_POST['search']['value']??'';
+
+$searchByFromdate = mysqli_real_escape_string($con, $_POST['searchByFromdate']??'');
+$searchByTodate = mysqli_real_escape_string($con, $_POST['searchByTodate']??'');
+$searchShift = mysqli_real_escape_string($con, $_POST['searchShift']??'');
+
+// Map DataTable column data names to actual DB column names
+$dbCols = ['id','WM_CODE','MCH','MAT_IP_CODE','MAT_DESC','Amount','Park','On_Insert','CURE_TIME','Count_Printed','WM_NAME_WM_SURNAME','WM_GROUP','WM_SHIFT','Re'];
+$columnName = isset($dbCols[$columnIndex]) ? $dbCols[$columnIndex] : 'id';
 
 $searchQuery = " ";
 if ($searchValue != '') {
-    $searchQuery = " and ( WM_NAME_WM_SURNAME like '%" . $searchValue . "%' or MAT_IP_CODE like '%" . $searchValue . "%' or Park like '%" . $searchValue . "%' or WM_CODE like '%" . $searchValue . "%' ) ";
+    $s = mysqli_real_escape_string($con, $searchValue);
+    $searchQuery = " and ( WM_NAME_WM_SURNAME like '%$s%' or MAT_IP_CODE like '%$s%' or Park like '%$s%' or WM_CODE like '%$s%' ) ";
 }
 
 if ($searchByFromdate != '' && $searchByTodate != '') {
-    $searchQuery .= " and (str_to_date(On_Insert,'%d/%m/%Y %H.%i') between '" . $searchByFromdate . " 00:00:00' and '" . $searchByTodate . " 23:59:59') ";
+    $searchQuery .= " and (str_to_date(On_Insert,'%d/%m/%Y %H.%i') between '$searchByFromdate 00:00:00' and '$searchByTodate 23:59:59') ";
 }
 
 if ($searchShift != '') {
-    $searchQuery .= " and (WM_SHIFT = '" . $searchShift . "') ";
+    $searchQuery .= " and (WM_SHIFT = '$searchShift') ";
 }
 
-$countAll = mysqli_query($con, "select count(*) as allcount from painting_re");
-if (!$countAll) { echo json_encode(["draw"=>intval($draw),"iTotalRecords"=>0,"iTotalDisplayRecords"=>0,"aaData"=>[]]); die; }
-$totalRecords = mysqli_fetch_assoc($countAll)['allcount'];
+$countAll = @mysqli_query($con, "select count(*) as allcount from painting_re");
+$totalRecords = 0;
+if ($countAll) {
+    $r = @mysqli_fetch_assoc($countAll);
+    $totalRecords = $r ? $r['allcount'] : 0;
+}
 
-$countFiltered = mysqli_query($con, "select count(*) as allcount from painting_re WHERE 1 " . $searchQuery);
-if (!$countFiltered) { echo json_encode(["draw"=>intval($draw),"iTotalRecords"=>$totalRecords,"iTotalDisplayRecords"=>0,"aaData"=>[]]); die; }
-$totalRecordwithFilter = mysqli_fetch_assoc($countFiltered)['allcount'];
+$totalRecordwithFilter = $totalRecords;
+$countFiltered = @mysqli_query($con, "select count(*) as allcount from painting_re WHERE 1 $searchQuery");
+if ($countFiltered) {
+    $r = @mysqli_fetch_assoc($countFiltered);
+    $totalRecordwithFilter = $r ? $r['allcount'] : 0;
+}
 
-$empQuery = "select * from painting_re WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
-$empRecords = mysqli_query($con, $empQuery);
 $data = array();
-$no = $_POST['start'] + 1;
+$empQuery = "select * from painting_re WHERE 1 $searchQuery order by $columnName $columnSortOrder limit $row,$rowperpage";
+$empRecords = @mysqli_query($con, $empQuery);
+$no = intval($row) + 1;
 
-while ($row = mysqli_fetch_assoc($empRecords)) {
-    $data[] = array(
-        "NO" => $no++,
-        "WM_CODE" => isset($row['WM_CODE']) ? $row['WM_CODE'] : '',
-        "MCH" => isset($row['MCH']) ? $row['MCH'] : '',
-        "IP_CODE" => isset($row['MAT_IP_CODE']) ? $row['MAT_IP_CODE'] : (isset($row['IP_CODE']) ? $row['IP_CODE'] : ''),
-        "MAT_DESC" => isset($row['MAT_DESC']) ? $row['MAT_DESC'] : '',
-        "AMOUNT" => isset($row['Amount']) ? $row['Amount'] : (isset($row['AMOUNT']) ? $row['AMOUNT'] : ''),
-        "SLOT" => isset($row['Park']) ? $row['Park'] : (isset($row['SLOT']) ? $row['SLOT'] : ''),
-        "PRINT_OUT" => isset($row['On_Insert']) ? $row['On_Insert'] : (isset($row['PRINT_OUT']) ? $row['PRINT_OUT'] : ''),
-        "CURE_TIME" => isset($row['CURE_TIME']) ? $row['CURE_TIME'] : (isset($row['CURING_TIME']) ? $row['CURING_TIME'] : ''),
-        "COUNT_PRINTED" => isset($row['Count_Printed']) ? $row['Count_Printed'] : (isset($row['COUNT_PRINTED']) ? $row['COUNT_PRINTED'] : ''),
-        "USERNAME" => isset($row['WM_NAME_WM_SURNAME']) ? $row['WM_NAME_WM_SURNAME'] : (isset($row['USERNAME']) ? $row['USERNAME'] : ''),
-        "GROUP_PAINT" => isset($row['WM_GROUP']) ? $row['WM_GROUP'] : (isset($row['GROUP_PAINT']) ? $row['GROUP_PAINT'] : ''),
-        "SHIFT" => isset($row['WM_SHIFT']) ? $row['WM_SHIFT'] : (isset($row['SHIFT']) ? $row['SHIFT'] : ''),
-        "RE" => isset($row['Re']) ? $row['Re'] : (isset($row['RE']) ? $row['RE'] : ''),
-    );
+if ($empRecords) {
+    while ($row = @mysqli_fetch_assoc($empRecords)) {
+        if (!$row) break;
+        $data[] = array(
+            "NO" => $no++,
+            "WM_CODE" => $row['WM_CODE']??'',
+            "MCH" => $row['MCH']??'',
+            "IP_CODE" => $row['MAT_IP_CODE']??$row['IP_CODE']??'',
+            "MAT_DESC" => $row['MAT_DESC']??'',
+            "AMOUNT" => $row['Amount']??$row['AMOUNT']??'',
+            "SLOT" => $row['Park']??$row['SLOT']??'',
+            "PRINT_OUT" => $row['On_Insert']??$row['PRINT_OUT']??'',
+            "CURE_TIME" => $row['CURE_TIME']??$row['CURING_TIME']??'',
+            "COUNT_PRINTED" => $row['Count_Printed']??$row['COUNT_PRINTED']??'',
+            "USERNAME" => $row['WM_NAME_WM_SURNAME']??$row['USERNAME']??'',
+            "GROUP_PAINT" => $row['WM_GROUP']??$row['GROUP_PAINT']??'',
+            "SHIFT" => $row['WM_SHIFT']??$row['SHIFT']??'',
+            "RE" => $row['Re']??$row['RE']??'',
+        );
+    }
 }
 
 echo json_encode(array(
