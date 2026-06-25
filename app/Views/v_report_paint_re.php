@@ -26,7 +26,6 @@
 	<script src="<?= base_url() ?>/template/loader.js"></script>
 
 </head>
-
 <body>
 	<div class="container">
 
@@ -110,7 +109,11 @@
 				</div>
 			</div>
 
-	
+			<script>
+				setTimeout(function() {
+					rangetanggal();
+				}, 100);
+			</script>
 
 			<script type="text/javascript">
 				var dataTable = $('#report1').DataTable({
@@ -159,7 +162,7 @@
 						},
 					],
 					"order": [
-						[10, "desc"]
+						[7, "desc"]
 					],
 					"ajax": {
 						"url": "<?= site_url('report_paint_re/data_tables'); ?>",
@@ -167,7 +170,6 @@
 						"data": function(data) {
 							data.f1 = $('#f1').val();
 							data.f2 = $('#f2').val();
-							return data;
 						},
 						beforeSend: function() {
 							loading('area_lod');
@@ -175,6 +177,7 @@
 						complete: function(data) {
 							unblock('area_lod');
 						},
+
 					},
 					"fixedHeader": true,
 					"colReorder": true,
@@ -223,7 +226,13 @@
 
 				});
 
-				setTimeout(function() {
+				function reload_table() {
+					dataTable.ajax.reload(null, false);
+				}
+			</script>
+
+			<script>
+				function rangetanggal() {
 					$('#f1').daterangepicker({
 						"showDropdowns": true,
 						ranges: {
@@ -248,6 +257,7 @@
 								"Kam",
 								"Jum",
 								"Sab",
+
 							],
 							"monthNames": [
 								"Januari",
@@ -268,13 +278,10 @@
 						"startDate": moment(),
 						"endDate": moment(),
 						"opens": "left"
-					});
-				}, 100);
+					}, function(start, end, label) {
+						console.log('New date range selected: ' + start.format('DD/MM/YYYY') + ' to ' + end.format('DD/MM/YYYY') + ' (predefined range: ' + label + ')');
 
-				function reload_table() {
-					if (typeof dataTable !== 'undefined') {
-						dataTable.ajax.reload(null, false);
-					}
+					});
 				}
 			</script>
 
