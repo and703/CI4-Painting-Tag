@@ -1,5 +1,7 @@
 <?php
+error_reporting(0);
 include 'config.php';
+header('Content-Type: application/json');
 
 $draw = $_POST['draw'];
 $row = $_POST['start'];
@@ -26,17 +28,15 @@ if ($searchShift != '') {
     $searchQuery .= " and (WM_SHIFT = '" . $searchShift . "') ";
 }
 
-$table = "pcs.painting_re";
+$countAll = mysqli_query($con, "select count(*) as allcount from painting_re");
+if (!$countAll) { echo json_encode(["draw"=>intval($draw),"iTotalRecords"=>0,"iTotalDisplayRecords"=>0,"aaData"=>[]]); die; }
+$totalRecords = mysqli_fetch_assoc($countAll)['allcount'];
 
-$sel = mysqli_query($con, "select count(*) as allcount from $table");
-$records = mysqli_fetch_assoc($sel);
-$totalRecords = $records['allcount'];
+$countFiltered = mysqli_query($con, "select count(*) as allcount from painting_re WHERE 1 " . $searchQuery);
+if (!$countFiltered) { echo json_encode(["draw"=>intval($draw),"iTotalRecords"=>$totalRecords,"iTotalDisplayRecords"=>0,"aaData"=>[]]); die; }
+$totalRecordwithFilter = mysqli_fetch_assoc($countFiltered)['allcount'];
 
-$sel = mysqli_query($con, "select count(*) as allcount from $table WHERE 1 " . $searchQuery);
-$records = mysqli_fetch_assoc($sel);
-$totalRecordwithFilter = $records['allcount'];
-
-$empQuery = "select * from $table WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$empQuery = "select * from painting_re WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $empRecords = mysqli_query($con, $empQuery);
 $data = array();
 $no = $_POST['start'] + 1;
@@ -44,28 +44,26 @@ $no = $_POST['start'] + 1;
 while ($row = mysqli_fetch_assoc($empRecords)) {
     $data[] = array(
         "NO" => $no++,
-        "WM_CODE" => $row['WM_CODE'],
-        "MCH" => $row['MCH'],
-        "IP_CODE" => $row['MAT_IP_CODE'],
-        "MAT_DESC" => $row['MAT_DESC'],
-        "AMOUNT" => $row['Amount'],
-        "SLOT" => $row['Park'],
-        "PRINT_OUT" => $row['On_Insert'],
-        "CURE_TIME" => $row['CURE_TIME'],
-        "COUNT_PRINTED" => $row['Count_Printed'],
-        "USERNAME" => $row['WM_NAME_WM_SURNAME'],
-        "GROUP_PAINT" => $row['WM_GROUP'],
-        "SHIFT" => $row['WM_SHIFT'],
-        "RE" => $row['Re'],
-    });
+        "WM_CODE" => isset($row['WM_CODE']) ? $row['WM_CODE'] : '',
+        "MCH" => isset($row['MCH']) ? $row['MCH'] : '',
+        "IP_CODE" => isset($row['MAT_IP_CODE']) ? $row['MAT_IP_CODE'] : (isset($row['IP_CODE']) ? $row['IP_CODE'] : ''),
+        "MAT_DESC" => isset($row['MAT_DESC']) ? $row['MAT_DESC'] : '',
+        "AMOUNT" => isset($row['Amount']) ? $row['Amount'] : (isset($row['AMOUNT']) ? $row['AMOUNT'] : ''),
+        "SLOT" => isset($row['Park']) ? $row['Park'] : (isset($row['SLOT']) ? $row['SLOT'] : ''),
+        "PRINT_OUT" => isset($row['On_Insert']) ? $row['On_Insert'] : (isset($row['PRINT_OUT']) ? $row['PRINT_OUT'] : ''),
+        "CURE_TIME" => isset($row['CURE_TIME']) ? $row['CURE_TIME'] : (isset($row['CURING_TIME']) ? $row['CURING_TIME'] : ''),
+        "COUNT_PRINTED" => isset($row['Count_Printed']) ? $row['Count_Printed'] : (isset($row['COUNT_PRINTED']) ? $row['COUNT_PRINTED'] : ''),
+        "USERNAME" => isset($row['WM_NAME_WM_SURNAME']) ? $row['WM_NAME_WM_SURNAME'] : (isset($row['USERNAME']) ? $row['USERNAME'] : ''),
+        "GROUP_PAINT" => isset($row['WM_GROUP']) ? $row['WM_GROUP'] : (isset($row['GROUP_PAINT']) ? $row['GROUP_PAINT'] : ''),
+        "SHIFT" => isset($row['WM_SHIFT']) ? $row['WM_SHIFT'] : (isset($row['SHIFT']) ? $row['SHIFT'] : ''),
+        "RE" => isset($row['Re']) ? $row['Re'] : (isset($row['RE']) ? $row['RE'] : ''),
+    );
 }
 
-$response = array(
+echo json_encode(array(
     "draw" => intval($draw),
     "iTotalRecords" => $totalRecords,
     "iTotalDisplayRecords" => $totalRecordwithFilter,
     "aaData" => $data
-);
-
-echo json_encode($response);
+));
 die;
