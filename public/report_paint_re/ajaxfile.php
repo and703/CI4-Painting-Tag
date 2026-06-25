@@ -26,15 +26,17 @@ if ($searchShift != '') {
     $searchQuery .= " and (WM_SHIFT = '" . $searchShift . "') ";
 }
 
-$sel = mysqli_query($con, "select count(*) as allcount from painting");
+$table = "pcs.painting_re";
+
+$sel = mysqli_query($con, "select count(*) as allcount from $table");
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
-$sel = mysqli_query($con, "select count(*) as allcount from painting WHERE 1 " . $searchQuery);
+$sel = mysqli_query($con, "select count(*) as allcount from $table WHERE 1 " . $searchQuery);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
-$empQuery = "select * from painting WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
+$empQuery = "select * from $table WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $empRecords = mysqli_query($con, $empQuery);
 $data = array();
 
