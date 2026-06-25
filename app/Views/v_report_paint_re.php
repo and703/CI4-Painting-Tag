@@ -110,13 +110,10 @@
 				</div>
 			</div>
 
-			<script>
-				setTimeout(function() {
-					rangetanggal();
-				}, 100);
-			</script>
+	
 
 			<script type="text/javascript">
+				rangetanggal();
 				var dataTable = $('#report1').DataTable({
 					"paging": true,
 					"processing": false,
@@ -227,7 +224,9 @@
 				});
 
 				function reload_table() {
-					dataTable.ajax.reload(null, false);
+					if (typeof dataTable !== 'undefined') {
+						dataTable.ajax.reload(null, false);
+					}
 				}
 			</script>
 
