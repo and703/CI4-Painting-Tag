@@ -39,9 +39,11 @@ $totalRecordwithFilter = $records['allcount'];
 $empQuery = "select * from $table WHERE 1 " . $searchQuery . " order by " . $columnName . " " . $columnSortOrder . " limit " . $row . "," . $rowperpage;
 $empRecords = mysqli_query($con, $empQuery);
 $data = array();
+$no = $_POST['start'] + 1;
 
 while ($row = mysqli_fetch_assoc($empRecords)) {
     $data[] = array(
+        "NO" => $no++,
         "WM_CODE" => $row['WM_CODE'],
         "MCH" => $row['MCH'],
         "IP_CODE" => $row['MAT_IP_CODE'],
@@ -55,7 +57,7 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
         "GROUP_PAINT" => $row['WM_GROUP'],
         "SHIFT" => $row['WM_SHIFT'],
         "RE" => $row['Re'],
-    );
+    });
 }
 
 $response = array(

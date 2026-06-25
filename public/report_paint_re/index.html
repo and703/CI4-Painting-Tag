@@ -1,176 +1,179 @@
 <!doctype html>
 <html>
-    <head>
-        <title>Data Report Painting RePrint</title>
-
-        <link rel="stylesheet" type="text/css" href="../report_paint/jquery-ui.min.css"/>
-        <link rel="stylesheet" type="text/css" href="../report_paint/DataTables/datatables.min.css"/>
-        <link rel="stylesheet" href="../template/datatables/bootstrap.min.css">
-        <script type="text/javascript" src="../report_paint/DataTables/datatables.min.js"></script>
-        <script type="text/javascript" src="../report_paint/jquery-ui.min.js"></script>
-        
-    </head>
-    <body>
-
-        <div>
-            <table>
-                <tr>
-                    <td>
-                        <input type='text' readonly id='search_fromdate' class="datepicker" placeholder='From date'>
-                    </td>
-                    <td>
-                        <input type='text' readonly id='search_todate' class="datepicker" placeholder='To date'>
-                    </td>
-                    <td>
-                        <input type='text' id='Shift' placeholder='Shift'>
-                    </td>
-                    <td>
-                        <input type='button' id="btn_search" value="Filter">
-                    </td>
-                </tr>
-            </table>
-            
-            <table id='empTable' class='display dataTable'>
-                <thead>
+<head>
+    <title>Data Report Painting RePrint</title>
+    <link rel="stylesheet" type="text/css" href="../report_paint/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../report_paint/DataTables/datatables.min.css"/>
+    <link rel="stylesheet" href="../template/datatables/bootstrap.min.css">
+    <link rel="stylesheet" href="../template/plugins/fontawesome-free/css/all.min.css">
+    <script type="text/javascript" src="../report_paint/DataTables/datatables.min.js"></script>
+    <script type="text/javascript" src="../report_paint/jquery-ui.min.js"></script>
+    <style>
+        .container { margin-top: 30px; }
+        .card { border: 1px solid #ddd; border-radius: 4px; }
+        .card-header { background: #f5f5f5; padding: 12px 15px; font-weight: bold; font-size: 16px; border-bottom: 1px solid #ddd; }
+        .card-body { padding: 15px; }
+        .filter-row { margin-bottom: 15px; }
+        .filter-row td { padding: 5px; }
+        .filter-row label { margin-right: 5px; font-weight: 600; }
+        hr { margin: 15px 0; border: 0; border-top: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">GT Painting RePrint Report</div>
+            <div class="card-body">
+                <table class="filter-row">
                     <tr>
-                        <th>WM Code</th>
-                        <th>Machine</th>
-                        <th>IP Code</th>
-                        <th>Material Deskripsi</th>
-                        <th>Jumlah</th>
-                        <th>Slot</th>
-                        <th>On Insert</th>
-                        <th>Cure Time</th>
-                        <th>Count Printed</th>
-                        <th>Operator</th>
-                        <th>Group</th>
-                        <th>Shift</th>
-                        <th>Re</th>
+                        <td><label>Date Range</label></td>
+                        <td><input type='text' readonly id='search_fromdate' class="datepicker form-control" placeholder='From date' style="width:140px"></td>
+                        <td><input type='text' readonly id='search_todate' class="datepicker form-control" placeholder='To date' style="width:140px"></td>
+                        <td><label style="margin-left:15px">SHIFT</label></td>
+                        <td>
+                            <select id='Shift' class="form-control" style="width:100px">
+                                <option value="">=== Pilih ===</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </td>
+                        <td><input type='button' id="btn_search" class="btn btn-primary btn-sm" value="Filter" style="margin-left:15px"></td>
                     </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Jumlah</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-                
-            </table>
+                </table>
+                <hr>
+
+                <div id='area_lod'>
+                    <table id='empTable' class='table table-striped table-bordered table-hover'>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>WM Code</th>
+                                <th>Machine</th>
+                                <th>IP Code</th>
+                                <th>Material Deskripsi</th>
+                                <th>Jumlah</th>
+                                <th>Slot</th>
+                                <th>On Insert</th>
+                                <th>Cure Time</th>
+                                <th>Count Printed</th>
+                                <th>Operator</th>
+                                <th>Group</th>
+                                <th>Shift</th>
+                                <th>Re</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>Jumlah</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
         </div>
-        
-        <script>
-        $(document).ready(function(){
+    </div>
 
-            $(".datepicker").datepicker({
-                "dateFormat": "yy-mm-dd",
-                changeYear: true
-            });
+    <script>
+    $(document).ready(function(){
+        $(".datepicker").datepicker({
+            "dateFormat": "yy-mm-dd",
+            changeYear: true
+        });
 
-            var dataTable = $('#empTable').DataTable({    
-                lengthMenu: [
-                    [10, 100, 500, 1000, 5000, 10000],
-                    [10, 100, 500, 1000, 5000, 10000],
-                ],
-                'processing': true,
-                'serverSide': true,
-                'serverMethod': 'post',
-                'searching': true,
-                dom: 'Blfrtip',
-                buttons: [{
-                        text: '<span class="fas fa-sync-alt"></span> Refresh',
-                        className: "btn btn-light btn-sm",
-                        action: function(e, dt, node, config) {
-                            reload_table();
-                        }
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-                        },
-                        footer: true,
-                        text: '<span class="fas fa-file-excel"></span> Download Excell',
-                        className: "btn btn-light btn-sm",
-                        title: 'Report RePrint',
-                        filename: 'painting_reprint_report'
-                    },
-                ],
-                'ajax': {
-                    'url':'ajaxfile.php',
-                    'data': function(data){
-                        var from_date = $('#search_fromdate').val();
-                        var to_date = $('#search_todate').val();
-                        var Shift = $('#Shift').val();
-
-                        data.searchByFromdate = from_date;
-                        data.searchByTodate = to_date;
-                        data.searchShift = Shift;
+        var dataTable = $('#empTable').DataTable({    
+            lengthMenu: [
+                [10, 100, 500, 1000, 5000, 10000],
+                [10, 100, 500, 1000, 5000, 10000],
+            ],
+            'processing': true,
+            'serverSide': true,
+            'serverMethod': 'post',
+            'searching': true,
+            dom: 'Blfrtip',
+            buttons: [{
+                    text: '<span class="fas fa-sync-alt"></span> Refresh',
+                    className: "btn btn-light btn-sm",
+                    action: function(e, dt, node, config) {
+                        reload_table();
                     }
                 },
-                'footerCallback': function(row, data, start, end, display) {
-                    var api = this.api(),
-                        data;
-
-                    var intVal = function(i) {
-                        return typeof i === 'string' ?
-                            i.replace(/[\,]/g, '') * 1 :
-                            typeof i === 'number' ?
-                            i : 0;
-                    };
-
-                    total = api
-                        .column(4)
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    pageTotal = api
-                        .column(4, {
-                            page: 'current'
-                        })
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    $(api.column(2).footer()).html(
-                        + pageTotal + '   Total'
-                    );
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+                    },
+                    footer: true,
+                    text: '<span class="fas fa-file-excel"></span> Download Excell',
+                    className: "btn btn-light btn-sm",
+                    title: 'Painting RePrint',
+                    messageTop: 'DI CETAK : ' + new Date().toLocaleString('id-ID', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}),
+                    filename: 'painting_reprint_report'
                 },
-                'columns': [
-                    { data: 'WM_CODE' },
-                    { data: 'MCH' },
-                    { data: 'IP_CODE' },
-                    { data: 'MAT_DESC' },
-                    { data: 'AMOUNT' },
-                    { data: 'SLOT' },
-                    { data: 'PRINT_OUT' },
-                    { data: 'CURE_TIME' },
-                    { data: 'COUNT_PRINTED' },
-                    { data: 'USERNAME' },
-                    { data: 'GROUP_PAINT' },
-                    { data: 'SHIFT' },
-                    { data: 'RE' },
-                ]
-            });
-
-            $('#btn_search').click(function(){
-                dataTable.draw();
-            });
+            ],
+            'ajax': {
+                'url':'ajaxfile.php',
+                'data': function(data){
+                    var from_date = $('#search_fromdate').val();
+                    var to_date = $('#search_todate').val();
+                    var Shift = $('#Shift').val();
+                    data.searchByFromdate = from_date;
+                    data.searchByTodate = to_date;
+                    data.searchShift = Shift;
+                }
+            },
+            'footerCallback': function(row, data, start, end, display) {
+                var api = this.api(), data;
+                var intVal = function(i) {
+                    return typeof i === 'string' ?
+                        i.replace(/[\,]/g, '') * 1 :
+                        typeof i === 'number' ? i : 0;
+                };
+                total = api.column(5).data().reduce(function(a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+                pageTotal = api.column(5, { page: 'current' }).data().reduce(function(a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+                $(api.column(3).footer()).html(+ pageTotal + '   Total');
+            },
+            'columns': [
+                { data: 'NO' },
+                { data: 'WM_CODE' },
+                { data: 'MCH' },
+                { data: 'IP_CODE' },
+                { data: 'MAT_DESC' },
+                { data: 'AMOUNT' },
+                { data: 'SLOT' },
+                { data: 'PRINT_OUT' },
+                { data: 'CURE_TIME' },
+                { data: 'COUNT_PRINTED' },
+                { data: 'USERNAME' },
+                { data: 'GROUP_PAINT' },
+                { data: 'SHIFT' },
+                { data: 'RE' },
+            ],
+            'order': [[7, 'desc']],
         });
-        </script>
-    </body>
 
+        $('#btn_search').click(function(){
+            dataTable.draw();
+        });
+    });
+    </script>
+</body>
 </html>
