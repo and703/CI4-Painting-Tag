@@ -126,9 +126,11 @@
 					}
 				});
 		 	};
+			var xhr_reid;
 			function load_reid(id)
 			{
-				$.ajax({
+				if (xhr_reid) xhr_reid.abort();
+				xhr_reid = $.ajax({
 					method:"POST",
 					url:"../reID.php",
 					data: {id:id},
@@ -136,11 +138,9 @@
 					{
 						if(hasil.length > 0){
 							$('.data').html(hasil);
-							console.log('ID Hasil');
 							$('form').unbind( 'submit' );
 						}else{
 							$('.data').html(hasil);
-							console.log('ID Kosong');
 							$('form').submit( function(e){
 								e.preventDefault();
 							});
