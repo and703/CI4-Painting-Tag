@@ -215,10 +215,6 @@
 					"ajax": {
 						"url": "<?= site_url('report_paint_re/data_tables'); ?>",
 						"type": "POST",
-						"data": function(data) {
-							data.f1 = $('#f1').val();
-							data.f2 = $('#f2').val();
-						},
 						beforeSend: function() {
 							loading('area_lod');
 						},
