@@ -20,7 +20,7 @@ $searchByTodate = mysqli_real_escape_string($con, $_POST['searchByTodate']??'');
 $searchShift = mysqli_real_escape_string($con, $_POST['searchShift']??'');
 
 // Map DataTable column data names to actual DB column names
-$dbCols = ['id','WM_CODE','MCH','MAT_IP_CODE','MAT_DESC','Amount','Park','On_Insert','CURE_TIME','Count_Printed','WM_NAME_WM_SURNAME','WM_GROUP','WM_SHIFT','Re'];
+$dbCols = ['WM_CODE','MCH','MAT_IP_CODE','MAT_DESC','Amount','Park','On_Insert','CURE_TIME','Count_Printed','WM_NAME_WM_SURNAME','WM_GROUP','WM_SHIFT','Re'];
 $columnName = isset($dbCols[$columnIndex]) ? $dbCols[$columnIndex] : 'id';
 
 $searchQuery = " ";
