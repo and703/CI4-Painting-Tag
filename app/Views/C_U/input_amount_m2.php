@@ -9,7 +9,7 @@
             </div>
             <div class="col-1">
                 <div class="row">
-                    <h5 class="card-title" style="font-size: 350%; color: #FFF;"><?= $painting['MCH'];?></h4>
+                    <h5 class="card-title" style="font-size: 350%; color: #FFF;">A1</h4>
                 </div>
             </div>
             <div class="col-4">

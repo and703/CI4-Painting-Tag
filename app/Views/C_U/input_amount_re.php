@@ -9,7 +9,7 @@
             </div>
             <div class="col-1">
                 <div class="row">
-                    <h5 class="card-title" style="font-size: 350%; color: #FFF;"><?= $painting['MCH'];?></h4>
+                    <h5 class="card-title" style="font-size: 350%; color: #FFF;">A1</h4>
                 </div>
             </div>
             <div class="col-4">
@@ -71,8 +71,8 @@
             </div>
             <div class="col-12" align="center">
                 <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
-                <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT MACHINE REBOIACCA</h4>
-                <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch1" autofocus required autocomplete="off" value="<?= $painting['MCH'];?>">
+                <h5 class="card-title" style="font-size: 300%; color: #FFF017;">MACHINE A1 REBOIACCA</h4>
+                <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch1" autofocus required autocomplete="off" value="A1" disabled>
                 <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                 <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT AMOUNT TYRE REBOIACCA</h4>
                 <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="Amount" name="Amount" autofocus required autocomplete="off" maxlength="2">
