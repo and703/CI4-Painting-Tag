@@ -249,7 +249,7 @@ class Komik extends BaseController
     
             session()->setFlashdata("pesan", "Print Success. ");
     
-            $session->destroy();
+            //$session->destroy();
             return redirect()->to("worker");
         }
     }
