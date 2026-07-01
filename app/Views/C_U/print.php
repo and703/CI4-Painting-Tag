@@ -52,8 +52,8 @@
         <div class="col-md-12">
             <div class="text-left">
                 <p style="font-size: 300%; color: #000; font-weight:bold;margin-bottom: 0px;">CURE AFTER : <?= $painting["CURE_TIME"] ?></p>
-                <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px; text-align:center;">TROLLEY NUMBER</p>
-                <p style="font-size: 400%; color: #000; font-weight:bold;margin-bottom: 0px; text-align:center;"><?= isset($painting["tr_code"]) ? $painting["tr_code"] : '' ?></p>
+                <p style="font-size: 300%; color: #000; margin-bottom: 0px; text-align:center;">TROLLEY NUMBER</p>
+                <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px; text-align:center;"><?= isset($painting["tr_code"]) ? $painting["tr_code"] : '' ?></p>
             </div>
         </div>
     </div>
