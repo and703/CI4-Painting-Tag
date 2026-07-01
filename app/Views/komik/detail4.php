@@ -91,6 +91,7 @@
                         $Date2 = $date->format('d/m/Y H.i');
                     ?>
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Expired AFTER : <?= $Date2;?></p>
+                    <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">TROLLEY : <?= isset($komik2['tr_code']) ? $komik2['tr_code'] : '';?></p>
                 </div>
             </div>
         </div>

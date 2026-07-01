@@ -52,6 +52,7 @@
         <div class="col-md-12">
             <div class="text-left">
                 <p style="font-size: 300%; color: #000; font-weight:bold;margin-bottom: 0px;">CURE AFTER : <?= $painting["CURE_TIME"] ?></p>
+                <p style="font-size: 300%; color: #000; font-weight:bold;margin-bottom: 0px;">TROLLEY : <?= isset($painting["tr_code"]) ? $painting["tr_code"] : '' ?></p>
             </div>
         </div>
     </div>
