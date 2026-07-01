@@ -47,8 +47,10 @@
                         <form action="/worker/get_ip" method="post">
                             <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" id="MAT_IP_CODE" name="MAT_IP_CODE" placeholder="MAT_IP_CODE" autofocus required autocomplete="off" maxlength="5">
                             <input type="hidden" name="id" id="id" value="-">
+                            <input style="text-align:center; font-weight:bold; width:20%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autocomplete="off" maxlength="5">
                             <div class="container1"></div>
                         
+                            <div class="tr_data"></div>
                             <div class="data"></div>
                             <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                         
@@ -176,6 +178,26 @@
                     $(wrapper).append('<input type="hidden" name="id" id="id" value="-">'); //add input box
 				    load_data(keyword);
                 }
+			});
+			$('#tr_code').keyup(function(){
+				var trcode = $("#tr_code").val();
+				$.ajax({
+					method:"POST",
+					url:"../chTR.php",
+					data: {keyword:trcode},
+					success:function(hasil)
+					{
+						if(hasil.length > 0){
+							$('.tr_data').html(hasil);
+							$('form').unbind('submit');
+						}else{
+							$('.tr_data').html(hasil);
+							$('form').submit(function(e){
+								e.preventDefault();
+							});
+						}
+					}
+				});
 			});
 		});
 	</script>

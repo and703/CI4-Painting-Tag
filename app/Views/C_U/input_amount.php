@@ -55,6 +55,7 @@
                     <div class="col-12">
 						<form action="/worker/save" method="post">
 							<input type="hidden" name="mch" value="<?= $mch;?>">
+							<input type="hidden" name="tr_code" value="<?= isset($tr_code) ? $tr_code : '';?>">
 							<input type="hidden" name="MAT_DESC" value="<?= $gt_ip->MAT_DESC;?>">
 							<input type="hidden" name="MAT_IP_CODE" value="<?= $gt_ip->MAT_IP_CODE;?>">
 							<input type="hidden" name="AG_time" value="<?= $AG_time ?>">

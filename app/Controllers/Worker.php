@@ -412,9 +412,11 @@ class Worker extends Controller
         $md1 = new KomikModel();
         $MAT_IP_CODE = $this->request->getPost("MAT_IP_CODE");
         $id = $this->request->getPost("id");
+        $tr_code = $this->request->getPost("tr_code");
         if($MAT_IP_CODE == 'i'){
             $data["painting"] 		= $md1->where("id", $id)->first();
 			$data["gt_ip"] 			= $model->getGtip($data["painting"]["MAT_IP_CODE"])->getRow();
+			$data["tr_code"]        = $tr_code;
 			
 			$dt = $md->getIpExp($data["painting"]["MAT_IP_CODE"]);
 			if($dt){
@@ -428,6 +430,7 @@ class Worker extends Controller
         }elseif($MAT_IP_CODE == 'r'){
             $data["painting"] 		= $md1->where("id", $id)->first();
 			$data["gt_ip"] 			= $model->getGtip($data["painting"]["MAT_IP_CODE"])->getRow();
+			$data["tr_code"]        = $tr_code;
 			
 			$dt = $md->getIpExp($data["painting"]["MAT_IP_CODE"]);
 			if($dt){
@@ -441,6 +444,7 @@ class Worker extends Controller
         }else{
             $data["mch"] = $this->request->getPost("mch");
             $data["gt_ip"] = $model->getGtip($MAT_IP_CODE)->getRow();
+            $data["tr_code"] = $tr_code;
             $dt = $md->getIpExp($MAT_IP_CODE);
             if($dt){
                 $data["AG_time"] = $dt['Exp_Time'];
@@ -449,7 +453,6 @@ class Worker extends Controller
             }
             $data["title"] = "Input Amount GT";
             echo view("C_U/input_amount", $data);
-            //print_r($data);
         }
     }
 
@@ -490,6 +493,7 @@ class Worker extends Controller
                         "Count_Printed" 		=> $this->request->getPost("Count_Printed"),
                         "Park" 					=> $slot,
 					    "Re" 					=> $this->request->getPost("id"),
+                        "tr_code" 			    => $this->request->getPost("tr_code"),
                     ];
                     $model->savePrint($data);
 
@@ -539,6 +543,7 @@ class Worker extends Controller
                         "CURE_TIME" 			=> $cenvertedTime,
                         "Count_Printed" 		=> $this->request->getPost("Count_Printed"),
                         "Park" 					=> $slot,
+                        "tr_code" 			    => $this->request->getPost("tr_code"),
                     ];
                     $model->savePrint($data);
 
@@ -595,6 +600,7 @@ class Worker extends Controller
 					"CURE_TIME" 			=> $cenvertedTime,
 					"Count_Printed" 		=> $this->request->getPost("Count_Printed"),
 					"Park" 					=> $slot,
+					"tr_code" 			    => $this->request->getPost("tr_code"),
 				];
 				$model->savePrint($data);
 
@@ -661,6 +667,7 @@ class Worker extends Controller
 					"Count_Printed" 		=> $this->request->getPost("Count_Printed"),
 					"Park" 					=> $slot,
 					"M_id" 					=> $this->request->getPost("id"),
+					"tr_code" 			    => $this->request->getPost("tr_code"),
 				];
 				$model->savePrint($data_B);
 
