@@ -13,10 +13,10 @@
 	$tr_type = substr($s_keyword, 0, 1);
 	$tr_num = intval(substr($s_keyword, 1));
 
-	$qdet = "SELECT d.id, d.tr_cat, d.tr_desc, s.TR_STATUS, s.TR_LOC
+	$qdet = "SELECT d.id, d.tr_cat, s.TR_NUM, d.tr_desc, s.TR_STATUS, s.TR_LOC
 			 FROM tr_status s
 			 INNER JOIN tr_det d ON d.id = s.TR_ID
-			 WHERE s.TR_NUM = ? AND d.tr_type = ?";
+			 WHERE s.TR_NUM = ? AND d.tr_cat = ?";
 	$st = $db1->prepare($qdet);
 	if (!$st) {
 		echo '';
