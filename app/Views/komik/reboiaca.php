@@ -86,8 +86,10 @@
                         $Date2 = $date->format('d/m/Y H.i');
                     ?>
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Expired AFTER : <?= $Date2;?></p>
+                    <br>
+                    <br>
                     <p style="font-size: 300%; color: #000; margin-bottom: 0px; text-align:center;">TROLLEY NUMBER</p>
-                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px; text-align:center;"><?= isset($komik['tr_code']) ? $komik['tr_code'] : '';?></p>
+                    <p style="font-size:600%; color: #000; font-weight:bold; margin-bottom: 0px; text-align:center;"><?= isset($komik['tr_code']) ? $komik['tr_code'] : '';?></p>
                 </div>
             </div>
         </div>
