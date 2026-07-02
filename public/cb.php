@@ -34,12 +34,12 @@ include 'conn.php';
 						<div class="card rounded-pill shadow-sm">
 							<div class="card-header py-1 <?= $blink?>" style="background-color: #dc3545; padding-left: 0px;"></div>
 							<div class="card-body <?= $blink?>" style="background-color: #dc3545; padding-left: 30px;padding-right: 30px;">
-								<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row['slot'];?><?= (!empty($row['tr_code'])) ? ' / '.$row['tr_code'] : '';?></h1>
+								<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row['slot'];?> / <?= isset($row['tr_code']) ? $row['tr_code'] : '';?></h1>
 								<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 									<li><?= $row['MAT_IP_CODE'];?></li>
 								</ul>
 								<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 100%;">
-									<li><?= $row['Amount'];?><?= ($row['Re'] && $row['Re'] != '0') ? ' / RE' : '';?></li>
+									<li><?= $row['Amount'];?><?= (!empty($row['Re']) && $row['Re'] != '0') ? ' / RE' : '';?></li>
 								</ul>
 								<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 150%;">
 									<li><?= $timeCure;?></li>
@@ -56,12 +56,12 @@ include 'conn.php';
 						<div class="card rounded-pill shadow-sm">
 							<div class="card-header py-1 <?= $blink?>" style="background-color: #c617ff; padding-left: 0px;"></div>
 							<div class="card-body <?= $blink?>" style="background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
-								<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row['slot'];?><?= (!empty($row['tr_code'])) ? ' / '.$row['tr_code'] : '';?></h1>
+								<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row['slot'];?> / <?= isset($row['tr_code']) ? $row['tr_code'] : '';?></h1>
 								<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 									<li><?= $row['MAT_IP_CODE'];?></li>
 								</ul>
 								<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 100%;">
-									<li><?= $row['Amount'];?><?= ($row['Re'] && $row['Re'] != '0') ? ' / RE' : '';?></li>
+									<li><?= $row['Amount'];?><?= (!empty($row['Re']) && $row['Re'] != '0') ? ' / RE' : '';?></li>
 								</ul>
 								<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 150%;">
 									<li><?= $timeCure;?></li>
@@ -78,12 +78,12 @@ include 'conn.php';
 						<div class="card rounded-pill shadow-sm">
 							<div class="card-header py-1 <?= $blink?>" style="background-color: #ffc107; padding-left: 0px;"></div>
 							<div class="card-body <?= $blink?>" style="background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
-								<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row['slot'];?><?= (!empty($row['tr_code'])) ? ' / '.$row['tr_code'] : '';?></h1>
+								<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row['slot'];?> / <?= isset($row['tr_code']) ? $row['tr_code'] : '';?></h1>
 								<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 									<li><?= $row['MAT_IP_CODE'];?></li>
 								</ul>
 								<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 100%;">
-									<li><?= $row['Amount'];?><?= ($row['Re'] && $row['Re'] != '0') ? ' / RE' : '';?></li>
+									<li><?= $row['Amount'];?><?= (!empty($row['Re']) && $row['Re'] != '0') ? ' / RE' : '';?></li>
 								</ul>
 								<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 150%;">
 									<li><?= $timeCure;?></li>
@@ -115,12 +115,12 @@ include 'conn.php';
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #dc3545; padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #dc3545; padding-left: 30px; padding-right: 30px;">
-										<h1 class="card-title pricing-card-title" style="font-size: 150%;padding-left: 0px;"><?= $row1['slot'];?><?= (!empty($row['tr_code'])) ? ' / '.$row['tr_code'] : '';?></h1>
+										<h1 class="card-title pricing-card-title" style="font-size: 150%;padding-left: 0px;"><?= $row1['slot'];?> / <?= isset($row['tr_code']) ? $row['tr_code'] : '';?></h1>
 										<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 											<li><?= $row['MAT_IP_CODE'];?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 100%;">
-											<li><?= $row['Amount'];?><?= ($row['Re'] && $row['Re'] != '0') ? ' / RE' : '';?></li>
+											<li><?= $row['Amount'];?><?= (!empty($row['Re']) && $row['Re'] != '0') ? ' / RE' : '';?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 150%;">
 											<li><?= $timeCure;?></li>
@@ -136,12 +136,12 @@ include 'conn.php';
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #c617ff; padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
-										<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= (!empty($row['tr_code'])) ? ' / '.$row['tr_code'] : '';?></h1>
+										<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 										<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 											<li><?= $row['MAT_IP_CODE'];?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 100%;">
-											<li><?= $row['Amount'];?><?= ($row['Re'] && $row['Re'] != '0') ? ' / RE' : '';?></li>
+											<li><?= $row['Amount'];?><?= (!empty($row['Re']) && $row['Re'] != '0') ? ' / RE' : '';?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 150%;">
 											<li><?= $timeCure;?></li>
@@ -157,12 +157,12 @@ include 'conn.php';
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #c617ff; padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
-										<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= (!empty($row['tr_code'])) ? ' / '.$row['tr_code'] : '';?></h1>
+										<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 										<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 											<li><?= $row['MAT_IP_CODE'];?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 100%;">
-											<li><?= $row['Amount'];?><?= ($row['Re'] && $row['Re'] != '0') ? ' / RE' : '';?></li>
+											<li><?= $row['Amount'];?><?= (!empty($row['Re']) && $row['Re'] != '0') ? ' / RE' : '';?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px;font-size: 150%;">
 											<li><?= $timeCure;?></li>
@@ -178,12 +178,12 @@ include 'conn.php';
 								<div class="card rounded-pill shadow-sm">
 									<div class="card-header py-1" style="background-color: #ffc107; padding-left: 0px;"></div>
 									<div class="card-body" style="background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
-										<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?></h1>
+										<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 										<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 											<li><?= $row['MAT_IP_CODE'];?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px; font-size: 100%;">
-											<li><?= $row['Amount'];?></li>
+											<li><?= $row['Amount'];?><?= (!empty($row['Re']) && $row['Re'] != '0') ? ' / RE' : '';?></li>
 										</ul>
 										<ul class="list-unstyled" style="margin-bottom: 0px; font-size: 150%;">
 											<li><?= $timeCure;?></li>
