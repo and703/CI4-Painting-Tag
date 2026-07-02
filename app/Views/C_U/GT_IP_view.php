@@ -42,12 +42,14 @@
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                         <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                     </div>
-                    <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT GT IPCODE</h4>
                     <div class="col-12">
                         <form action="/worker/get_ip" method="post">
+                            <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT GT IPCODE</h4>
                             <input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" id="MAT_IP_CODE" name="MAT_IP_CODE" placeholder="MAT_IP_CODE" autofocus required autocomplete="off" maxlength="5">
                             <input type="hidden" name="id" id="id" value="-">
-                            <input style="text-align:center; font-weight:bold; width:20%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autocomplete="off" maxlength="5">
+                            <BR>
+                            <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT TROLLEY CODE</h4>
+                            <input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:20%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">
                             <div class="container1"></div>
                         
                             <div class="tr_data"></div>

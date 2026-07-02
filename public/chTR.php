@@ -14,9 +14,15 @@
 	$tr_num = intval(substr($s_keyword, 1));
 
 	$qdet = "SELECT d.id, d.tr_cat, s.TR_NUM, d.tr_desc, s.TR_STATUS, s.TR_LOC
+<<<<<<< Updated upstream
 			 FROM tr_status s
 			 INNER JOIN tr_det d ON d.id = s.TR_ID
 			 WHERE s.TR_NUM = ? AND d.tr_cat = ?";
+=======
+			FROM tr_status s
+			INNER JOIN tr_det d ON d.id = s.TR_ID
+			WHERE s.TR_NUM = ? AND d.tr_cat = ?";
+>>>>>>> Stashed changes
 	$st = $db1->prepare($qdet);
 	if (!$st) {
 		echo '';
