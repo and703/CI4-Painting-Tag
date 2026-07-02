@@ -19,26 +19,26 @@
         <div class="row" align="left">
             <div class="col-md-12">
                 <div class="text-center">
-                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= $komik['MAT_DESC'];?></p>
-                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= $komik['MAT_IP_CODE'];?>(<?= $komik2['Amount'];?> Pcs) <?= $komik['MCH'];?></p>
+                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= isset($komik['MAT_DESC']) ? $komik['MAT_DESC'] : '';?></p>
+                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= isset($komik['MAT_IP_CODE']) ? $komik['MAT_IP_CODE'] : '';?>(<?= isset($komik2['Amount']) ? $komik2['Amount'] : '';?> Pcs) <?= isset($komik['MCH']) ? $komik['MCH'] : '';?></p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="text-left">
-                    <form id="reprint" action="/komik/update2/<?= $komik['id']; ?>" method="post" enctype="multipart/form-data">
+                    <form id="reprint" action="/komik/update2/<?= isset($komik['id']) ? $komik['id'] : ''; ?>" method="post" enctype="multipart/form-data">
                     <?php
-                        $count = $komik['Count_Printed']+1;
+                        $count = (isset($komik['Count_Printed']) ? $komik['Count_Printed'] : 0)+1;
                     ?>
                         <input type="hidden" name="<?= csrf_token() ?>" value="<?= csrf_hash() ?>">
                         <input type="hidden" name="Count_Printed" value="<?= $count; ?>">
-                        <input type="hidden" name="mch" value="<?= $komik['On_Insert']; ?>">
+                        <input type="hidden" name="mch" value="<?= isset($komik['On_Insert']) ? $komik['On_Insert'] : ''; ?>">
                         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;" tabindex="-1" />
                     </form>
                     <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px; text-decoration: underline;">OUTSIDE</p>
-                    <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $komik['On_Insert'];?></p>
-                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['WM_NAME_WM_SURNAME'];?></p>
-                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik['WM_GROUP'];?></p>
-                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik['WM_SHIFT'];?></p>
+                    <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= isset($komik['On_Insert']) ? $komik['On_Insert'] : '';?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= isset($komik['WM_NAME_WM_SURNAME']) ? $komik['WM_NAME_WM_SURNAME'] : '';?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= isset($komik['WM_GROUP']) ? $komik['WM_GROUP'] : '';?></p>
+                    <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= isset($komik['WM_SHIFT']) ? $komik['WM_SHIFT'] : '';?></p>
                 </div>
             </div>
             <div class="col-md-8">
@@ -80,10 +80,10 @@
             </div>
             <div class="col-md-12">
                 <div class="text-center">
-                    <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">CURE AFTER : <?= $komik['CURE_TIME'];?></p>
+                    <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">CURE AFTER : <?= isset($komik['CURE_TIME']) ? $komik['CURE_TIME'] : '';?></p>
                     <?php
                         date_default_timezone_set("Asia/Bangkok");
-                        $Date1 = $komik['On_Insert'];
+                        $Date1 = isset($komik['On_Insert']) ? $komik['On_Insert'] : '';
                         $text1 = str_replace('/', '-', $Date1);
                         $text2 = str_replace('.', ':', $text1);
                         $date = new DateTime($text2);
@@ -117,8 +117,8 @@
   }
 
   // --- Values from PHP
-  const onInsertRaw = "<?= $komik['On_Insert'];?>"; // "27/08/2025 19.03"
-  const cureTimeRaw = "<?= $komik['CURE_TIME'];?>"; // "27/08/2025 23.30"
+  const onInsertRaw = "<?= isset($komik['On_Insert']) ? $komik['On_Insert'] : '';?>";
+  const cureTimeRaw = "<?= isset($komik['CURE_TIME']) ? $komik['CURE_TIME'] : '';?>";
 
   const onInsertDT = parseDMY_HM(onInsertRaw);
   const cureDT     = parseDMY_HM(cureTimeRaw);
