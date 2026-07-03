@@ -167,7 +167,7 @@
                     var totalNormal = 0, totalRe = 0;
                     for (var i = 0; i < pageData.length; i++) {
                         var d = pageData[i];
-                        if (d.RE == 0 || d.RE === '' || d.RE === null) {
+                        if (d.RE == null || d.RE == 0) {
                             totalNormal += intVal(d.AMOUNT);
                         } else {
                             totalRe += intVal(d.JUMLAH_RE || 0);
