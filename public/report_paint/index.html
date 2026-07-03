@@ -174,8 +174,9 @@
                         }
                     }
 
-                    $(api.column(2).footer()).html(totalNormal);
-                    $(api.column(6).footer()).html(totalRe);
+                    $(api.column(2).footer()).html(totalNormal + ' (Normal)');
+                    $(api.column(3).footer()).html(totalRe + ' (RE)');
+                    $(api.column(4).footer()).html((totalNormal - totalRe) + ' (Total)');
                 },
                 'columns': [
                     { data: 'MCH' },
