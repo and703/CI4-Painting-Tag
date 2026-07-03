@@ -153,10 +153,9 @@
                     }
                 },
                 'footerCallback': function(row, data, start, end, display) {
-                    var api = this.api(),
-                        data;
+                    var api = this.api();
+                    var data;
 
-                    // Remove the formatting to get integer data for summation
                     var intVal = function(i) {
                         return typeof i === 'string' ?
                             i.replace(/[\,]/g, '') * 1 :
@@ -164,28 +163,19 @@
                             i : 0;
                     };
 
-                    // Total over all pages
-                    total = api
-                        .column(api.colReorder.transpose(4))
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
+                    // Total over this page: AMOUNT if RE==0, JUMLAH_RE if RE!=0
+                    var pageData = api.rows({page: 'current'}).data();
+                    var pageTotal = 0;
+                    for (var i = 0; i < pageData.length; i++) {
+                        var d = pageData[i];
+                        if (d.RE == 0 || d.RE === '' || d.RE === null) {
+                            pageTotal += intVal(d.AMOUNT);
+                        } else {
+                            pageTotal += intVal(d.JUMLAH_RE || 0);
+                        }
+                    }
 
-                    // Total over this page
-                    pageTotal = api
-                        .column(api.colReorder.transpose(3), {
-                            page: 'current'
-                        })
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
-                    // Update footer
-                    $(api.column(api.colReorder.transpose(3)).footer()).html(
-                        + pageTotal + '   Total'
-                    );
+                    $(api.column(2).footer()).html(pageTotal + '   Total');
                 },
                 'columns': [
                     { data: 'MCH' },
@@ -199,6 +189,7 @@
                     { data: 'GROUP_PAINT' },
                     { data: 'SHIFT' },
                     { data: 'RE' },
+                    { data: 'JUMLAH_RE', visible: false },
                 ]
             });
 

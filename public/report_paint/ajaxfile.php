@@ -57,7 +57,7 @@ $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
 
 ## Fetch records
-$empQuery = "select * from v_tbl_allprint WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
+$empQuery = "select v.*, (SELECT p_re.Amount FROM painting p_re WHERE p_re.id = v.RE LIMIT 1) as JUMLAH_RE from v_tbl_allprint v WHERE 1 ".$searchQuery." order by ".$columnName." ".$columnSortOrder." limit ".$row.",".$rowperpage;
 $empRecords = mysqli_query($con, $empQuery);
 $data = array();
 
@@ -74,6 +74,7 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
     		"GROUP_PAINT"=>$row['GROUP_PAINT'],
     		"SHIFT"=>$row['SHIFT'],
     		"RE"=>$row['RE'],
+    		"JUMLAH_RE"=>$row['JUMLAH_RE'],
     	);
 }
 
