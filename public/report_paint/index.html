@@ -170,7 +170,7 @@
                         if (d.RE == null || d.RE == 0) {
                             totalNormal += intVal(d.AMOUNT);
                         } else {
-                            totalRe += intVal(d.JUMLAH_RE || 0);
+                            totalRe += intVal(d.AMOUNT);
                         }
                     }
 
@@ -189,7 +189,6 @@
                     { data: 'GROUP_PAINT' },
                     { data: 'SHIFT' },
                     { data: 'RE' },
-                    { data: 'JUMLAH_RE', visible: false },
                 ]
             });
 
