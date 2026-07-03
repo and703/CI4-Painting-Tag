@@ -68,10 +68,12 @@ while ($row = mysqli_fetch_assoc($empRecords)) {
     		"MAT_DESC"=>$row['MAT_DESC'],
     		"AMOUNT"=>$row['AMOUNT'],
     		"SLOT"=>$row['SLOT'],
+    		"TROLLEY"=>$row['TROLLEY'],
     		"PRINT_OUT"=>$row['PRINT_OUT'],
     		"USERNAME"=>$row['USERNAME'],
     		"GROUP_PAINT"=>$row['GROUP_PAINT'],
     		"SHIFT"=>$row['SHIFT'],
+    		"RE"=>$row['RE'],
     	);
 }
 

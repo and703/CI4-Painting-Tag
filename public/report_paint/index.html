@@ -1,81 +1,98 @@
 <!doctype html>
 <html>
     <head>
-        <title>Data Report Painting</title>
-
-        <link rel="stylesheet" type="text/css" href="jquery-ui.min.css"/>
-        <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
-        <link rel="stylesheet" href="../template/datatables/bootstrap.min.css">
-        <script type="text/javascript" src="DataTables/datatables.min.js"></script>
-        <script type="text/javascript" src="jquery-ui.min.js"></script>
-        
+    <title>Data Report Painting Print</title>
+    <link rel="stylesheet" type="text/css" href="../report_paint/jquery-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../report_paint/DataTables/datatables.min.css"/>
+    <link rel="stylesheet" href="../template/datatables/bootstrap.min.css">
+    <link rel="stylesheet" href="../template/plugins/fontawesome-free/css/all.min.css">
+    <script type="text/javascript" src="../report_paint/DataTables/datatables.min.js"></script>
+    <script type="text/javascript" src="../report_paint/jquery-ui.min.js"></script>
+    <style>
+        .container { margin-top: 30px; }
+        .card { border: 1px solid #ddd; border-radius: 4px; }
+        .card-header { background: #f5f5f5; padding: 12px 15px; font-weight: bold; font-size: 16px; border-bottom: 1px solid #ddd; }
+        .card-body { padding: 15px; }
+        .filter-row { margin-bottom: 15px; }
+        .filter-row td { padding: 5px; }
+        .filter-row label { margin-right: 5px; font-weight: 600; }
+        hr { margin: 15px 0; border: 0; border-top: 1px solid #ddd; }
+    </style>
     </head>
     <body >
-
-        <div >
-            <!-- Date Filter -->
-            <table>
-                <tr>
-                    <td>
-                        <input type='text' readonly id='search_fromdate' class="datepicker" placeholder='From date'>
-                    </td>
-                    <td>
-                        <input type='text' readonly id='search_todate' class="datepicker" placeholder='To date'>
-                    </td>
-                    <td>
-                        <input type='text' id='Shift' placeholder='Shift'>
-                    </td>
-                    <td>
-                        <input type='text' id='MCH' placeholder='Machine'>
-                    </td>
-                    <td>
-                        <input type='text' id='Park' placeholder='Park'>
-                    </td>
-                    <td>
-                        <input type='button' id="btn_search" value="Filter">
-                    </td>
-                </tr>
-            </table>
-            
-            <!-- Table -->
-            <table id='empTable' class='display dataTable'>
-                <thead>
-                    <tr rowspan="2" style="border: 1px;">
-                        <td colspan="2">EVOLUZIONE TYRES</td>
-                        <td colspan="5">FORM REPORT BOIACCA</td>
-                        <td colspan="2">
-                            Doc. No.        : CR-F-024-0820 <br>
-                            Rev.            : 00
+    <div class="container">
+        <div class="card">
+            <div class="card-header">GT Painting RePrint Report</div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td>
+                            <input type='text' readonly id='search_fromdate' class="datepicker" placeholder='From date'>
+                        </td>
+                        <td>
+                            <input type='text' readonly id='search_todate' class="datepicker" placeholder='To date'>
+                        </td>
+                        <td>
+                            <input type='text' id='Shift' placeholder='Shift'>
+                        </td>
+                        <td>
+                            <input type='text' id='MCH' placeholder='Machine'>
+                        </td>
+                        <td>
+                            <input type='text' id='Park' placeholder='Park'>
+                        </td>
+                        <td>
+                            <input type='button' id="btn_search" value="Filter">
                         </td>
                     </tr>
-                    <tr>
-                        <th>Machine</th>
-                        <th>IP Code</th>
-                        <th>Material Deskripsi</th>
-                        <th>Jumlah</th>
-                        <th>Slot</th>
-                        <th>Print Out</th>
-                        <th>Operator</th>
-                        <th>Group</th>
-                        <th>Shift</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Jumlah</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tfoot>
+                </table>
                 
-            </table>
+                <!-- Table -->
+                <table id='empTable' class='display dataTable'>
+                    <thead>
+                        <tr rowspan="2" style="border: 1px;">
+                            <td colspan="2">EVOLUZIONE TYRES</td>
+                            <td colspan="7">FORM REPORT BOIACCA</td>
+                            <td colspan="2">
+                                Doc. No.        : CR-F-024-0820 <br>
+                                Rev.            : 00
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Machine</th>
+                            <th>IP Code</th>
+                            <th>Material Deskripsi</th>
+                            <th>Jumlah</th>
+                            <th>Slot</th>
+                            <th>Trolley</th>
+                            <th>Print Out</th>
+                            <th>Operator</th>
+                            <th>Group</th>
+                            <th>Shift</th>
+                            <th>REBoiacca</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Jumlah</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                    
+                </table>
+            </div>
         </div>
+    </div>
+</div>
         
         <!-- Script -->
         <script>
@@ -176,10 +193,12 @@
                     { data: 'MAT_DESC' },
                     { data: 'AMOUNT' },
                     { data: 'SLOT' },
+                    { data: 'TROLLEY' },
                     { data: 'PRINT_OUT' },
                     { data: 'USERNAME' },
                     { data: 'GROUP_PAINT' },
                     { data: 'SHIFT' },
+                    { data: 'RE' },
                 ]
             });
 

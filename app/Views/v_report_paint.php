@@ -111,10 +111,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td>Material Deskripsi</td>
 												<td>Jumlah</td>
 												<td>Slot</td>
+												<td>Trolley</td>
 												<td>Print Out</td>
 												<td>Operator</td>
 												<td>Group</td>
 												<td>Shift</td>
+												<td>Re</td>
 
 											</tr>
 										</thead>
@@ -129,6 +131,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 												<td></td>
 												<td></td>
 												<td>Jumlah</td>
+												<td></td>
+												<td></td>
 												<td></td>
 												<td></td>
 												<td></td>

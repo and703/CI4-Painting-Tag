@@ -20,7 +20,7 @@ $searchByTodate = mysqli_real_escape_string($con, $_POST['searchByTodate']??'');
 $searchShift = mysqli_real_escape_string($con, $_POST['searchShift']??'');
 
 // Map DataTable column data names to actual DB column names
-$dbCols = ['WM_CODE','MCH','MAT_IP_CODE','MAT_DESC','Amount','Park','On_Insert','CURE_TIME','Count_Printed','WM_NAME_WM_SURNAME','WM_GROUP','WM_SHIFT','Re'];
+$dbCols = ['WM_CODE','MCH','MAT_IP_CODE','MAT_DESC','Amount','Park','On_Insert','CURE_TIME','WM_NAME_WM_SURNAME','WM_GROUP','WM_SHIFT','Re','tr_code'];
 $columnName = isset($dbCols[$columnIndex]) ? $dbCols[$columnIndex] : 'id';
 
 $searchQuery = " ";
@@ -67,9 +67,9 @@ if ($empRecords) {
             "MAT_DESC" => $row['MAT_DESC']??'',
             "AMOUNT" => $row['Amount']??$row['AMOUNT']??'',
             "SLOT" => $row['Park']??$row['SLOT']??'',
+            "TROLLEY" => $row['tr_code']??$row['TROLLEY']??'',
             "PRINT_OUT" => $row['On_Insert']??$row['PRINT_OUT']??'',
             "CURE_TIME" => $row['CURE_TIME']??$row['CURING_TIME']??'',
-            "COUNT_PRINTED" => $row['Count_Printed']??$row['COUNT_PRINTED']??'',
             "USERNAME" => $row['WM_NAME_WM_SURNAME']??$row['USERNAME']??'',
             "GROUP_PAINT" => $row['WM_GROUP']??$row['GROUP_PAINT']??'',
             "SHIFT" => $row['WM_SHIFT']??$row['SHIFT']??'',

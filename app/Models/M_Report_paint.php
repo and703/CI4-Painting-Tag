@@ -76,7 +76,7 @@ class M_Report_paint extends Model
 		}
 		
 
-        $column_order = array('','MCH','IP_CODE','','AMOUNT','SLOT','PRINT_OUT','','','GT_STATUS','','','',''); //field yang ada di table
+        $column_order = array('','MCH','IP_CODE','','AMOUNT','SLOT','TROLLEY', 'PRINT_OUT','','','GT_STATUS','','','',''); //field yang ada di table
         $column_search = array('IP_CODE','SLOT');
         //$order = array('PRINT_OUT','ASC');
 

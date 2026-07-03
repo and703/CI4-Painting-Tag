@@ -46,11 +46,13 @@ class Report_paint extends BaseController
 			$matdesc=isset($v->MAT_DESC)?($v->MAT_DESC):'';
 			$jumlah=isset($v->AMOUNT)?($v->AMOUNT):'';
 			$parkir=isset($v->SLOT)?($v->SLOT):'';
+			$parkir=isset($v->TROLLEY)?($v->TROLLEY):'';
 			$printout=isset($v->PRINT_OUT)?($v->PRINT_OUT):'';
 		
 			$operator=isset($v->USERNAME)?($v->USERNAME):'';
 			$group=isset($v->GROUP_PAINT)?($v->GROUP_PAINT):'';
 			$shift=isset($v->SHIFT)?($v->SHIFT):'';
+			$shift=isset($v->RE)?($v->RE):'';
 		
 			$row = array();
 			$row[] = $no++;	
@@ -60,11 +62,13 @@ class Report_paint extends BaseController
 			$row[] = $matdesc;
 			$row[] = $jumlah;
 			$row[] = $parkir;
+			$row[] = $trolley;
 			$row[] = $printout;
 		
 			$row[] = $operator;
 			$row[] = $group;
-			$row[] = $shift;	
+			$row[] = $shift;
+			$row[] = $re;
 							
 			//$row[] = "<span class='size' >  ".$profilename."</span>";
 			//add html for action
