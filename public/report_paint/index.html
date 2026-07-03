@@ -75,14 +75,14 @@
                     <tfoot>
                         <tr>
                             <td></td>
-                            <td></td>
-                            <td>Jumlah</td>
-                            <td></td>
+                            <td>Jumlah </td>
                             <td></td>
                             <td></td>
+                            <td>Jumlah RE </td>
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td>Jumlah Total </td>
                             <td></td>
                             <td></td>
                         </tr>
@@ -175,7 +175,7 @@
                     }
 
                     $(api.column(2).footer()).html(totalNormal);
-                    $(api.column(3).footer()).html(totalRe);
+                    $(api.column(6).footer()).html(totalRe);
                 },
                 'columns': [
                     { data: 'MCH' },
