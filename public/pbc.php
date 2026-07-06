@@ -18,7 +18,7 @@ while($row1 = $result1->fetch_assoc()) {
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #dc3545; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #dc3545; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #dc3545; padding-left: 30px;padding-right: 30px;">
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 150%;">
 										<li><?= $row['MAT_IP_CODE'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></li>
 									</ul>
@@ -38,7 +38,7 @@ while($row1 = $result1->fetch_assoc()) {
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #c617ff; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 150%;">
 										<li><?= $row['MAT_IP_CODE'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></li>
 									</ul>
@@ -58,7 +58,7 @@ while($row1 = $result1->fetch_assoc()) {
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #ffc107; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 150%;">
 										<li><?= $row['MAT_IP_CODE'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></li>
 									</ul>

@@ -20,7 +20,7 @@ include 'conn.php';
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #dc3545; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #dc3545; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #dc3545; padding-left: 30px;padding-right: 30px;">
 									<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 										<li><?= $row['MAT_IP_CODE'];?></li>
@@ -41,7 +41,7 @@ include 'conn.php';
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #c617ff; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
 									<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 										<li><?= $row['MAT_IP_CODE'];?></li>
@@ -62,7 +62,7 @@ include 'conn.php';
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #ffc107; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
 									<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 										<li><?= $row['MAT_IP_CODE'];?></li>
@@ -96,7 +96,7 @@ include 'conn.php';
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #dc3545; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #dc3545; padding-left: 30px; padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #dc3545; padding-left: 30px; padding-right: 30px;">
 									<h1 class="card-title pricing-card-title" style="font-size: 150%;padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 										<li><?= $row['MAT_IP_CODE'];?></li>
@@ -117,7 +117,7 @@ include 'conn.php';
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #c617ff; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #c617ff; padding-left: 30px;padding-right: 30px;">
 									<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 										<li><?= $row['MAT_IP_CODE'];?></li>
@@ -138,7 +138,7 @@ include 'conn.php';
 						<div class="col" >
 							<div class="card rounded-pill shadow-sm">
 								<div class="card-header py-1" style="background-color: #ffc107; padding-left: 0px;"></div>
-								<div class="card-body" style="background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
+								<div class="card-body" style="white-space: nowrap; background-color: #ffc107; padding-left: 30px;padding-right: 30px;">
 									<h1 class="card-title pricing-card-title" style="font-size: 150%; padding-left: 0px;"><?= $row1['slot'];?><?= !empty($row['tr_code']) ? ' / ' . $row['tr_code'] : '';?></h1>
 									<ul class="list-unstyled" style="margin-bottom: 0px; font-weight:bold; font-size: 100%;">
 										<li><?= $row['MAT_IP_CODE'];?></li>
@@ -161,7 +161,7 @@ include 'conn.php';
 				<div class="col">
 					<div class="card rounded-pill shadow-sm">
 						<div class="card-header py-1" style="background-color: #34a11d;"></div>
-						<div class="card-body" style="background-color: #34a11d; padding-left: 30px; padding-right: 30px;">
+						<div class="card-body" style="white-space: nowrap; background-color: #34a11d; padding-left: 30px; padding-right: 30px;">
 							<h1 class="card-title pricing-card-title" style="font-size: 150%;"><?= $row1['slot'];?></h1>
 							<ul class="list-unstyled" style="margin-bottom: 92px;">
 								<li></li>
