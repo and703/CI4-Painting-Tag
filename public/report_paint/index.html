@@ -119,7 +119,7 @@
                         text: '<span class="fas fa-sync-alt"></span> Refresh',
                         className: "btn btn-light btn-sm",
                         action: function(e, dt, node, config) {
-                            reload_table();
+                            dt.ajax.reload();
                         }
                     },
                     {
