@@ -49,7 +49,7 @@
                             <input type="hidden" name="id" id="id" value="-">
                             <BR>
                             <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT TROLLEY CODE</h4>
-                            <input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:20%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">
+                            <input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:40%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">
                             <div class="container1"></div>
                         
                             <div class="tr_data"></div>
@@ -189,7 +189,7 @@
                     if (tr_code) {
                         tr_code.parentNode.removeChild(tr_code);
                     }
-                    $(wrapper).append('<input type="hidden" name="id" id="id" value="-"><input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:20%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">'); //add input box
+                    $(wrapper).append('<input type="hidden" name="id" id="id" value="-"><input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:40%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">'); //add input box
                     load_data(keyword);
                 }
 			});
