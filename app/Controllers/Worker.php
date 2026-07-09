@@ -484,7 +484,7 @@ class Worker extends Controller
                         "WM_GROUP" 				=> $session->get("GROUP"),
                         "WM_SHIFT" 				=> $session->get("SHIFT"),
                         "WM_NAME_WM_SURNAME" 	=> $WM_NAME_WM_SURNAME,
-					    "MCH" 					=> $this->request->getPost("mch1"),
+					    "MCH" 					=> $this->request->getPost("mch"),
                         "MAT_DESC" 				=> $this->request->getPost("MAT_DESC"),
                         "MAT_IP_CODE" 			=> $this->request->getPost("MAT_IP_CODE"),
                         "Amount" 				=> $this->request->getPost("Amount"),

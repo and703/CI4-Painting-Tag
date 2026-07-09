@@ -39,7 +39,8 @@
                 <div class="col-6">
                     <input type="hidden" name="id" value="<?= $painting['id'];?>">
                     <input type="hidden" name="Park" value="<?= $painting['Park'];?>">
-                    <input type="hidden" name="mch" value="A1_RE">
+                    <input type="hidden" name="tr_code" value="<?= $painting['tr_code'];?>">
+                    <input type="hidden" name="mch" value="A1">
                     <input type="hidden" name="mch1" value="<?= $painting['MCH'];?>">
                     <input type="hidden" name="MAT_DESC" value="<?= $painting['MAT_DESC'];?>">
                     <input type="hidden" name="MAT_IP_CODE" value="<?= $painting['MAT_IP_CODE'];?>">
@@ -61,6 +62,8 @@
                 <div class="col-6">
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">IP CODE</h4>
                     <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="MAT_IP_CODE" name="MAT_IP_CODE" value="<?= $painting['MAT_IP_CODE'];?>" disabled>
+                    <h5 class="card-title" style="font-size: 300%; color: #FFF017;">NO TROLLEY</h4>
+                    <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="-" name="tr_code" value="<?= $painting['tr_code'];?>" disabled>
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">MATERIAL DESCRIPTION</h4>
                     <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="MAT_DESC" name="MAT_DESC" value="<?= $painting['MAT_DESC'];?>" disabled>
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">DATE CREATE</h4>
@@ -73,7 +76,7 @@
             <div class="col-12" align="center">
                 <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                 <h5 class="card-title" style="font-size: 300%; color: #FFF017;">MACHINE A1 REBOIACCA</h4>
-                <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch1" autofocus required autocomplete="off" value="A1" disabled>
+                <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch" autofocus required autocomplete="off" value="A1" disabled>
                 <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                 <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT AMOUNT TYRE REBOIACCA</h4>
                 <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="Amount" name="Amount" autofocus required autocomplete="off" maxlength="2">

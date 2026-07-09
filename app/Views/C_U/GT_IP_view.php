@@ -158,7 +158,9 @@
                 var wrapper = $(".container1");
                 if(keyword === 'i'){
                     var element = document.getElementById("id"); // notice the change
+                    var tr_code = document.getElementById("tr_code"); // notice the change
                     element.parentNode.removeChild(element);
+                    tr_code.parentNode.removeChild(tr_code);
                     $(wrapper).append('<input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="id" id="id" placeholder="INPUT ID" required autofocus autocomplete="off">'); //add input box
                     $('#id').focus();
                     $('#id').keyup(function(){
@@ -167,7 +169,9 @@
                     });
                 }else if(keyword === 'r'){
                     var element = document.getElementById("id"); // notice the change
+                    var tr_code = document.getElementById("tr_code"); // notice the change
                     element.parentNode.removeChild(element);
+                    tr_code.parentNode.removeChild(tr_code);
                     $(wrapper).append('<input style="text-align:center; font-weight:bold; width:50%" type="text" class="form-control" name="id" id="id" placeholder="INPUT ID" required autofocus autocomplete="off">'); //add input box
                     $('#id').focus();
                     $('#id').keyup(function(){
@@ -176,9 +180,11 @@
                     });
                 }else{
                     var element = document.getElementById("id"); // notice the change
+                    var tr_code = document.getElementById("tr_code"); // notice the change
                     element.parentNode.removeChild(element);
-                    $(wrapper).append('<input type="hidden" name="id" id="id" value="-">'); //add input box
-				    load_data(keyword);
+                    tr_code.parentNode.removeChild(tr_code);
+                    $(wrapper).append('<input type="hidden" name="id" id="id" value="-"><input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:20%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">'); //add input box
+                    load_data(keyword);
                 }
 			});
 			$('#tr_code').keyup(function(){
