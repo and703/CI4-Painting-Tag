@@ -46,7 +46,7 @@
                     <br>
                     <div id="qrcode"></div>
 					<div class="text-left">
-						<p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['id'];?></p>
+						<p style="font-size: 300%; color: #000;margin-bottom: 0px;"><?= $komik['id'];?></p>
 					</div>
                     <?php
                         $Qr = $komik['MAT_IP_CODE'].','.$komik['Amount'].','.$komik['On_Insert'].','.$komik['WM_CODE'].','.$komik['id'];

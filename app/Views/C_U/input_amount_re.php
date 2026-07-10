@@ -49,6 +49,7 @@
                     <input type="hidden" name="Count_Printed" value="1">
                     <input type="hidden" name="AG_time" value="<?= $AG_time?>">
                     <input type="hidden" name="tr_code" value="<?= isset($tr_code) ? $tr_code : '';?>">
+                    <input type="hidden" name="Re" value="<?= isset($Re) ? $Re : '';?>">
                     
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">OP NAME</h4>
                     <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="WM_NAME_WM_SURNAME" name="WM_NAME_WM_SURNAME" value="<?= $painting['WM_NAME_WM_SURNAME'];?>" disabled>
@@ -58,6 +59,8 @@
                     <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="WM_SHIFT" name="WM_SHIFT" value="<?= $painting['WM_SHIFT'];?>" disabled>
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">AMOUNT</h4>
                     <input style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="Amount1" name="Amount1" value="<?= $painting['Amount'];?>" disabled>
+                    <h5 class="card-title" style="font-size: 300%; color: #FFF017;">MACHINE A1 REBOIACCA</h4>
+                    <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:80%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch" autofocus required autocomplete="off" value="A1" disabled>
                 </div>
                 <div class="col-6">
                     <h5 class="card-title" style="font-size: 300%; color: #FFF017;">IP CODE</h4>
@@ -74,9 +77,6 @@
                 </div>
             </div>
             <div class="col-12" align="center">
-                <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
-                <h5 class="card-title" style="font-size: 300%; color: #FFF017;">MACHINE A1 REBOIACCA</h4>
-                <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="MCH" name="mch" autofocus required autocomplete="off" value="A1" disabled>
                 <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                 <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT AMOUNT TYRE REBOIACCA</h4>
                 <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="Amount" name="Amount" autofocus required autocomplete="off" maxlength="2">

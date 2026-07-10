@@ -36,26 +36,28 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="text-left">
+            <div class="col-md-12">
+                <div class="text-center">
                     <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px; text-decoration: underline;">REBOIACCA</p>
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $komik['On_Insert'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['WM_NAME_WM_SURNAME'];?></p>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="text-left">
+            <div class="col-sm-6">
+                <div class="text-center">
+                    <br>
+                    <br>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik['WM_GROUP'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik['WM_SHIFT'];?></p>
                     <p style="font-size: 450%; font-weight:bold; color: #000;margin-bottom: 0px;"><?= $komik['Park'];?></p>
                 </div>
             </div>
-            <div class="col-sm-7">
-                <div class="text-center">
+            <div class="col-sm-6">
+                <div class="text-left">
                     <br>
                     <div id="qrcode2"></div>
 					<div class="text-left">
-						<p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['id'];?></p>
+						<p style="font-size: 300%; color: #000;margin-bottom: 0px;"><?= $komik['id'];?></p>
 					</div>
                     <?php
                         $Qr2 = $komik['MAT_IP_CODE'].','.$komik['Amount'].','.$komik['On_Insert'].','.$komik['WM_CODE'].','.$komik['id'];

@@ -431,6 +431,7 @@ class Worker extends Controller
             $data["painting"] 		= $md1->where("id", $id)->first();
 			$data["gt_ip"] 			= $model->getGtip($data["painting"]["MAT_IP_CODE"])->getRow();
 			$data["tr_code"]        = $tr_code;
+			$data["Re"]             = "RE";
 			
 			$dt = $md->getIpExp($data["painting"]["MAT_IP_CODE"]);
 			if($dt){
@@ -461,7 +462,7 @@ class Worker extends Controller
         $session = session();
         $md1 = new KomikModel();
         if(strncmp($this->request->getPost("mch"), "A", 1) === 0){
-            if($this->request->getPost("mch") == "A1_RE"){
+            if($this->request->getPost("Re") == "RE"){
                 $md2                            = new ParkModel();
                 if (($dt["park"] = $md2->where("id_paint", "0")->first())) {
                     $slot 						= $dt["park"]["slot"];
