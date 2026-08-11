@@ -36,6 +36,13 @@ class Worker extends Controller
         $data["title"] = "Input Nik";
         echo view("C_U/cure_mch", $data);
     }
+
+    public function test_mch_cure($ip)
+    {
+        $model = new Worker_model();
+        $data["mch_cure"] = $model->getMch_Cure($ip);
+        return $this->response->setJSON($data);
+    }
 	
 	public function api_jumlah(){
 		header("Access-Control-Allow-Origin: *");

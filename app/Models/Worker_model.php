@@ -52,6 +52,25 @@ class Worker_model extends Model
         return $query->getResultArray();
     }
 
+    public function getMch_Cure($ip)
+    {
+        $query = $this->pcs->query("SELECT
+                                        MCN_SIDE,
+                                        T.MCH_CODE
+                                    FROM
+                                        SCH_MACHINE_TOOL T,
+                                        MD_MATERIALS MA
+                                    WHERE
+                                        T.MCN_SIDE IN ('L','R')
+                                    AND T.MTO_END_DATE IS NULL
+                                    AND T.MAT_SAP_CODE=MA.MAT_SAP_CODE
+                                    AND T.MAT_VARIANT=MA.MAT_VARIANT
+                                    AND T.CNT_CODE=MA.CNT_CODE
+                                    AND PP_CODE ='V01'
+                                    AND MAT_CODE = '".$ip."'");
+        return $query->getResultArray();
+    }
+
     public function savePrint($data)
     {
         $query = $this->db1->table("painting")->insert($data);

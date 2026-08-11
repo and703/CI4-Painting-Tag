@@ -87,6 +87,7 @@ $routes->post('get_cure_mch', 'Worker::get_cure_mch');
 $routes->post('cure_conf', 'Worker::cure_conf');
 $routes->get('logout_CURE', 'Worker::logout_CURE');
 $routes->get('cure_mch', 'Worker::cure_mch');
+$routes->get('test_mch_cure/(:any)', 'Worker::test_mch_cure/$1');
 
 // Setting Routes
 $routes->get('users/userRoleAccess', 'Users::userRoleAccess');
