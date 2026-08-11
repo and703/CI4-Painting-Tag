@@ -501,6 +501,7 @@ class Worker extends Controller
                         "Park" 					=> $slot,
 					    "Re" 					=> $this->request->getPost("id"),
                         "tr_code" 			    => $this->request->getPost("tr_code"),
+                        "mch_cure" 			    => $model->getMch_Cure($this->request->getPost("MAT_IP_CODE")),
                     ];
                     $model->savePrint($data);
 
@@ -551,6 +552,7 @@ class Worker extends Controller
                         "Count_Printed" 		=> $this->request->getPost("Count_Printed"),
                         "Park" 					=> $slot,
                         "tr_code" 			    => $this->request->getPost("tr_code"),
+                        "mch_cure" 			    => $model->getMch_Cure($this->request->getPost("MAT_IP_CODE")),
                     ];
                     $model->savePrint($data);
 
@@ -608,6 +610,7 @@ class Worker extends Controller
 					"Count_Printed" 		=> $this->request->getPost("Count_Printed"),
 					"Park" 					=> $slot,
 					"tr_code" 			    => $this->request->getPost("tr_code"),
+                    "mch_cure" 			    => $model->getMch_Cure($this->request->getPost("MAT_IP_CODE")),
 				];
 				$model->savePrint($data);
 
@@ -675,6 +678,7 @@ class Worker extends Controller
 					"Park" 					=> $slot,
 					"M_id" 					=> $this->request->getPost("id"),
 					"tr_code" 			    => $this->request->getPost("tr_code"),
+                    "mch_cure" 			    => $model->getMch_Cure($this->request->getPost("MAT_IP_CODE")),
 				];
 				$model->savePrint($data_B);
 

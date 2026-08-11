@@ -30,6 +30,7 @@
                     </form>
                     <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= $komik['MAT_DESC'];?></p>
                     <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= $komik['MAT_IP_CODE'];?>(<?= $komik['Amount'];?> Pcs) <?= $komik['MCH'];?></p>
+                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">CURE MCH:<?= isset($komik['mch_cure']) ? $komik['mch_cure'] : '';?></p>
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $komik['On_Insert'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik['WM_NAME_WM_SURNAME'];?></p>
                 </div>
