@@ -68,7 +68,12 @@ class Worker_model extends Model
                                     AND T.CNT_CODE=MA.CNT_CODE
                                     AND PP_CODE ='V01'
                                     AND MAT_CODE = '".$ip."'");
-        return $query->getResultArray();
+        $rows = $query->getResultArray();
+        $combined = [];
+        foreach ($rows as $row) {
+            $combined[] = $row['MCH_CODE'] . '-' . $row['MCN_SIDE'];
+        }
+        return implode(', ', $combined);
     }
 
     public function savePrint($data)
