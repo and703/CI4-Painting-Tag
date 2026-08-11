@@ -40,8 +40,7 @@ class Worker extends Controller
     public function test_mch_cure($ip)
     {
         $model = new Worker_model();
-        $data["mch_cure"] = $model->getMch_Cure($ip);
-        return $this->response->setJSON($data);
+        return $this->response->setJSON($model->getMch_Cure($ip));
     }
 	
 	public function api_jumlah(){
