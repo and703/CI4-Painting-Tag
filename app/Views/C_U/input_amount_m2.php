@@ -72,6 +72,9 @@
             </div>
             <div class="col-12" align="center">
                 <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
+                <h5 class="card-title" style="font-size: 300%; color: #FFF017;">TROLLY NUMBER</h4>
+                <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="tr_code" name="tr_code" autofocus required autocomplete="off" value="<?= $painting['tr_code'];?>" >
+                <h5 class="card-title" style="font-size: 100%; color: #FFF;"><br></h4>
                 <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT AMOUNT</h4>
                 <input align="center" style="text-align:center; font-size: 300%; font-weight:bold; width:50%" type="text" class="form-control" id="valid-state" placeholder="Amount" name="Amount" autofocus required autocomplete="off" value="<?= $painting['Amount'];?>" maxlength="2">
             </div>

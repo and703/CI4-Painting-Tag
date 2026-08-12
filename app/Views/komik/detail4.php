@@ -16,16 +16,15 @@
   <div id="error">
     <script src="/js/qrcode.js"></script>
     <div class="error-page">
-        <div class="row" align="left">
+        <div class="row" align="center">
             <div class="col-md-12">
                 <div class="text-center">
                     <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= isset($komik['MAT_DESC']) ? $komik['MAT_DESC'] : '';?></p>
                     <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">IP:<?= isset($komik['MAT_IP_CODE']) ? $komik['MAT_IP_CODE'] : '';?>(<?= isset($komik2['Amount']) ? $komik2['Amount'] : '';?> Pcs) <?= isset($komik['MCH']) ? $komik['MCH'] : '';?></p>
-                    <p style="font-size: 400%; color: #000; font-weight:bold; margin-bottom: 0px;">CURE MCH:<?= isset($komik['mch_cure']) ? $komik['mch_cure'] : '';?></p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="text-left">
+                <div class="text-center">
                     <form id="reprint" action="/komik/update2/<?= isset($komik['id']) ? $komik['id'] : ''; ?>" method="post" enctype="multipart/form-data">
                     <?php
                         $count = (isset($komik['Count_Printed']) ? $komik['Count_Printed'] : 0)+1;
@@ -43,14 +42,14 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="text-left">
+                <div class="text-center">
                     <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px; text-decoration: underline;">INSIDE</p>
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Date Rel:<?= $komik2['On_Insert'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;"><?= $komik2['WM_NAME_WM_SURNAME'];?></p>
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="text-left">
+                <div class="text-center">
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;">GROUP: <?= $komik2['WM_GROUP'];?></p>
                     <p style="font-size: 250%; color: #000;margin-bottom: 0px;">SHIFT: <?= $komik2['WM_SHIFT'];?></p>
                     <p style="font-size: 450%; font-weight:bold; color: #000;margin-bottom: 0px;"><?= $komik2['Park'];?></p>
@@ -60,7 +59,7 @@
                 <div class="text-center">
                     <br>
                     <div id="qrcode2"></div>
-					<div class="text-left">
+					<div class="text-center">
 						<p style="font-size: 300%; color: #000;margin-bottom: 0px;"><?= $komik2['id'];?></p>
 					</div>
                     <?php
@@ -94,8 +93,11 @@
                     <p style="font-size: 250%; color: #000; font-weight:bold;margin-bottom: 0px;">Expired AFTER : <?= $Date2;?></p>
                     <br>
                     <br>
-                    <p style="font-size: 300%; color: #000; margin-bottom: 0px; text-align:center;">TROLLEY NUMBER</p>
-                    <p style="font-size:600%; color: #000; font-weight:bold; margin-bottom: 0px; text-align:center;"><?= isset($komik['tr_code']) ? $komik['tr_code'] : '';?></p>
+                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;">CURE MCH:</p>
+                    <p style="font-size: 300%; color: #000; font-weight:bold; margin-bottom: 0px;"><?= isset($komik['mch_cure']) ? $komik['mch_cure'] : '';?></p>
+                    <br>
+                    <p style="font-size: 250%; color: #000; margin-bottom: 0px; text-align:center;">TROLLEY NUMBER</p>
+                    <p style="font-size:400%; color: #000; font-weight:bold; margin-bottom: 0px; text-align:center;"><?= isset($komik['tr_code']) ? $komik['tr_code'] : '';?></p>
                 </div>
             </div>
         </div>
