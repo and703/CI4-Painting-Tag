@@ -10,6 +10,11 @@
 		exit;
 	}
 
+	if (!preg_match('/^[A-Z][0-9]{3}$/', $s_keyword)) {
+		echo '<h5 class="card-title" style="font-size: 300%; color: #dc3545;">Invalid Format: 1 Letter + 3 Digits</h4>';
+		exit;
+	}
+
 	$tr_type = substr($s_keyword, 0, 1);
 	$tr_num = intval(substr($s_keyword, 1));
 
@@ -32,6 +37,6 @@
 		echo '<h5 class="card-title" style="font-size: 300%; color: #FFF017;">TR ' . $row['tr_desc'] . ' (' . $cat_label . ')</h4>';
 		echo '<h5 class="card-title" style="font-size: 200%; color: #28a745;">Status: ' . ($row['TR_STATUS'] == 1 ? 'Available' : 'In Use') . ' - Loc: ' . $row['TR_LOC'] . '</h4>';
 	} else {
-		echo '<h5 class="card-title" style="font-size: 300%; color: #dc3545;">Invalid Trolley Code</h4>';
+		echo '';
 	}
 ?>

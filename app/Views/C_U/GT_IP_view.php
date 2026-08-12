@@ -49,7 +49,7 @@
                             <input type="hidden" name="id" id="id" value="-">
                             <BR>
                             <h5 class="card-title" style="font-size: 300%; color: #FFF017;">INPUT TROLLEY CODE</h4>
-                            <input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:40%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">
+<input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:40%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="4">
                             <div class="container1"></div>
                         
                             <div class="tr_data"></div>
@@ -189,12 +189,22 @@
                     if (tr_code) {
                         tr_code.parentNode.removeChild(tr_code);
                     }
-                    $(wrapper).append('<input type="hidden" name="id" id="id" value="-"><input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:40%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="5">'); //add input box
+                    $(wrapper).append('<input type="hidden" name="id" id="id" value="-"><input oninput="this.value = this.value.toUpperCase()"  style="text-align:center; font-weight:bold; width:40%" type="text" class="form-control" id="tr_code" name="tr_code" placeholder="TR CODE" autofocus required autocomplete="off" maxlength="4">'); //add input box
                     load_data(keyword);
                 }
 			});
-			$('#tr_code').keyup(function(){
+			$(document).on('keyup', '#tr_code', function(){
 				var trcode = $("#tr_code").val();
+				if (trcode == '') {
+					$('.tr_data').html('');
+					$('form').submit(function(e){ e.preventDefault(); });
+					return;
+				}
+				if (!/^[A-Z][0-9]{3}$/.test(trcode)) {
+					$('.tr_data').html('<h5 class="card-title" style="font-size: 300%; color: #dc3545;">Invalid Format: 1 Letter + 3 Digits</h4>');
+					$('form').submit(function(e){ e.preventDefault(); });
+					return;
+				}
 				$.ajax({
 					method:"POST",
 					url:"../chTR.php",
@@ -205,7 +215,7 @@
 							$('.tr_data').html(hasil);
 							$('form').unbind('submit');
 						}else{
-							$('.tr_data').html(hasil);
+							$('.tr_data').html('<h5 class="card-title" style="font-size: 300%; color: #dc3545;">Invalid Trolley Code</h4>');
 							$('form').submit(function(e){
 								e.preventDefault();
 							});
